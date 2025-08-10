@@ -98,12 +98,30 @@ const Header = () => {
           {/* Logo and Brand */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
-              <img
-                src="/logo.png"
-                alt="OponMeta Logo"
-                className="h-12 w-12 mr-3 animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50"
-                style={{ minWidth: '3rem' }}
-              />
+              <div className="relative">
+                <img
+                  src="/logo.png"
+                  alt="OponMeta Logo"
+                  className="h-12 w-12 mr-3 animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50"
+                  style={{ minWidth: '3rem' }}
+                  onError={(e) => {
+                    // Fallback to branding folder if main logo fails
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('/logo.png')) {
+                      target.src = '/branding/logo.png';
+                    } else if (target.src.includes('/branding/logo.png')) {
+                      target.src = '/branding/oponmeta-logo.png';
+                    } else {
+                      // Final fallback - hide image and show text only
+                      target.style.display = 'none';
+                    }
+                  }}
+                />
+                {/* Fallback logo circle if image fails to load */}
+                <div className="h-12 w-12 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50 hidden">
+                  <span className="text-white font-bold text-lg">O</span>
+                </div>
+              </div>
               <span
                 className="text-3xl font-extrabold group-hover:scale-105 transition-transform duration-300"
                 style={{

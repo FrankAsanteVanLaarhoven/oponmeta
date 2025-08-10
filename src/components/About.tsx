@@ -54,7 +54,29 @@ const About = () => (
   <div className="bg-gradient-to-br from-[#0a174e] to-[#1a2a6b] min-h-screen pb-16">
     {/* Logo and tagline */}
     <div className="flex flex-col items-center pt-10 pb-4">
-      <img src="/logo.png" alt="OponMeta Logo" className="h-20 w-20 mb-4 animate-pulse drop-shadow-lg" />
+      <div className="relative">
+        <img 
+          src="/logo.png" 
+          alt="OponMeta Logo" 
+          className="h-20 w-20 mb-4 animate-pulse drop-shadow-lg"
+          onError={(e) => {
+            // Fallback to branding folder if main logo fails
+            const target = e.target as HTMLImageElement;
+            if (target.src.includes('/logo.png')) {
+              target.src = '/branding/logo.png';
+            } else if (target.src.includes('/branding/logo.png')) {
+              target.src = '/branding/oponmeta-logo.png';
+            } else {
+              // Final fallback - hide image and show text only
+              target.style.display = 'none';
+            }
+          }}
+        />
+        {/* Fallback logo circle if image fails to load */}
+        <div className="h-20 w-20 mb-4 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center animate-pulse drop-shadow-lg hidden">
+          <span className="text-white font-bold text-2xl">O</span>
+        </div>
+      </div>
       <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-lg mb-2">OponMeta</h1>
       <p className="text-lg text-white font-semibold mb-2">Empowering Global Learning</p>
     </div>

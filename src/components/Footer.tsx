@@ -34,11 +34,29 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <img
-                src="/logo.png"
-                alt="OponMeta Logo"
-                className="h-10 w-10 mr-3"
-              />
+              <div className="relative">
+                <img
+                  src="/logo.png"
+                  alt="OponMeta Logo"
+                  className="h-10 w-10 mr-3"
+                  onError={(e) => {
+                    // Fallback to branding folder if main logo fails
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('/logo.png')) {
+                      target.src = '/branding/logo.png';
+                    } else if (target.src.includes('/branding/logo.png')) {
+                      target.src = '/branding/oponmeta-logo.png';
+                    } else {
+                      // Final fallback - hide image and show text only
+                      target.style.display = 'none';
+                    }
+                  }}
+                />
+                {/* Fallback logo circle if image fails to load */}
+                <div className="h-10 w-10 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hidden">
+                  <span className="text-white font-bold text-sm">O</span>
+                </div>
+              </div>
               <span className="text-2xl font-bold text-yellow-400">
                 OponMeta
               </span>
