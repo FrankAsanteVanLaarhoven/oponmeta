@@ -462,16 +462,23 @@ const CourseAuthoringTool = () => {
         );
       case 'video':
         return (
-          <video
+          <div
             key={element.id}
-            src={element.content.src}
-            controls={element.content.controls}
-            autoPlay={element.content.autoplay}
             style={elementStyle}
             onClick={() => handleElementClick(element.id)}
             onMouseDown={(e) => handleMouseDown(e, element.id)}
-            className="rounded"
-          />
+            className="rounded bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center cursor-pointer"
+          >
+            <div className="text-center text-white">
+              <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-sm font-medium">Video Element</p>
+              <p className="text-xs opacity-75">Click to edit</p>
+            </div>
+          </div>
         );
       case 'button':
         return (
