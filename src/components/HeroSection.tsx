@@ -69,7 +69,7 @@ const HeroSection = memo(() => {
                 <video 
                   className="w-full h-full object-cover rounded-2xl" 
                   controls
-                  poster="/oponmeta-logo .png"
+                  poster="/logo.png"
                 >
                   <source src="/Quick Avatar Video.mp4" type="video/mp4" />
                   Your browser does not support the video tag.

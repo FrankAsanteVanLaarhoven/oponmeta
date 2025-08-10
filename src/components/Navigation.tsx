@@ -171,16 +171,16 @@ const Navigation = () => {
             <Link to="/" className="flex items-center group">
               <div className="relative">
                                  <img
-                   src="/oponmeta-logo .png"
+                   src="/logo.png"
                    alt="OponMeta Logo"
                    className="h-12 w-12 mr-3 animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50"
                    style={{ minWidth: '3rem' }}
                    onError={(e) => {
                      // Fallback to other logo files if main logo fails
                      const target = e.target as HTMLImageElement;
-                     if (target.src.includes('oponmeta-logo')) {
-                       target.src = '/logo.png';
-                     } else if (target.src.includes('/logo.png')) {
+                     if (target.src.includes('/logo.png')) {
+                       target.src = '/oponmeta-logo .png';
+                     } else if (target.src.includes('oponmeta-logo')) {
                        target.src = '/branding/logo.png';
                      } else {
                        // Final fallback - hide image and show text only

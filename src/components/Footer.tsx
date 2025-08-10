@@ -36,15 +36,15 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <div className="relative">
                                  <img
-                   src="/oponmeta-logo .png"
+                   src="/logo.png"
                    alt="OponMeta Logo"
                    className="h-10 w-10 mr-3"
                    onError={(e) => {
                      // Fallback to other logo files if main logo fails
                      const target = e.target as HTMLImageElement;
-                     if (target.src.includes('oponmeta-logo')) {
-                       target.src = '/logo.png';
-                     } else if (target.src.includes('/logo.png')) {
+                     if (target.src.includes('/logo.png')) {
+                       target.src = '/oponmeta-logo .png';
+                     } else if (target.src.includes('oponmeta-logo')) {
                        target.src = '/branding/logo.png';
                      } else {
                        // Final fallback - hide image and show text only

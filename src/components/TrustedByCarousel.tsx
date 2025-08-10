@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 // Using only local images and text-based logos to avoid external URL issues
 const logos = [
-  { name: 'OponMeta', type: 'local', src: '/oponmeta-logo .png' },
+  { name: 'OponMeta', type: 'local', src: '/logo.png' },
   { name: 'Microsoft', type: 'text', color: 'bg-blue-600' },
   { name: 'Nike', type: 'text', color: 'bg-black' },
   { name: 'IBM', type: 'text', color: 'bg-blue-800' },
