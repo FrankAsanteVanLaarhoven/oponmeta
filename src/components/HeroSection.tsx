@@ -66,17 +66,14 @@ const HeroSection = memo(() => {
           <div className="flex justify-center lg:justify-end p-0 m-0 flex-shrink-0">
             <div className="relative group p-0 m-0">
               <div className="w-full max-w-sm aspect-[9/16] bg-[#1a2a6b] rounded-2xl shadow-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500 border-4 border-white">
-                <div className="w-full h-full bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <p className="text-sm font-medium">Demo Video</p>
-                    <p className="text-xs opacity-75">Interactive Learning Experience</p>
-                  </div>
-                </div>
+                <video 
+                  className="w-full h-full object-cover rounded-2xl" 
+                  controls
+                  poster="/oponmeta-logo .png"
+                >
+                  <source src="/Quick Avatar Video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
           </div>
