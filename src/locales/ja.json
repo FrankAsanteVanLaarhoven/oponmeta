@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "features": "機能",
+    "pricing": "価格",
+    "about": "約",
+    "signIn": "サインイン",
+    "getStarted": "始める"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー"
+  },
+  "cta": {
+    "title": "未来を形作る準備はできていますか？",
+    "subtitle": "私たちのグローバル教育プラットフォームでキャリアを進歩させている何千人もの学習者に参加してください。",
+    "startLearning": "今すぐ学習を始める",
+    "becomeInstructor": "グローバルインストラクターになる"
+  }
+} 

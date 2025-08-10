@@ -1,0 +1,488 @@
+/* Global Font System - Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Typography System */
+html {
+  font-size: 16px; /* Base font size for rem calculations */
+}
+
+body {
+  font-family: 'Open Sans', 'Roboto', 'Montserrat', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Typography Hierarchy */
+h1, .hero-title, .text-hero {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 3.5rem; /* 56px */
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+h2, .text-heading-2 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+h3, .text-heading-3 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2rem; /* 32px */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+h4, .text-heading-4 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+h5, .text-heading-5 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+h6, .text-heading-6 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+/* Body text and paragraphs */
+p, .text-body {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Small text and captions */
+.text-sm, .text-caption {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* Large body text */
+.text-lg, .text-body-large {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* Button and interactive text */
+button, .btn, .text-button {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Navigation and menu text */
+nav, .nav, .text-nav {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Footer text */
+footer, .footer, .text-footer {
+  font-family: 'Roboto', 'Verdana', Arial, sans-serif;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* Form elements */
+input, textarea, select, .form-input {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1rem; /* 16px */
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Links */
+a, .text-link {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+}
+
+a:hover, .text-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Lists */
+ul, ol, .text-list {
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* Code and monospace text */
+code, pre, .text-code {
+  font-family: 'Roboto Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Ensure all headings inherit proper spacing */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 768px) {
+  h1, .hero-title, .text-hero {
+    font-size: 2.5rem; /* 40px */
+  }
+  
+  h2, .text-heading-2 {
+    font-size: 2rem; /* 32px */
+  }
+  
+  h3, .text-heading-3 {
+    font-size: 1.75rem; /* 28px */
+  }
+  
+  body, p, .text-body {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .text-lg, .text-body-large {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+@media (max-width: 480px) {
+  h1, .hero-title, .text-hero {
+    font-size: 2rem; /* 32px */
+  }
+  
+  h2, .text-heading-2 {
+    font-size: 1.75rem; /* 28px */
+  }
+  
+  h3, .text-heading-3 {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+/* Theme CSS Variables */
+:root {
+  /* Light theme colors */
+  --color-primary: #0a174e;
+  --color-primary-hover: #1a2a6b;
+  --color-primary-light: #2a3a7b;
+  --color-secondary: #FFD700;
+  --color-secondary-hover: #f4c430;
+  --color-accent: #11235a;
+  
+  /* Background colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f6f9fc;
+  --color-bg-tertiary: #f8fafc;
+  
+  /* Text colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #1a202c;
+  --color-text-muted: #4a5568;
+  
+  /* Border colors */
+  --color-border-primary: #e2e8f0;
+  --color-border-secondary: #cbd5e0;
+  
+  /* Shadow colors */
+  --color-shadow: rgba(10, 23, 78, 0.1);
+  --color-shadow-hover: rgba(10, 23, 78, 0.2);
+}
+
+/* Dark theme colors */
+.dark {
+  --color-primary: #1a2a6b;
+  --color-primary-hover: #2a3a7b;
+  --color-primary-light: #3a4a8b;
+  --color-secondary: #FFD700;
+  --color-secondary-hover: #f4c430;
+  --color-accent: #0a174e;
+  
+  /* Background colors */
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  
+  /* Text colors */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e0;
+  --color-text-muted: #94a3b8;
+  
+  /* Border colors */
+  --color-border-primary: #334155;
+  --color-border-secondary: #475569;
+  
+  /* Shadow colors */
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
+}
+
+/* Apply theme variables to body */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme-aware utility classes */
+.theme-light {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.theme-dark {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Enhanced visibility for white backgrounds */
+.bg-white, .sidebar, .filter-sidebar, .course-catalog {
+  color: #000000 !important;
+}
+
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4, .sidebar h5, .sidebar h6,
+.filter-sidebar h1, .filter-sidebar h2, .filter-sidebar h3, .filter-sidebar h4, .filter-sidebar h5, .filter-sidebar h6,
+.course-catalog h1, .course-catalog h2, .course-catalog h3, .course-catalog h4, .course-catalog h5, .course-catalog h6 {
+  color: #000000 !important;
+}
+
+.bg-white p, .bg-white span, .bg-white div, .bg-white label,
+.sidebar p, .sidebar span, .sidebar div, .sidebar label,
+.filter-sidebar p, .filter-sidebar span, .filter-sidebar div, .filter-sidebar label,
+.course-catalog p, .course-catalog span, .course-catalog div, .course-catalog label {
+  color: #000000 !important;
+}
+
+/* Ensure filter checkboxes and labels are visible */
+.filter-sidebar input[type="checkbox"] + label,
+.filter-sidebar input[type="radio"] + label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* Ensure button text is visible on white backgrounds */
+.bg-white button, .sidebar button, .filter-sidebar button, .course-catalog button {
+  color: #000000 !important;
+}
+
+/* Yellow text on buttons - ensure high visibility with maximum specificity */
+button.text-yellow-500,
+button.text-yellow-500 *,
+.text-yellow-500,
+.text-yellow-500 * {
+  color: #f59e0b !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+button.text-yellow-600,
+button.text-yellow-600 *,
+.text-yellow-600,
+.text-yellow-600 * {
+  color: #d97706 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced yellow text for better contrast with maximum specificity */
+.quick-action-button,
+.quick-action-button *,
+button.quick-action-button,
+button.quick-action-button * {
+  color: #f59e0b !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Force yellow text on all quick action buttons regardless of Tailwind classes */
+[class*="quick-action"] {
+  color: #f59e0b !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Override any Tailwind text color classes */
+.text-yellow-500,
+.text-yellow-600,
+.text-yellow-400,
+.text-yellow-300 {
+  color: #f59e0b !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure dropdown text is visible */
+.bg-white select, .sidebar select, .filter-sidebar select, .course-catalog select {
+  color: #000000 !important;
+}
+
+/* Custom utilities for line clamping */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* High contrast text utilities for white backgrounds */
+.text-black-on-white {
+  color: #000000 !important;
+}
+
+.text-dark-on-white {
+  color: #1a202c !important;
+}
+
+.text-visible-on-white {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* Enhanced sidebar and filter visibility */
+.sidebar-text, .filter-text, .catalog-text {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+.sidebar-heading, .filter-heading, .catalog-heading {
+  color: #000000 !important;
+  font-weight: 600;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.sidebar-label, .filter-label, .catalog-label {
+  color: #000000 !important;
+  font-weight: 500;
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+}
+
+/* Custom animations for OponMeta branding */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
