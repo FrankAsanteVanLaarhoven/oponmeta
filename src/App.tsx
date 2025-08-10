@@ -1,140 +1,103 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { NotificationProvider } from './context/NotificationContext';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-import Dashboard from './components/Dashboard';
-import CourseCatalog from './components/CourseCatalog';
-import CourseBrowsingPage from './components/CourseBrowsingPage';
-import HeroSection from './components/HeroSection';
-import WhatWeOffer from './components/WhatWeOffer';
-import FeaturedCourses from './components/FeaturedCourses';
-import About from './components/About';
-import Programme from './components/Programme';
-import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
-import CourseDetail from './components/CourseDetail';
+import LoadingSpinner from './components/LoadingSpinner';
 
-import PricingPage from './components/PricingPage';
-import Resources from './components/Resources';
-import Community from './components/Community';
-import StudentDashboard from './components/StudentDashboard';
-import VendorDashboard from './components/VendorDashboard';
-import Settings from './components/Settings';
-import TrustedByCarousel from './components/TrustedByCarousel';
-
-import AnalyticsDashboard from './components/AnalyticsDashboard';
-import CourseGrid from './components/CourseGrid';
-import CourseFilters from './components/CourseFilters';
-
-import BauhausCourseCard from './components/BauhausCourseCard';
-import RightAdPanel from './components/RightAdPanel';
-import GlobalSearch from './components/GlobalSearch';
-import StudentPortalWidgets from './components/StudentPortalWidgets';
-import StudentPortal from './components/StudentPortal';
-import SocialFeed from './components/SocialFeed';
-import CourseWorkspace from './components/CourseWorkspace';
-import CoursePurchase from './components/CoursePurchase';
-import InternationalPaymentForm from './components/InternationalPaymentForm';
-import PlagiarismChecker from './components/PlagiarismChecker';
-import GrammarChecker from './components/GrammarChecker';
-import FloatingNavigation from './components/FloatingNavigation';
-import FeatureGrid from './components/FeatureGrid';
-import DashboardSidebar from './components/DashboardSidebar';
-import CurrencySelector from './components/CurrencySelector';
-import CurrencyCalculator from './components/CurrencyCalculator';
-import CourseViewToggle from './components/CourseViewToggle';
-import CoursesHeader from './components/CoursesHeader';
-import StripePaymentForm from './components/StripePaymentForm';
-import PaystackPaymentForm from './components/PaystackPaymentForm';
-import FlutterwavePaymentForm from './components/FlutterwavePaymentForm';
-import PageNavigation from './components/PageNavigation';
-import OpontainmentDemo from './components/OpontainmentDemo';
-import MultilingualContentExample from './components/MultilingualContentExample';
-import LanguageSwitcher from './components/LanguageSwitcher';
-import SocialMediaLinks from './components/SocialMediaLinks';
-import Sidebar from './components/Sidebar';
-import ResponsiveTest from './components/ResponsiveTest';
-import RecommendedForYou from './components/RecommendedForYou';
-import TeamCarousel from './components/TeamCarousel';
-import SuccessStoriesCarousel from './components/SuccessStoriesCarousel';
-import UserProfileDropdown from './components/UserProfileDropdown';
-import VendorCard from './components/VendorCard';
-import WeatherForecast from './components/WeatherForecast';
-import CourseLibrary from './components/CourseLibrary';
-import Whiteboard from './components/Whiteboard';
-import CourseAuthoringTool from './components/CourseAuthoringTool';
-import AIVideoCalling from './components/AIVideoCalling';
-import CompanionsLibrary from './components/CompanionsLibrary';
-import CompanionPage from './components/CompanionPage';
-import CreateCompanion from './components/CreateCompanion';
-import CompanionsAnalytics from './components/CompanionsAnalytics';
-import CompanionsSettings from './components/CompanionsSettings';
-import CourseCertifications from './components/CourseCertifications';
-import InstructorPortal from './components/InstructorPortal';
-import ShareKnowledgeGlobally from './components/ShareKnowledgeGlobally';
-import Blogs from './components/Blogs';
-import DownloadApp from './components/DownloadApp';
-import ThemeDemo from './components/ThemeDemo';
-import TestYellowButtons from './components/TestYellowButtons';
-import CreatorsPortal from './components/CreatorsPortal';
-import BecomeInstructor from './components/BecomeInstructor';
-import ResumeBuilder from './components/ResumeBuilder';
-import CareerReadyPlan from './components/CareerReadyPlan';
-import AptitudeTest from './components/AptitudeTest';
-import WorkplacePersonalityAssessment from './components/WorkplacePersonalityAssessment';
-import MentalHealthAssessment from './components/MentalHealthAssessment';
-import LearningManagementSystem from './components/LearningManagementSystem';
-import Webinars from './components/Webinars';
-import GraduateProfiles from './components/GraduateProfiles';
-import GrowthMindset from './components/GrowthMindset';
-import AICourseCreator from './components/AICourseCreator';
-import PaymentDemo from './components/PaymentDemo';
-import CourseBrowsing from './components/CourseBrowsing';
-import AICompanionSubscription from './components/AICompanionSubscription';
-import SubscriptionManagement from './components/SubscriptionManagement';
-import Contact from './components/Contact';
-import Mission from './components/Mission';
-import Vision from './components/Vision';
-import Approach from './components/Approach';
-import WelcomeBackWidget from './components/WelcomeBackWidget';
-import { Toaster } from './components/ui/sonner';
-
-// Import dashboard components
-import DashboardOverview from './dashboard/Overview';
-import DashboardCourses from './dashboard/CoursesManagement';
-import DashboardEnrollments from './dashboard/Enrollments';
-import DashboardRevenue from './dashboard/Revenue';
-import DashboardAnalytics from './dashboard/Analytics';
-import DashboardCollaboration from './dashboard/Collaboration';
-import DashboardWhiteboard from './dashboard/Whiteboard';
-import DashboardMeetings from './dashboard/Meetings';
-import DashboardDocuments from './dashboard/Documents';
-import DashboardForums from './dashboard/Forums';
-import DashboardUsers from './dashboard/UserManagement';
-import DashboardLibrary from './dashboard/Library';
-import DashboardTemplates from './dashboard/Templates';
-import DashboardRecommendations from './dashboard/Recommendations';
-import DashboardSettings from './dashboard/DashboardSettings';
-import DashboardCourseCreator from './dashboard/CourseCreatorDashboard';
-import DashboardAICourseCreator from './dashboard/AICourseCreator';
-import DashboardAILessonGenerator from './dashboard/AILessonGenerator';
-import DashboardAIQuizGenerator from './dashboard/AIQuizGenerator';
-import DashboardAIVideoGenerator from './dashboard/AIVideoGenerator';
-import DashboardAIAssessmentGenerator from './dashboard/AIAssessmentGenerator';
-import DashboardInteractiveContentDesigner from './dashboard/InteractiveContentDesigner';
-import DashboardChatbotTrainer from './dashboard/ChatbotTrainer';
-import DashboardWhiteLabelBranding from './dashboard/WhiteLabelBranding';
-import DashboardSCORMExport from './dashboard/SCORMExport';
-import DashboardInstructorDashboard from './dashboard/InstructorDashboard';
-import DashboardInstructorManagement from './dashboard/InstructorManagement';
-import DashboardInstructorOnboarding from './dashboard/InstructorOnboarding';
-import DashboardCourseMarketplace from './dashboard/CourseMarketplace';
-import DashboardCourseManagement from './dashboard/CourseManagement';
-import DashboardCreatorsPortal from './dashboard/CreatorsPortal';
-import DashboardPaymentAnalytics from './dashboard/PaymentAnalytics';
-import DashboardSocial from './dashboard/Social';
+// Lazy load components for better performance
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const CourseCatalog = lazy(() => import('./components/CourseCatalog'));
+const CourseBrowsingPage = lazy(() => import('./components/CourseBrowsingPage'));
+const HeroSection = lazy(() => import('./components/HeroSection'));
+const WhatWeOffer = lazy(() => import('./components/WhatWeOffer'));
+const FeaturedCourses = lazy(() => import('./components/FeaturedCourses'));
+const About = lazy(() => import('./components/About'));
+const Programme = lazy(() => import('./components/Programme'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Pricing = lazy(() => import('./components/Pricing'));
+const CourseDetail = lazy(() => import('./components/CourseDetail'));
+const PricingPage = lazy(() => import('./components/PricingPage'));
+const Resources = lazy(() => import('./components/Resources'));
+const Community = lazy(() => import('./components/Community'));
+const StudentDashboard = lazy(() => import('./components/StudentDashboard'));
+const VendorDashboard = lazy(() => import('./components/VendorDashboard'));
+const Settings = lazy(() => import('./components/Settings'));
+const TrustedByCarousel = lazy(() => import('./components/TrustedByCarousel'));
+const AnalyticsDashboard = lazy(() => import('./components/AnalyticsDashboard'));
+const CourseGrid = lazy(() => import('./components/CourseGrid'));
+const CourseFilters = lazy(() => import('./components/CourseFilters'));
+const BauhausCourseCard = lazy(() => import('./components/BauhausCourseCard'));
+const RightAdPanel = lazy(() => import('./components/RightAdPanel'));
+const GlobalSearch = lazy(() => import('./components/GlobalSearch'));
+const StudentPortalWidgets = lazy(() => import('./components/StudentPortalWidgets'));
+const StudentPortal = lazy(() => import('./components/StudentPortal'));
+const SocialFeed = lazy(() => import('./components/SocialFeed'));
+const CourseWorkspace = lazy(() => import('./components/CourseWorkspace'));
+const CoursePurchase = lazy(() => import('./components/CoursePurchase'));
+const InternationalPaymentForm = lazy(() => import('./components/InternationalPaymentForm'));
+const PlagiarismChecker = lazy(() => import('./components/PlagiarismChecker'));
+const GrammarChecker = lazy(() => import('./components/GrammarChecker'));
+const FloatingNavigation = lazy(() => import('./components/FloatingNavigation'));
+const FeatureGrid = lazy(() => import('./components/FeatureGrid'));
+const DashboardSidebar = lazy(() => import('./components/DashboardSidebar'));
+const CurrencySelector = lazy(() => import('./components/CurrencySelector'));
+const CurrencyCalculator = lazy(() => import('./components/CurrencyCalculator'));
+const CourseViewToggle = lazy(() => import('./components/CourseViewToggle'));
+const CoursesHeader = lazy(() => import('./components/CoursesHeader'));
+const StripePaymentForm = lazy(() => import('./components/StripePaymentForm'));
+const PaystackPaymentForm = lazy(() => import('./components/PaystackPaymentForm'));
+const FlutterwavePaymentForm = lazy(() => import('./components/FlutterwavePaymentForm'));
+const PageNavigation = lazy(() => import('./components/PageNavigation'));
+const OpontainmentDemo = lazy(() => import('./components/OpontainmentDemo'));
+const MultilingualContentExample = lazy(() => import('./components/MultilingualContentExample'));
+const LanguageSwitcher = lazy(() => import('./components/LanguageSwitcher'));
+const SocialMediaLinks = lazy(() => import('./components/SocialMediaLinks'));
+const Sidebar = lazy(() => import('./components/Sidebar'));
+const ResponsiveTest = lazy(() => import('./components/ResponsiveTest'));
+const RecommendedForYou = lazy(() => import('./components/RecommendedForYou'));
+const TeamCarousel = lazy(() => import('./components/TeamCarousel'));
+const SuccessStoriesCarousel = lazy(() => import('./components/SuccessStoriesCarousel'));
+const UserProfileDropdown = lazy(() => import('./components/UserProfileDropdown'));
+const VendorCard = lazy(() => import('./components/VendorCard'));
+const WeatherForecast = lazy(() => import('./components/WeatherForecast'));
+const CourseLibrary = lazy(() => import('./components/CourseLibrary'));
+const Whiteboard = lazy(() => import('./components/Whiteboard'));
+const CourseAuthoringTool = lazy(() => import('./components/CourseAuthoringTool'));
+const AIVideoCalling = lazy(() => import('./components/AIVideoCalling'));
+const CompanionsLibrary = lazy(() => import('./components/CompanionsLibrary'));
+const CompanionPage = lazy(() => import('./components/CompanionPage'));
+const CreateCompanion = lazy(() => import('./components/CreateCompanion'));
+const CompanionsAnalytics = lazy(() => import('./components/CompanionsAnalytics'));
+const CompanionsSettings = lazy(() => import('./components/CompanionsSettings'));
+const CourseCertifications = lazy(() => import('./components/CourseCertifications'));
+const InstructorPortal = lazy(() => import('./components/InstructorPortal'));
+const ShareKnowledgeGlobally = lazy(() => import('./components/ShareKnowledgeGlobally'));
+const Blogs = lazy(() => import('./components/Blogs'));
+const DownloadApp = lazy(() => import('./components/DownloadApp'));
+const ThemeDemo = lazy(() => import('./components/ThemeDemo'));
+const TestYellowButtons = lazy(() => import('./components/TestYellowButtons'));
+const CreatorsPortal = lazy(() => import('./components/CreatorsPortal'));
+const BecomeInstructor = lazy(() => import('./components/BecomeInstructor'));
+const ResumeBuilder = lazy(() => import('./components/ResumeBuilder'));
+const CareerReadyPlan = lazy(() => import('./components/CareerReadyPlan'));
+const AptitudeTest = lazy(() => import('./components/AptitudeTest'));
+const WorkplacePersonalityAssessment = lazy(() => import('./components/WorkplacePersonalityAssessment'));
+const MentalHealthAssessment = lazy(() => import('./components/MentalHealthAssessment'));
+const LearningManagementSystem = lazy(() => import('./components/LearningManagementSystem'));
+const Webinars = lazy(() => import('./components/Webinars'));
+const GraduateProfiles = lazy(() => import('./components/GraduateProfiles'));
+const GrowthMindset = lazy(() => import('./components/GrowthMindset'));
+const AICourseCreator = lazy(() => import('./components/AICourseCreator'));
+const PaymentDemo = lazy(() => import('./components/PaymentDemo'));
+const CourseBrowsing = lazy(() => import('./components/CourseBrowsing'));
+const AICompanionSubscription = lazy(() => import('./components/AICompanionSubscription'));
+const SubscriptionManagement = lazy(() => import('./components/SubscriptionManagement'));
+const Contact = lazy(() => import('./components/Contact'));
+const Mission = lazy(() => import('./components/Mission'));
+const Vision = lazy(() => import('./components/Vision'));
+const Approach = lazy(() => import('./components/Approach'));
 
 // Placeholder component for missing components
 const Placeholder = ({ title }: { title: string }) => (
@@ -153,7 +116,8 @@ function App() {
         <BrowserRouter>
           <div className="App">
             <Navigation />
-            <Routes>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
           {/* Main Routes */}
           <Route path="/" element={
             <>
@@ -196,39 +160,39 @@ function App() {
           <Route path="/instructor-portal" element={<InstructorPortal />} />
           
           {/* Dashboard Sub-routes */}
-          <Route path="/dashboard/overview" element={<DashboardOverview />} />
-          <Route path="/dashboard/courses" element={<DashboardCourses />} />
-          <Route path="/dashboard/enrollments" element={<DashboardEnrollments />} />
-          <Route path="/dashboard/revenue" element={<DashboardRevenue />} />
-          <Route path="/dashboard/analytics" element={<DashboardAnalytics />} />
-          <Route path="/dashboard/collaboration" element={<DashboardCollaboration />} />
-          <Route path="/dashboard/whiteboard" element={<DashboardWhiteboard />} />
-          <Route path="/dashboard/meetings" element={<DashboardMeetings />} />
-          <Route path="/dashboard/documents" element={<DashboardDocuments />} />
-          <Route path="/dashboard/forums" element={<DashboardForums />} />
-          <Route path="/dashboard/users" element={<DashboardUsers />} />
-          <Route path="/dashboard/library" element={<DashboardLibrary />} />
-          <Route path="/dashboard/templates" element={<DashboardTemplates />} />
-          <Route path="/dashboard/recommendations" element={<DashboardRecommendations />} />
-          <Route path="/dashboard/settings" element={<DashboardSettings />} />
-          <Route path="/dashboard/course-creator" element={<DashboardCourseCreator />} />
-          <Route path="/dashboard/ai-course-creator" element={<DashboardAICourseCreator />} />
-          <Route path="/dashboard/ai-lesson-generator" element={<DashboardAILessonGenerator />} />
-          <Route path="/dashboard/ai-quiz-generator" element={<DashboardAIQuizGenerator />} />
-          <Route path="/dashboard/ai-video-generator" element={<DashboardAIVideoGenerator />} />
-          <Route path="/dashboard/ai-assessment-generator" element={<DashboardAIAssessmentGenerator />} />
-          <Route path="/dashboard/interactive-content-designer" element={<DashboardInteractiveContentDesigner />} />
-          <Route path="/dashboard/chatbot-trainer" element={<DashboardChatbotTrainer />} />
-          <Route path="/dashboard/white-label-branding" element={<DashboardWhiteLabelBranding />} />
-          <Route path="/dashboard/scorm-export" element={<DashboardSCORMExport />} />
-          <Route path="/dashboard/instructor-dashboard" element={<DashboardInstructorDashboard />} />
-          <Route path="/dashboard/instructor-management" element={<DashboardInstructorManagement />} />
-          <Route path="/dashboard/instructor-onboarding" element={<DashboardInstructorOnboarding />} />
-          <Route path="/dashboard/course-marketplace" element={<DashboardCourseMarketplace />} />
-          <Route path="/dashboard/course-management" element={<DashboardCourseManagement />} />
-          <Route path="/dashboard/creators-portal" element={<DashboardCreatorsPortal />} />
-          <Route path="/dashboard/payment-analytics" element={<DashboardPaymentAnalytics />} />
-          <Route path="/dashboard/social" element={<DashboardSocial />} />
+          <Route path="/dashboard/overview" element={<Placeholder title="Dashboard Overview" />} />
+          <Route path="/dashboard/courses" element={<Placeholder title="Dashboard Courses" />} />
+          <Route path="/dashboard/enrollments" element={<Placeholder title="Dashboard Enrollments" />} />
+          <Route path="/dashboard/revenue" element={<Placeholder title="Dashboard Revenue" />} />
+          <Route path="/dashboard/analytics" element={<Placeholder title="Dashboard Analytics" />} />
+          <Route path="/dashboard/collaboration" element={<Placeholder title="Dashboard Collaboration" />} />
+          <Route path="/dashboard/whiteboard" element={<Placeholder title="Dashboard Whiteboard" />} />
+          <Route path="/dashboard/meetings" element={<Placeholder title="Dashboard Meetings" />} />
+          <Route path="/dashboard/documents" element={<Placeholder title="Dashboard Documents" />} />
+          <Route path="/dashboard/forums" element={<Placeholder title="Dashboard Forums" />} />
+          <Route path="/dashboard/users" element={<Placeholder title="Dashboard Users" />} />
+          <Route path="/dashboard/library" element={<Placeholder title="Dashboard Library" />} />
+          <Route path="/dashboard/templates" element={<Placeholder title="Dashboard Templates" />} />
+          <Route path="/dashboard/recommendations" element={<Placeholder title="Dashboard Recommendations" />} />
+          <Route path="/dashboard/settings" element={<Placeholder title="Dashboard Settings" />} />
+          <Route path="/dashboard/course-creator" element={<Placeholder title="Dashboard Course Creator" />} />
+          <Route path="/dashboard/ai-course-creator" element={<Placeholder title="Dashboard AI Course Creator" />} />
+          <Route path="/dashboard/ai-lesson-generator" element={<Placeholder title="Dashboard AI Lesson Generator" />} />
+          <Route path="/dashboard/ai-quiz-generator" element={<Placeholder title="Dashboard AI Quiz Generator" />} />
+          <Route path="/dashboard/ai-video-generator" element={<Placeholder title="Dashboard AI Video Generator" />} />
+          <Route path="/dashboard/ai-assessment-generator" element={<Placeholder title="Dashboard AI Assessment Generator" />} />
+          <Route path="/dashboard/interactive-content-designer" element={<Placeholder title="Dashboard Interactive Content Designer" />} />
+          <Route path="/dashboard/chatbot-trainer" element={<Placeholder title="Dashboard Chatbot Trainer" />} />
+          <Route path="/dashboard/white-label-branding" element={<Placeholder title="Dashboard White Label Branding" />} />
+          <Route path="/dashboard/scorm-export" element={<Placeholder title="Dashboard SCORM Export" />} />
+          <Route path="/dashboard/instructor-dashboard" element={<Placeholder title="Dashboard Instructor Dashboard" />} />
+          <Route path="/dashboard/instructor-management" element={<Placeholder title="Dashboard Instructor Management" />} />
+          <Route path="/dashboard/instructor-onboarding" element={<Placeholder title="Dashboard Instructor Onboarding" />} />
+          <Route path="/dashboard/course-marketplace" element={<Placeholder title="Dashboard Course Marketplace" />} />
+          <Route path="/dashboard/course-management" element={<Placeholder title="Dashboard Course Management" />} />
+          <Route path="/dashboard/creators-portal" element={<Placeholder title="Dashboard Creators Portal" />} />
+          <Route path="/dashboard/payment-analytics" element={<Placeholder title="Dashboard Payment Analytics" />} />
+          <Route path="/dashboard/social" element={<Placeholder title="Dashboard Social" />} />
           
           {/* Feature Routes */}
           <Route path="/whiteboard" element={<Whiteboard />} />
@@ -381,9 +345,10 @@ function App() {
           <Route path="/user-profile-dropdown-page" element={<Placeholder title="User Profile Dropdown Page" />} />
           <Route path="/vendor-card-page" element={<Placeholder title="Vendor Card Page" />} />
           <Route path="/weather-forecast-page" element={<Placeholder title="Weather Forecast Page" />} />
-        </Routes>
-        <Footer />
-        <Toaster />
+                      </Routes>
+            </Suspense>
+          <Footer />
+        {/* <Toaster /> */} {/* Removed Toaster as per new_code */}
       </div>
       </BrowserRouter>
       </NotificationProvider>
