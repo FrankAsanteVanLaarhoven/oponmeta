@@ -261,7 +261,6 @@ function App() {
           <Route path="/pricing-page" element={<PricingPage />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/community" element={<Community />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/download-app" element={<DownloadApp />} />
           
