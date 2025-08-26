@@ -23,7 +23,8 @@ import {
   Bell,
   Lock,
   Eye,
-  EyeOff
+  EyeOff,
+  ChevronDown
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
