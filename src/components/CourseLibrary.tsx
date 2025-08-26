@@ -21,7 +21,15 @@ import {
   CheckCircle, 
   Info,
   Book,
-  TrendingUp
+  TrendingUp,
+  Heart,
+  ShoppingCart,
+  Eye,
+  Bookmark,
+  Share2,
+  DollarSign,
+  CreditCard,
+  X
 } from "lucide-react";
 import { toast } from 'sonner';
 
@@ -33,6 +41,13 @@ const CourseLibrary = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
   const [showCustomizeModal, setShowCustomizeModal] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
+  const [cart, setCart] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [favorites, setFavorites] = useState<any[]>([]);
   const navigate = useNavigate();
 
   const categories = ["All", "Technology", "Business", "Marketing", "Design", "Leadership", "Data Science", "AI & ML"];
@@ -231,9 +246,86 @@ const CourseLibrary = () => {
     toast.success(`Course added to library!`);
   };
 
-  const handlePreviewCourse = (courseId: number) => {
-    navigate(`/courses/${courseId}/preview`);
+  const handlePreviewCourse = (course: any) => {
+    setSelectedCourse(course);
+    setShowPreviewModal(true);
   };
+
+  const handleAddToCart = (course: any) => {
+    if (cart.find(item => item.id === course.id)) {
+      toast.error("Course already in cart!");
+      return;
+    }
+    setCart([...cart, course]);
+    toast.success(`${course.title} added to cart!`);
+  };
+
+  const handleRemoveFromCart = (courseId: number) => {
+    setCart(cart.filter(item => item.id !== courseId));
+    toast.success("Course removed from cart!");
+  };
+
+  const handleAddToWishlist = (course: any) => {
+    if (wishlist.find(item => item.id === course.id)) {
+      toast.error("Course already in wishlist!");
+      return;
+    }
+    setWishlist([...wishlist, course]);
+    toast.success(`${course.title} added to wishlist!`);
+  };
+
+  const handleRemoveFromWishlist = (courseId: number) => {
+    setWishlist(wishlist.filter(item => item.id !== courseId));
+    toast.success("Course removed from wishlist!");
+  };
+
+  const handleAddToFavorites = (course: any) => {
+    if (favorites.find(item => item.id === course.id)) {
+      toast.error("Course already in favorites!");
+      return;
+    }
+    setFavorites([...favorites, course]);
+    toast.success(`${course.title} added to favorites!`);
+  };
+
+  const handleRemoveFromFavorites = (courseId: number) => {
+    setFavorites(favorites.filter(item => item.id !== courseId));
+    toast.success("Course removed from favorites!");
+  };
+
+  const handlePurchaseCourse = (course: any) => {
+    setSelectedCourse(course);
+    setShowPurchaseModal(true);
+  };
+
+  const handlePurchaseFromCart = () => {
+    setShowCartModal(false);
+    setShowPurchaseModal(true);
+  };
+
+  const handleCompletePurchase = () => {
+    toast.success("Purchase completed successfully!");
+    setCart([]);
+    setShowPurchaseModal(false);
+    setSelectedCourse(null);
+  };
+
+  const handleShareCourse = (course: any) => {
+    if (navigator.share) {
+      navigator.share({
+        title: course.title,
+        text: course.description,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(`${course.title} - ${course.description}`);
+      toast.success("Course link copied to clipboard!");
+    }
+  };
+
+  const isInCart = (courseId: number) => cart.find(item => item.id === courseId);
+  const isInWishlist = (courseId: number) => wishlist.find(item => item.id === courseId);
+  const isInFavorites = (courseId: number) => favorites.find(item => item.id === courseId);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -248,6 +340,38 @@ const CourseLibrary = () => {
             </div>
             
             <div className="flex items-center gap-4">
+              {/* Cart and Wishlist Indicators */}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowCartModal(true)}
+                  className="relative"
+                >
+                  <ShoppingCart className="h-4 w-4 mr-1" />
+                  Cart
+                  {cart.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-red-500 text-white text-xs">
+                      {cart.length}
+                    </Badge>
+                  )}
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="relative"
+                >
+                  <Heart className="h-4 w-4 mr-1" />
+                  Wishlist
+                  {wishlist.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-pink-500 text-white text-xs">
+                      {wishlist.length}
+                    </Badge>
+                  )}
+                </Button>
+              </div>
+
               {/* Sort Dropdown */}
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-gray-700">Sort by:</span>
@@ -483,21 +607,101 @@ const CourseLibrary = () => {
                         )}
                       </div>
                       
-                      <div className="flex gap-2">
-                        <Button 
-                          onClick={() => handleAddToLibrary(course.id)}
-                          className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
-                        >
-                          Add to Library
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={() => handlePreviewCourse(course.id)}
-                          className="text-gray-900 border-gray-300 hover:bg-gray-50"
-                        >
-                          Preview
-                        </Button>
+                      <div className="flex flex-wrap gap-2">
+                        {/* Action Buttons */}
+                        <div className="flex gap-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handlePreviewCourse(course)}
+                            className="text-gray-900 border-gray-300 hover:bg-gray-50"
+                            title="Preview Course"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleShareCourse(course)}
+                            className="text-gray-900 border-gray-300 hover:bg-gray-50"
+                            title="Share Course"
+                          >
+                            <Share2 className="h-4 w-4" />
+                          </Button>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => isInFavorites(course.id) 
+                              ? handleRemoveFromFavorites(course.id)
+                              : handleAddToFavorites(course)
+                            }
+                            className={`border-gray-300 hover:bg-gray-50 ${
+                              isInFavorites(course.id) 
+                                ? 'text-red-500 border-red-300' 
+                                : 'text-gray-900'
+                            }`}
+                            title={isInFavorites(course.id) ? "Remove from Favorites" : "Add to Favorites"}
+                          >
+                            <Heart className={`h-4 w-4 ${isInFavorites(course.id) ? 'fill-current' : ''}`} />
+                          </Button>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => isInWishlist(course.id)
+                              ? handleRemoveFromWishlist(course.id)
+                              : handleAddToWishlist(course)
+                            }
+                            className={`border-gray-300 hover:bg-gray-50 ${
+                              isInWishlist(course.id)
+                                ? 'text-blue-500 border-blue-300'
+                                : 'text-gray-900'
+                            }`}
+                            title={isInWishlist(course.id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                          >
+                            <Bookmark className={`h-4 w-4 ${isInWishlist(course.id) ? 'fill-current' : ''}`} />
+                          </Button>
+                        </div>
+                        
+                        {/* Main Action Buttons */}
+                        <div className="flex gap-2 w-full">
+                          {course.isFree ? (
+                            <Button
+                              onClick={() => handleAddToLibrary(course.id)}
+                              className="flex-1 bg-green-600 text-white hover:bg-green-700"
+                            >
+                              <BookOpen className="h-4 w-4 mr-1" />
+                              Enroll Free
+                            </Button>
+                          ) : (
+                            <>
+                              <Button
+                                onClick={() => isInCart(course.id)
+                                  ? handleRemoveFromCart(course.id)
+                                  : handleAddToCart(course)
+                                }
+                                className={`flex-1 ${
+                                  isInCart(course.id)
+                                    ? 'bg-red-600 hover:bg-red-700'
+                                    : 'bg-blue-600 hover:bg-blue-700'
+                                } text-white`}
+                              >
+                                <ShoppingCart className="h-4 w-4 mr-1" />
+                                {isInCart(course.id) ? 'Remove from Cart' : 'Add to Cart'}
+                              </Button>
+                              
+                              <Button
+                                onClick={() => handlePurchaseCourse(course)}
+                                className="flex-1 bg-green-600 text-white hover:bg-green-700"
+                              >
+                                <DollarSign className="h-4 w-4 mr-1" />
+                                Buy Now
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -523,6 +727,250 @@ const CourseLibrary = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Course Preview Modal */}
+        {showPreviewModal && selectedCourse && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold text-gray-900">Course Preview</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowPreviewModal(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div>
+                    <img 
+                      src={selectedCourse.image} 
+                      alt={selectedCourse.title}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">{selectedCourse.title}</h4>
+                    <p className="text-gray-600 mb-4">{selectedCourse.description}</p>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">{selectedCourse.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="h-4 w-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">{selectedCourse.lessons} lessons</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">{selectedCourse.students.toLocaleString()} students enrolled</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Star className="h-4 w-4 text-yellow-400" />
+                        <span className="text-sm text-gray-600">{selectedCourse.rating} rating</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-600">Instructor: {selectedCourse.instructor}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      {selectedCourse.isFree ? (
+                        <Button className="bg-green-600 hover:bg-green-700 text-white">
+                          <BookOpen className="h-4 w-4 mr-1" />
+                          Enroll Free
+                        </Button>
+                      ) : (
+                        <>
+                          <Button 
+                            onClick={() => handleAddToCart(selectedCourse)}
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            <ShoppingCart className="h-4 w-4 mr-1" />
+                            Add to Cart
+                          </Button>
+                          <Button 
+                            onClick={() => handlePurchaseCourse(selectedCourse)}
+                            className="bg-green-600 hover:bg-green-700 text-white"
+                          >
+                            <DollarSign className="h-4 w-4 mr-1" />
+                            Buy Now - ${selectedCourse.price}
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Shopping Cart Modal */}
+        {showCartModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold text-gray-900">Shopping Cart</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowCartModal(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                {cart.length === 0 ? (
+                  <div className="text-center py-8">
+                    <ShoppingCart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600">Your cart is empty</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {cart.map((course) => (
+                      <div key={course.id} className="flex items-center gap-4 p-4 border rounded-lg">
+                        <img 
+                          src={course.image} 
+                          alt={course.title}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-900">{course.title}</h4>
+                          <p className="text-sm text-gray-600">{course.instructor}</p>
+                          <p className="text-lg font-bold text-green-600">
+                            {course.isFree ? 'Free' : `$${course.price}`}
+                          </p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemoveFromCart(course.id)}
+                          className="text-red-600 hover:text-red-700"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    
+                    <div className="border-t pt-4">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-lg font-semibold">Total:</span>
+                        <span className="text-lg font-bold text-green-600">
+                          ${cart.reduce((sum, course) => sum + (course.isFree ? 0 : course.price), 0).toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button 
+                          onClick={handlePurchaseFromCart}
+                          className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          <CreditCard className="h-4 w-4 mr-1" />
+                          Checkout
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          onClick={() => setShowCartModal(false)}
+                        >
+                          Continue Shopping
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Purchase Modal */}
+        {showPurchaseModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg max-w-md w-full mx-4">
+              <div className="p-6 border-b">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-gray-900">Complete Purchase</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowPurchaseModal(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                {selectedCourse && (
+                  <div className="mb-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <img 
+                        src={selectedCourse.image} 
+                        alt={selectedCourse.title}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{selectedCourse.title}</h4>
+                        <p className="text-sm text-gray-600">{selectedCourse.instructor}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <span>Course Price:</span>
+                        <span className="font-semibold">
+                          {selectedCourse.isFree ? 'Free' : `$${selectedCourse.price}`}
+                        </span>
+                      </div>
+                      {!selectedCourse.isFree && (
+                        <div className="flex items-center justify-between">
+                          <span>Processing Fee:</span>
+                          <span className="font-semibold">$2.99</span>
+                        </div>
+                      )}
+                      <div className="border-t pt-2 mt-2">
+                        <div className="flex items-center justify-between font-bold">
+                          <span>Total:</span>
+                          <span className="text-green-600">
+                            {selectedCourse.isFree ? 'Free' : `$${(selectedCourse.price + 2.99).toFixed(2)}`}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="space-y-3">
+                  <Button 
+                    onClick={handleCompletePurchase}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    <CreditCard className="h-4 w-4 mr-1" />
+                    {selectedCourse?.isFree ? 'Enroll Now' : 'Pay with Card'}
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => setShowPurchaseModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Modals Placeholder */}
         {showAddCourseModal && (

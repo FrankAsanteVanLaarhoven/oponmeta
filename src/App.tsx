@@ -73,6 +73,7 @@ const CompanionsAnalytics = lazy(() => import('./components/CompanionsAnalytics'
 const CompanionsSettings = lazy(() => import('./components/CompanionsSettings'));
 const CourseCertifications = lazy(() => import('./components/CourseCertifications'));
 const InstructorPortal = lazy(() => import('./components/InstructorPortal'));
+const CourseCreationWizard = lazy(() => import('./components/CourseCreationWizard'));
 const ShareKnowledgeGlobally = lazy(() => import('./components/ShareKnowledgeGlobally'));
 const Blogs = lazy(() => import('./components/Blogs'));
 const DownloadApp = lazy(() => import('./components/DownloadApp'));
@@ -97,7 +98,19 @@ const SubscriptionManagement = lazy(() => import('./components/SubscriptionManag
 const Contact = lazy(() => import('./components/Contact'));
 const Mission = lazy(() => import('./components/Mission'));
 const Vision = lazy(() => import('./components/Vision'));
+const UserProfile = lazy(() => import('./components/UserProfile'));
+const UserSettings = lazy(() => import('./components/UserSettings'));
+const HelpSupport = lazy(() => import('./components/HelpSupport'));
+const Subscription = lazy(() => import('./components/SubscriptionPage'));
 const Approach = lazy(() => import('./components/Approach'));
+const Certification = lazy(() => import('./components/Certification'));
+const GetPremium = lazy(() => import('./components/GetPremium'));
+const GrammarCheckerPage = lazy(() => import('./components/GrammarCheckerPage'));
+const PlagiarismCheckerPage = lazy(() => import('./components/PlagiarismCheckerPage'));
+const BlogsPage = lazy(() => import('./components/BlogsPage'));
+const DownloadAppPage = lazy(() => import('./components/DownloadAppPage'));
+const LoginPage = lazy(() => import('./components/LoginPage'));
+const SuperAdminDashboard = lazy(() => import('./components/SuperAdminDashboard'));
 
 // Placeholder component for missing components
 const Placeholder = ({ title }: { title: string }) => (
@@ -133,6 +146,9 @@ function App() {
           {/* About Page */}
           <Route path="/about" element={<About />} />
           
+          {/* Auth Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          
           {/* Courses Page */}
           <Route path="/courses" element={<Programme />} />
           <Route path="/programme" element={<Programme />} />
@@ -153,6 +169,7 @@ function App() {
           
           {/* Dashboard Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/super-admin" element={<SuperAdminDashboard />} />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/student-portal" element={<StudentPortal />} />
           <Route path="/vendor-dashboard" element={<VendorDashboard />} />
@@ -208,12 +225,23 @@ function App() {
         <Route path="/payment-demo" element={<PaymentDemo />} />
         <Route path="/course-browsing" element={<CourseBrowsing />} />
         <Route path="/ai-companion-subscription" element={<AICompanionSubscription />} />
-        <Route path="/subscription-management" element={<SubscriptionManagement />} />
+<Route path="/subscription" element={<Subscription />} />
+<Route path="/subscription-management" element={<SubscriptionManagement />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mission" element={<Mission />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/approach" element={<Approach />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/settings" element={<UserSettings />} />
+        <Route path="/help" element={<HelpSupport />} />
         <Route path="/team" element={<Placeholder title="Our Team" />} />
+        <Route path="/resources/certification" element={<Certification />} />
+        <Route path="/resources/get-premium" element={<GetPremium />} />
+        <Route path="/resources/subscription" element={<Subscription />} />
+        <Route path="/resources/grammar-checker" element={<GrammarCheckerPage />} />
+        <Route path="/resources/plagiarism-checker" element={<PlagiarismCheckerPage />} />
+        <Route path="/resources/blogs" element={<BlogsPage />} />
+        <Route path="/resources/download-app" element={<DownloadAppPage />} />
         <Route path="/workshops" element={<Placeholder title="Workshops" />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/community-forums" element={<Placeholder title="Community Forums" />} />
@@ -248,6 +276,7 @@ function App() {
           <Route path="/resources/share-knowledge-globally" element={<ShareKnowledgeGlobally />} />
           <Route path="/resources/become-instructor" element={<BecomeInstructor />} />
           <Route path="/resources/instructor-portal" element={<InstructorPortal />} />
+          <Route path="/resources/create-course" element={<CourseCreationWizard />} />
           <Route path="/resources/resume-builder" element={<ResumeBuilder />} />
           <Route path="/resources/career-ready-plan" element={<CareerReadyPlan />} />
           <Route path="/resources/aptitude-test" element={<AptitudeTest />} />

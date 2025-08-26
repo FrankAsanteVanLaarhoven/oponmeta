@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Test - OponM LMS</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .test-section h3 {
+            margin-top: 0;
+            color: #fff;
+        }
+
+        .status {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .status.success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status.error {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .status.warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .install-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 PWA Test Dashboard</h1>
+        
+        <div class="test-section">
+            <h3>📱 PWA Installation</h3>
+            <div id="install-status">
+                <div class="status warning">Checking PWA support...</div>
+            </div>
+            <button id="install-button" class="install-button">Install OponM LMS</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🔧 Service Worker</h3>
+            <div id="sw-status">
+                <div class="status warning">Checking service worker...</div>
+            </div>
+            <div class="log" id="sw-log"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 PWA Features</h3>
+            <ul class="feature-list">
+                <li>Offline caching and background sync</li>
+                <li>Push notifications support</li>
+                <li>App-like installation experience</li>
+                <li>Responsive design for all devices</li>
+                <li>Fast loading with service worker</li>
+                <li>Background data synchronization</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🌐 Network Status</h3>
+            <div id="network-status">
+                <div class="status success">Online</div>
+            </div>
+            <p>Try disconnecting your internet to test offline mode!</p>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 Test Results</h3>
+            <div id="test-results">
+                <div class="status warning">Running tests...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt;
+        const installButton = document.getElementById('install-button');
+        const installStatus = document.getElementById('install-status');
+        const swStatus = document.getElementById('sw-status');
+        const swLog = document.getElementById('sw-log');
+        const networkStatus = document.getElementById('network-status');
+        const testResults = document.getElementById('test-results');
+
+        // Log function
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            swLog.innerHTML += `[${timestamp}] ${message}\n`;
+            swLog.scrollTop = swLog.scrollHeight;
+        }
+
+        // Test PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installStatus.innerHTML = '<div class="status success">PWA installation available!</div>';
+            installButton.style.display = 'inline-block';
+            log('PWA installation prompt captured');
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                log(`PWA installation ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            }
+        });
+
+        // Test Service Worker
+        if ('serviceWorker' in navigator) {
+            log('Service Worker supported');
+            swStatus.innerHTML = '<div class="status success">Service Worker supported</div>';
+            
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    log('Service Worker registered successfully');
+                    swStatus.innerHTML = '<div class="status success">Service Worker registered successfully</div>';
+                    
+                    // Check if service worker is active
+                    if (registration.active) {
+                        log('Service Worker is active');
+                    } else {
+                        log('Service Worker is installing...');
+                    }
+                })
+                .catch(error => {
+                    log(`Service Worker registration failed: ${error}`);
+                    swStatus.innerHTML = '<div class="status error">Service Worker registration failed</div>';
+                });
+
+            // Listen for service worker updates
+            navigator.serviceWorker.addEventListener('message', event => {
+                log(`Service Worker message: ${event.data}`);
+            });
+        } else {
+            log('Service Worker not supported');
+            swStatus.innerHTML = '<div class="status error">Service Worker not supported</div>';
+        }
+
+        // Test Network Status
+        function updateNetworkStatus() {
+            if (navigator.onLine) {
+                networkStatus.innerHTML = '<div class="status success">Online</div>';
+                log('Network: Online');
+            } else {
+                networkStatus.innerHTML = '<div class="status error">Offline</div>';
+                log('Network: Offline');
+            }
+        }
+
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+        updateNetworkStatus();
+
+        // Test PWA Features
+        function runTests() {
+            const tests = [
+                {
+                    name: 'Service Worker Support',
+                    test: () => 'serviceWorker' in navigator
+                },
+                {
+                    name: 'Cache API Support',
+                    test: () => 'caches' in window
+                },
+                {
+                    name: 'Push API Support',
+                    test: () => 'PushManager' in window
+                },
+                {
+                    name: 'Background Sync Support',
+                    test: () => 'serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype
+                },
+                {
+                    name: 'Notifications Support',
+                    test: () => 'Notification' in window
+                },
+                {
+                    name: 'Manifest Support',
+                    test: () => document.querySelector('link[rel="manifest"]') !== null
+                }
+            ];
+
+            let passedTests = 0;
+            const results = tests.map(test => {
+                const passed = test.test();
+                if (passed) passedTests++;
+                return `${test.name}: ${passed ? '✅' : '❌'}`;
+            });
+
+            testResults.innerHTML = `
+                <div class="status ${passedTests === tests.length ? 'success' : 'warning'}">
+                    ${passedTests}/${tests.length} tests passed
+                </div>
+                <ul class="feature-list">
+                    ${results.map(result => `<li>${result}</li>`).join('')}
+                </ul>
+            `;
+
+            log(`Tests completed: ${passedTests}/${tests.length} passed`);
+        }
+
+        // Run tests after page loads
+        window.addEventListener('load', () => {
+            setTimeout(runTests, 1000);
+        });
+
+        // Test offline functionality
+        if ('caches' in window) {
+            caches.open('test-cache')
+                .then(cache => {
+                    log('Cache API working');
+                    return cache.add('/offline.html');
+                })
+                .then(() => {
+                    log('Offline page cached successfully');
+                })
+                .catch(error => {
+                    log(`Cache test failed: ${error}`);
+                });
+        }
+    </script>
+</body>
+</html>

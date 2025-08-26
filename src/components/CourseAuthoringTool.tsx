@@ -50,7 +50,6 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import Footer from './Footer';
 
 interface CourseElement {
   id: string;
@@ -895,8 +894,6 @@ const CourseAuthoringTool = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </div>
   );
 };

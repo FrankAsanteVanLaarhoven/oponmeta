@@ -228,21 +228,21 @@ const CourseBrowsing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="max-w-7xl mx-auto px-4 py-8">
         
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Browse Your Courses Now</h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Browse Your Courses Now</h1>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Sidebar - Categories */}
           <div className="lg:w-1/4">
-            <Card className="bg-white border-gray-200">
+                          <Card className="bg-gray-800 border-gray-700">
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-gray-900">Categories</CardTitle>
+                <CardTitle className="text-xl font-bold text-white">Categories</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 {categories.map((category) => (
@@ -252,14 +252,14 @@ const CourseBrowsing = () => {
                     className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                       selectedCategory === category.id
                         ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                        : 'hover:bg-gray-50 text-gray-700'
+                        : 'hover:bg-gray-700 text-white'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <category.icon className={`w-5 h-5 ${category.color}`} />
                       <span className="font-medium">{category.name}</span>
                     </div>
-                    <span className="text-sm text-gray-500">({category.courseCount} Courses)</span>
+                                          <span className="text-sm text-white">({category.courseCount} Courses)</span>
                   </button>
                 ))}
               </CardContent>
@@ -270,11 +270,11 @@ const CourseBrowsing = () => {
           <div className="lg:w-3/4">
             
             {/* Search and Filters */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                            <div className="bg-gray-800 rounded-lg border border-gray-700 p-6 mb-6">
               <div className="flex flex-col lg:flex-row gap-4 items-center">
                 {/* Search */}
                 <div className="relative flex-1 max-w-md">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white h-5 w-5" />
                   <Input
                     type="text"
                     placeholder="Search courses..."
@@ -321,13 +321,13 @@ const CourseBrowsing = () => {
 
             {/* Available Courses Section */}
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Available Courses</h2>
+                              <h2 className="text-2xl font-bold text-white mb-4">Available Courses</h2>
             </div>
 
             {/* Course Grid */}
             {filteredCourses.length === 0 ? (
-              <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-                <p className="text-gray-600 text-lg">No courses found matching your criteria.</p>
+                              <div className="text-center py-12 bg-gray-800 rounded-lg border border-gray-700">
+                <p className="text-white text-lg">No courses found matching your criteria.</p>
               </div>
             ) : (
               <div className={viewMode === "grid" 
@@ -335,7 +335,7 @@ const CourseBrowsing = () => {
                 : "space-y-4"
               }>
                 {filteredCourses.map((course) => (
-                  <Card key={course.id} className="bg-white border-gray-200 hover:shadow-lg transition-shadow overflow-hidden">
+                  <Card key={course.id} className="bg-gray-800 border-gray-700 hover:shadow-lg transition-shadow overflow-hidden">
                     <div className={viewMode === "grid" ? "relative" : "flex"}>
                       {/* Course Image */}
                       <div className={viewMode === "grid" ? "relative" : "w-48 flex-shrink-0"}>
@@ -360,54 +360,54 @@ const CourseBrowsing = () => {
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-8 w-8 p-0 rounded-full bg-white/80 backdrop-blur-md hover:bg-white"
+                            className="h-8 w-8 p-0 rounded-full bg-gray-700/80 backdrop-blur-md hover:bg-gray-600"
                             onClick={() => handleFavorite(course.id)}
                           >
-                            <Heart className="h-4 w-4 text-gray-700" />
+                            <Heart className="h-4 w-4 text-white" />
                           </Button>
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-8 w-8 p-0 rounded-full bg-white/80 backdrop-blur-md hover:bg-white"
+                            className="h-8 w-8 p-0 rounded-full bg-gray-700/80 backdrop-blur-md hover:bg-gray-600"
                             onClick={() => handleWishlist(course.id)}
                           >
-                            <Bookmark className="h-4 w-4 text-gray-700" />
+                            <Bookmark className="h-4 w-4 text-white" />
                           </Button>
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-8 w-8 p-0 rounded-full bg-white/80 backdrop-blur-md hover:bg-white"
+                            className="h-8 w-8 p-0 rounded-full bg-gray-700/80 backdrop-blur-md hover:bg-gray-600"
                             onClick={() => handleLike(course.id)}
                           >
-                            <ThumbsUp className="h-4 w-4 text-gray-700" />
+                            <ThumbsUp className="h-4 w-4 text-white" />
                           </Button>
                         </div>
                       </div>
 
                       {/* Course Content */}
                       <div className={viewMode === "grid" ? "p-6" : "flex-1 p-6"}>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{course.title}</h3>
-                        <p className="text-sm text-gray-600 mb-2">Instructor: {course.instructor}</p>
+                        <h3 className="text-lg font-semibold text-white mb-2">{course.title}</h3>
+                        <p className="text-sm text-white mb-2">Instructor: {course.instructor}</p>
                         {viewMode === "grid" && (
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{course.description}</p>
+                                                      <p className="text-sm text-white mb-4 line-clamp-2">{course.description}</p>
                         )}
 
                         {/* Course Stats */}
                         <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                          <div className="flex items-center space-x-1 text-gray-700">
+                          <div className="flex items-center space-x-1 text-white">
                             <Clock className="h-3 w-3" />
                             <span>{course.duration}</span>
                           </div>
-                          <div className="flex items-center space-x-1 text-gray-700">
+                          <div className="flex items-center space-x-1 text-white">
                             <Play className="h-3 w-3" />
                             <span>{course.lessons} modules</span>
                           </div>
-                          <div className="flex items-center space-x-1 text-gray-700">
+                          <div className="flex items-center space-x-1 text-white">
                             <Users className="h-3 w-3" />
                             <span>{course.students}</span>
                           </div>
-                          <div className="text-gray-700">
-                            <Badge variant="outline" className="border-gray-300 text-gray-700 text-xs">
+                          <div className="text-white">
+                            <Badge variant="outline" className="border-white text-white text-xs">
                               {course.level}
                             </Badge>
                           </div>
@@ -417,17 +417,17 @@ const CourseBrowsing = () => {
                         <div className="flex items-center justify-between text-sm mb-4">
                           <div className="flex items-center space-x-1">
                             <StarIcon className="h-4 w-4 text-yellow-500 fill-current" />
-                            <span className="text-gray-900 font-medium">{course.rating} / 5</span>
-                            <span className="text-gray-700">({course.students} learners)</span>
+                            <span className="text-white font-medium">{course.rating} / 5</span>
+                            <span className="text-white">({course.students} learners)</span>
                           </div>
-                          <div className="text-xs text-gray-700">
+                          <div className="text-xs text-white">
                             Updated {course.lastUpdated}
                           </div>
                         </div>
 
                         {/* Price and Action */}
                         <div className="flex items-center justify-between">
-                          <div className="text-2xl font-bold text-gray-900">
+                          <div className="text-2xl font-bold text-white">
                             ${course.price}
                           </div>
                           <Button 

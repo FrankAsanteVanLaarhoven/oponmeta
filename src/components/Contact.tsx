@@ -163,7 +163,7 @@ const Contact = () => {
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             Contact Us
           </h1>
-          <p className="text-xl text-blue-100">
+          <p className="text-xl text-yellow-400">
             We're here to support your success. Reach out anytime with questions, feedback, or partnership ideas from anywhere in the world.
           </p>
         </div>
@@ -178,8 +178,8 @@ const Contact = () => {
                 <Globe className="h-8 w-8 text-blue-400 mr-3" />
                 <h2 className="text-2xl font-bold text-white">Visit Our Website</h2>
               </div>
-              <p className="text-white mb-4">Explore our platform and discover all we have to offer</p>
-              <span className="text-2xl font-bold text-blue-200">
+              <p className="text-yellow-400 mb-4">Explore our platform and discover all we have to offer</p>
+              <span className="text-2xl font-bold text-yellow-400">
                 oponmeta.com
               </span>
             </CardContent>
@@ -193,7 +193,7 @@ const Contact = () => {
             <Card className="bg-[#11204a] border-[#16203a]">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
-                <p className="text-white mb-4">We respond promptly to all inquiries.</p>
+                <p className="text-yellow-400 mb-4">We respond promptly to all inquiries.</p>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -287,7 +287,7 @@ const Contact = () => {
             <Card className="bg-white/10 backdrop-blur-md border-white/20">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-white mb-6">Contact Methods</h3>
-                <p className="text-blue-100 mb-4">Choose the best way to reach our global support team.</p>
+                <p className="text-yellow-400 mb-4">Choose the best way to reach our global support team.</p>
                 <div className="space-y-4">
                   {contactMethods.map((method, index) => (
                     <div key={index} className="flex items-start space-x-3">
@@ -296,9 +296,9 @@ const Contact = () => {
                       </div>
                       <div>
                         <h4 className="text-white font-medium">{method.title}</h4>
-                        <p className="text-blue-100 text-sm">{method.description}</p>
-                        <p className="text-blue-200 text-sm font-medium">{method.contact}</p>
-                        <p className="text-blue-300 text-xs">{method.available}</p>
+                        <p className="text-yellow-400 text-sm">{method.description}</p>
+                        <p className="text-yellow-400 text-sm font-medium">{method.contact}</p>
+                        <p className="text-yellow-400 text-xs">{method.available}</p>
                       </div>
                     </div>
                   ))}
@@ -309,7 +309,7 @@ const Contact = () => {
             <Card className="bg-white/10 backdrop-blur-md border-white/20">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-white mb-6">Quick Support</h3>
-                <p className="text-blue-100 mb-4">Need help fast? Try our live chat or request a callback.</p>
+                <p className="text-yellow-400 mb-4">Need help fast? Try our live chat or request a callback.</p>
                 <div className="space-y-3">
                   <Button 
                     size="sm" 
@@ -338,7 +338,7 @@ const Contact = () => {
         <section className="mt-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Email Directory</h2>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-yellow-400">
               Contact the right team for your specific needs
             </p>
           </div>
@@ -353,12 +353,12 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">{contact.title}</h3>
-                      <p className="text-blue-100 text-sm">{contact.description}</p>
+                      <p className="text-yellow-400 text-sm">{contact.description}</p>
                     </div>
                   </div>
                   <a 
                     href={`mailto:${contact.email}`}
-                    className="text-blue-200 hover:text-white font-medium transition-colors duration-300"
+                    className="text-yellow-400 hover:text-white font-medium transition-colors duration-300"
                   >
                     {contact.email}
                   </a>
@@ -372,7 +372,7 @@ const Contact = () => {
         <section className="mt-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Our Offices</h2>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-yellow-400">
               Visit us at any of our regional offices or connect with us online from anywhere
             </p>
           </div>
@@ -385,8 +385,8 @@ const Contact = () => {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {office.city}, {office.country}
                   </h3>
-                  <p className="text-blue-100 text-sm mb-3">{office.description}</p>
-                  <p className="text-blue-200 text-xs">{office.address}</p>
+                  <p className="text-yellow-400 text-sm mb-3">{office.description}</p>
+                  <p className="text-yellow-400 text-xs">{office.address}</p>
                 </CardContent>
               </Card>
             ))}
@@ -398,7 +398,7 @@ const Contact = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardContent className="p-8 text-center">
               <h2 className="text-2xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-              <p className="text-blue-100 mb-6">
+              <p className="text-yellow-400 mb-6">
                 Find answers to common questions in our FAQ section
               </p>
               <Button 

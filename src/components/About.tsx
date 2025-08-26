@@ -3,19 +3,19 @@ import { Globe, Eye, Target, Users, Award, Heart } from 'lucide-react';
 
 const principles = [
   {
-    icon: <Globe className="h-8 w-8 text-[#0a174e] mb-2" />,
+    icon: <Globe className="h-8 w-8 text-yellow-400 mb-2" />,
     text: 'We celebrate and promote diverse expertise while connecting learners with comprehensive global knowledge networks and multilingual platforms.'
   },
   {
-    icon: <Users className="h-8 w-8 text-[#0a174e] mb-2" />,
+    icon: <Users className="h-8 w-8 text-yellow-400 mb-2" />,
     text: 'Quality education with AI-powered learning, Web3 integration, and emerging technologies should be accessible to everyone, regardless of location or background.'
   },
   {
-    icon: <Award className="h-8 w-8 text-[#0a174e] mb-2" />,
+    icon: <Award className="h-8 w-8 text-yellow-400 mb-2" />,
     text: 'We maintain the highest standards in course content, industry partnerships, blockchain certifications, and cutting-edge learning outcomes.'
   },
   {
-    icon: <Heart className="h-8 w-8 text-[#0a174e] mb-2" />,
+    icon: <Heart className="h-8 w-8 text-yellow-400 mb-2" />,
     text: 'Every course contributes to building stronger global communities through mentorship programs, professional networks, and sustainable development initiatives.'
   },
 ];
@@ -100,25 +100,25 @@ const About = () => (
     {/* Vision & Mission Cards */}
     <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
       <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-        <Target className="h-10 w-10 text-[#0a174e] mb-2" />
-        <h3 className="text-xl font-bold text-[#0a174e] mb-2">Mission</h3>
-        <p className="text-gray-700 text-center">To democratize access to high-quality global education through multilingual platforms, AI-powered learning, Web3 integration, industry partnerships, and inclusive programs that empower learners, educators, and organizations worldwide with future-ready skills.</p>
+        <Target className="h-10 w-10 text-yellow-400 mb-2" />
+        <h3 className="text-xl font-bold text-white mb-2">Mission</h3>
+        <p className="text-yellow-400 text-center">To democratize access to high-quality global education through multilingual platforms, AI-powered learning, Web3 integration, industry partnerships, and inclusive programs that empower learners, educators, and organizations worldwide with future-ready skills.</p>
       </div>
       <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-        <Eye className="h-10 w-10 text-[#0a174e] mb-2" />
-        <h3 className="text-xl font-bold text-[#0a174e] mb-2">Vision</h3>
-        <p className="text-gray-700 text-center">A future where every learner globally has access to comprehensive, technology-enhanced education, where diverse expertise is recognized and celebrated, and where innovative learning solutions serve as the foundation for sustainable development and global collaboration.</p>
+        <Eye className="h-10 w-10 text-yellow-400 mb-2" />
+        <h3 className="text-xl font-bold text-white mb-2">Vision</h3>
+        <p className="text-yellow-400 text-center">A future where every learner globally has access to comprehensive, technology-enhanced education, where diverse expertise is recognized and celebrated, and where innovative learning solutions serve as the foundation for sustainable development and global collaboration.</p>
       </div>
     </div>
 
     {/* Principles */}
     <div className="max-w-6xl mx-auto mb-10">
-      <h2 className="text-2xl font-bold text-[#0a174e] text-center mb-6">The principles that guide everything we do</h2>
+      <h2 className="text-2xl font-bold text-white text-center mb-6">The principles that guide everything we do</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {principles.map((p, idx) => (
           <div key={idx} className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
             {p.icon}
-            <p className="text-gray-700 text-sm">{p.text}</p>
+            <p className="text-yellow-400 text-sm">{p.text}</p>
           </div>
         ))}
       </div>
@@ -126,12 +126,12 @@ const About = () => (
 
     {/* Impact Stats */}
     <div className="bg-white py-10 mb-10">
-      <h2 className="text-xl font-bold text-[#0a174e] text-center mb-6">Making comprehensive education accessible globally through innovative technology</h2>
+      <h2 className="text-xl font-bold text-white text-center mb-6">Making comprehensive education accessible globally through innovative technology</h2>
       <div className="flex flex-wrap justify-center gap-10 max-w-4xl mx-auto">
         {stats.map((stat, idx) => (
           <div key={idx} className="flex flex-col items-center">
-            <span className="text-3xl md:text-4xl font-extrabold text-[#0a174e]">{stat.value}</span>
-            <span className="text-gray-700 text-base font-medium">{stat.label}</span>
+            <span className="text-3xl md:text-4xl font-extrabold text-yellow-400">{stat.value}</span>
+            <span className="text-yellow-400 text-base font-medium">{stat.label}</span>
           </div>
         ))}
       </div>
@@ -139,13 +139,13 @@ const About = () => (
 
     {/* Team Section */}
     <div className="max-w-6xl mx-auto mb-10">
-      <h2 className="text-2xl font-bold text-[#0a174e] text-center mb-6">Passionate educators and technologists dedicated to transforming global education through innovation</h2>
+      <h2 className="text-2xl font-bold text-white text-center mb-6">Passionate educators and technologists dedicated to transforming global education through innovation</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {team.map((member, idx) => (
           <div key={idx} className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
             <img src={member.img} alt={member.name} className="h-20 w-20 rounded-full mb-3 object-cover" />
-            <span className="text-[#0a174e] font-bold mb-1">{member.name}</span>
-            <span className="text-gray-600 text-sm mb-2">{member.title}</span>
+            <span className="text-yellow-400 font-bold mb-1">{member.name}</span>
+            <span className="text-yellow-400 text-sm mb-2">{member.title}</span>
           </div>
         ))}
       </div>
@@ -153,7 +153,7 @@ const About = () => (
 
     {/* Community CTA */}
     <div className="text-center mt-10">
-      <h2 className="text-xl font-bold text-[#0a174e] mb-2">Whether you're a learner, educator, or partner, there's a place for you in our community</h2>
+      <h2 className="text-xl font-bold text-white mb-2">Whether you're a learner, educator, or partner, there's a place for you in our community</h2>
       <button className="mt-4 px-8 py-3 bg-[#0a174e] text-white font-bold rounded shadow hover:bg-indigo-700 transition">Start Learning</button>
     </div>
   </div>

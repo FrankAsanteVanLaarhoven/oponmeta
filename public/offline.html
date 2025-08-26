@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - OponM LMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .offline-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .retry-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem;
+            min-width: 150px;
+        }
+
+        .retry-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .retry-button:active {
+            transform: translateY(0);
+        }
+
+        .offline-button {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem;
+            min-width: 150px;
+        }
+
+        .offline-button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #e74c3c;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .connection-info {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            color: #856404;
+        }
+
+        .connection-info h4 {
+            margin-bottom: 0.5rem;
+            color: #856404;
+        }
+
+        .connection-info p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .offline-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .retry-button,
+            .offline-button {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            📶
+        </div>
+        
+        <h1>You're Offline</h1>
+        <p class="subtitle">
+            Don't worry! OponM LMS works offline too. You can continue learning with cached content.
+        </p>
+
+        <div class="features">
+            <h3>What you can do offline:</h3>
+            <ul class="feature-list">
+                <li>Access previously viewed courses</li>
+                <li>Continue watching cached videos</li>
+                <li>Read downloaded materials</li>
+                <li>Take notes and track progress</li>
+                <li>Complete offline assessments</li>
+                <li>Sync when connection returns</li>
+            </ul>
+        </div>
+
+        <div class="connection-info">
+            <h4><span class="status-indicator"></span>Connection Status</h4>
+            <p>Your progress will be automatically synced when you're back online. No data will be lost.</p>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <button class="retry-button" onclick="retryConnection()">
+                🔄 Try Again
+            </button>
+            <button class="offline-button" onclick="continueOffline()">
+                📚 Continue Offline
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status
+        function checkConnection() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }
+
+        // Retry connection
+        function retryConnection() {
+            const button = event.target;
+            button.innerHTML = '🔄 Checking...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                checkConnection();
+                button.innerHTML = '🔄 Try Again';
+                button.disabled = false;
+            }, 2000);
+        }
+
+        // Continue offline
+        function continueOffline() {
+            // Try to load cached content
+            if ('caches' in window) {
+                caches.match('/')
+                    .then(response => {
+                        if (response) {
+                            window.location.href = '/';
+                        } else {
+                            // Show offline dashboard
+                            showOfflineDashboard();
+                        }
+                    })
+                    .catch(() => {
+                        showOfflineDashboard();
+                    });
+            } else {
+                showOfflineDashboard();
+            }
+        }
+
+        // Show offline dashboard
+        function showOfflineDashboard() {
+            const container = document.querySelector('.offline-container');
+            container.innerHTML = `
+                <div class="offline-icon" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                    📚
+                </div>
+                <h1>Offline Dashboard</h1>
+                <p class="subtitle">Here's what you can access offline:</p>
+                
+                <div class="features">
+                    <h3>Available Content:</h3>
+                    <ul class="feature-list">
+                        <li>Recent courses (cached)</li>
+                        <li>Downloaded materials</li>
+                        <li>Progress tracking</li>
+                        <li>Notes and bookmarks</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="retry-button" onclick="retryConnection()">
+                        🔄 Check Connection
+                    </button>
+                </div>
+            `;
+        }
+
+        // Listen for online/offline events
+        window.addEventListener('online', () => {
+            console.log('Connection restored');
+            window.location.reload();
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Connection lost');
+        });
+
+        // Check connection periodically
+        setInterval(checkConnection, 10000); // Check every 10 seconds
+
+        // Show connection status
+        function updateConnectionStatus() {
+            const statusIndicator = document.querySelector('.status-indicator');
+            if (statusIndicator) {
+                statusIndicator.style.background = navigator.onLine ? '#27ae60' : '#e74c3c';
+            }
+        }
+
+        // Update status on load
+        updateConnectionStatus();
+
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered successfully');
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -94,7 +94,18 @@ import {
   WifiOff as WifiOffIcon,
   WifiHigh as WifiHighIcon,
   WifiLow as WifiLowIcon,
-  WifiMedium as WifiMediumIcon
+  WifiMedium as WifiMediumIcon,
+  ShoppingCart,
+  CreditCard,
+  Briefcase,
+  MessageSquare,
+  Wallet,
+  Laptop,
+  Twitter,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -164,7 +175,7 @@ const StudentPortal: React.FC = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
     {
-      id: '1',
+      id: 'notification-1',
       title: 'New Course Available',
       message: 'Advanced React Development is now available for enrollment',
       type: 'info',
@@ -172,7 +183,7 @@ const StudentPortal: React.FC = () => {
       read: false
     },
     {
-      id: '2',
+      id: 'notification-2',
       title: 'Assignment Due',
       message: 'Your Machine Learning assignment is due in 3 days',
       type: 'warning',
@@ -180,7 +191,7 @@ const StudentPortal: React.FC = () => {
       read: false
     },
     {
-      id: '3',
+      id: 'notification-3',
       title: 'Course Completed!',
       message: 'Congratulations! You\'ve completed Digital Marketing Fundamentals',
       type: 'success',
@@ -206,12 +217,17 @@ const StudentPortal: React.FC = () => {
     const storedEnrollments = localStorage.getItem('courseEnrollments');
     if (storedEnrollments) {
       const enrollments = JSON.parse(storedEnrollments);
-      const coursesWithDetails = enrollments.map((enrollment: any) => {
+      // Remove duplicate enrollments by courseId and ensure unique course IDs
+      const uniqueEnrollments = enrollments.filter((enrollment: any, index: number, self: any[]) => 
+        index === self.findIndex((e: any) => e.courseId === enrollment.courseId)
+      );
+      
+      const coursesWithDetails = uniqueEnrollments.map((enrollment: any, index: number) => {
         // Find course details from coursesData
         const courseData = coursesData.find(c => c.id === enrollment.courseId);
         if (courseData) {
           return {
-            id: enrollment.courseId.toString(),
+            id: `enrolled-course-${enrollment.courseId}-${index}`,
             title: courseData.title,
             instructor: courseData.instructor,
             progress: enrollment.progress || 0,
@@ -271,7 +287,7 @@ const StudentPortal: React.FC = () => {
   // Mock data for demo purposes (fallback if no enrollments)
   const fallbackCourses: Course[] = [
     {
-      id: '1',
+      id: 'fallback-course-1',
       title: 'Digital Marketing Fundamentals',
       instructor: 'Sarah Johnson',
       progress: 0,
@@ -592,7 +608,7 @@ const StudentPortal: React.FC = () => {
 
   const achievements: Achievement[] = [
     {
-      id: '1',
+      id: 'achievement-1',
       title: 'First Course Completed',
       description: 'Successfully completed your first course',
       icon: '🎓',
@@ -601,7 +617,7 @@ const StudentPortal: React.FC = () => {
       category: 'milestone'
     },
     {
-      id: '2',
+      id: 'achievement-2',
       title: 'Perfect Score',
       description: 'Achieved 100% on a course assessment',
       icon: '⭐',
@@ -610,7 +626,7 @@ const StudentPortal: React.FC = () => {
       category: 'academic'
     },
     {
-      id: '3',
+      id: 'achievement-3',
       title: 'Streak Master',
       description: 'Maintained 7-day learning streak',
       icon: '🔥',
@@ -686,6 +702,45 @@ const StudentPortal: React.FC = () => {
   };
 
   const stats = getLearningStats();
+
+  // Social Media Sharing Function
+  const shareToSocialMedia = (platform: string, achievement: any) => {
+    const achievementText = `🎉 I just earned the "${achievement.title}" achievement on OponM LMS! ${achievement.description} #Learning #Achievement #OponM`;
+    const shareUrl = window.location.origin + '/student-portal';
+    
+    let shareLink = '';
+    
+    switch (platform) {
+      case 'twitter':
+        shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(achievementText)}&url=${encodeURIComponent(shareUrl)}`;
+        break;
+      case 'facebook':
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(achievementText)}`;
+        break;
+      case 'linkedin':
+        shareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(achievement.title)}&summary=${encodeURIComponent(achievement.description)}`;
+        break;
+      case 'instagram':
+        // Instagram doesn't support direct sharing via URL, so we'll copy to clipboard
+        navigator.clipboard.writeText(achievementText + ' ' + shareUrl);
+        alert('Achievement text copied to clipboard! You can now paste it on Instagram.');
+        return;
+      case 'youtube':
+        // YouTube doesn't support direct sharing via URL, so we'll copy to clipboard
+        navigator.clipboard.writeText(achievementText + ' ' + shareUrl);
+        alert('Achievement text copied to clipboard! You can now paste it on YouTube.');
+        return;
+      case 'copy':
+        navigator.clipboard.writeText(achievementText + ' ' + shareUrl);
+        alert('Achievement link copied to clipboard!');
+        return;
+      default:
+        return;
+    }
+    
+    // Open the share link in a new window
+    window.open(shareLink, '_blank', 'width=600,height=400');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -813,23 +868,51 @@ const StudentPortal: React.FC = () => {
                 {showProfileMenu && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 profile-menu">
                     <div className="py-1">
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      <button
+                        onClick={() => {
+                          navigate('/profile');
+                          setShowProfileMenu(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
                         <User className="h-4 w-4 mr-2" />
                         Profile
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/settings');
+                          setShowProfileMenu(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
                         <Settings className="h-4 w-4 mr-2" />
                         Settings
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/help');
+                          setShowProfileMenu(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
                         <HelpCircle className="h-4 w-4 mr-2" />
                         Help
-                      </a>
+                      </button>
                       <hr className="my-1" />
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                      <button
+                        onClick={() => {
+                          // Clear user data and redirect to home
+                          localStorage.removeItem('courseEnrollments');
+                          localStorage.removeItem('userSession');
+                          alert('You have been signed out successfully.');
+                          navigate('/');
+                          setShowProfileMenu(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
                         <LogOut className="h-4 w-4 mr-2" />
                         Sign Out
-                      </a>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -855,6 +938,13 @@ const StudentPortal: React.FC = () => {
           
           <nav className="mt-4">
             <div className="px-4 space-y-2">
+              {/* Main Navigation */}
+              <div className="mb-4">
+                <h3 className={`text-xs font-semibold text-white uppercase tracking-wider mb-3 ${sidebarCollapsed ? 'hidden' : ''}`}>
+                  Main
+                </h3>
+              </div>
+              
               <button
                 onClick={() => setActiveTab('dashboard')}
                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -864,7 +954,7 @@ const StudentPortal: React.FC = () => {
                 }`}
               >
                 <Home className="h-5 w-5" />
-                {!sidebarCollapsed && <span>Dashboard</span>}
+                {!sidebarCollapsed && <span className="text-white">Dashboard</span>}
               </button>
 
               <button
@@ -876,7 +966,7 @@ const StudentPortal: React.FC = () => {
                 }`}
               >
                 <BookOpen className="h-5 w-5" />
-                {!sidebarCollapsed && <span>My Courses</span>}
+                {!sidebarCollapsed && <span className="text-white">My Courses</span>}
               </button>
 
               <button
@@ -888,7 +978,7 @@ const StudentPortal: React.FC = () => {
                 }`}
               >
                 <Trophy className="h-5 w-5" />
-                {!sidebarCollapsed && <span>Achievements</span>}
+                {!sidebarCollapsed && <span className="text-white">Achievements</span>}
               </button>
 
               <button
@@ -900,19 +990,195 @@ const StudentPortal: React.FC = () => {
                 }`}
               >
                 <BarChart3 className="h-5 w-5" />
-                {!sidebarCollapsed && <span>Progress</span>}
+                {!sidebarCollapsed && <span className="text-white">Progress</span>}
               </button>
 
               <button
                 onClick={() => setActiveTab('community')}
                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'community'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-[#1a2a6b] text-white border border-[#2a3a7b]'
+                    : 'text-white hover:bg-[#1a2a6b] hover:text-blue-100'
                 }`}
               >
                 <Users className="h-5 w-5" />
-                {!sidebarCollapsed && <span>Community</span>}
+                {!sidebarCollapsed && <span className="text-white">Community</span>}
+              </button>
+
+              {/* Quick Access Tools */}
+              <div className="mt-6 mb-4">
+                <h3 className={`text-xs font-semibold text-white uppercase tracking-wider mb-3 ${sidebarCollapsed ? 'hidden' : ''}`}>
+                  Quick Access
+                </h3>
+              </div>
+
+              <button
+                onClick={() => navigate('/course-library')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <BookOpen className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Course Library</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/course-library')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Shopping Cart</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/course-library')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Heart className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Wishlist</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/course-library')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Wallet className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Wallet</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/course-workspace')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Monitor className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Workspace</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/whiteboard')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <FileText className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Whiteboard</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/ai-video-calling')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Video className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">AI Video Calling</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/companions-library')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Users className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">AI Companions</span>}
+              </button>
+
+              {/* Learning Tools */}
+              <div className="mt-6 mb-4">
+                <h3 className={`text-xs font-semibold text-white uppercase tracking-wider mb-3 ${sidebarCollapsed ? 'hidden' : ''}`}>
+                  Learning Tools
+                </h3>
+              </div>
+
+              <button
+                onClick={() => navigate('/course-authoring')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Edit className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Course Authoring</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/ai-course-creator')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Zap className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">AI Course Creator</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/plagiarism-checker')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Shield className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Plagiarism Checker</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/grammar-checker')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <CheckCircle className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Grammar Checker</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/resume-builder')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <FileText className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Resume Builder</span>}
+              </button>
+
+              {/* Resources */}
+              <div className="mt-6 mb-4">
+                <h3 className={`text-xs font-semibold text-white uppercase tracking-wider mb-3 ${sidebarCollapsed ? 'hidden' : ''}`}>
+                  Resources
+                </h3>
+              </div>
+
+              <button
+                onClick={() => navigate('/blogs')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <FileText className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Blogs</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/webinars')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Video className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Webinars</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/download-app')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <Download className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Download App</span>}
+              </button>
+
+              {/* Account & Settings */}
+              <div className="mt-6 mb-4">
+                <h3 className={`text-xs font-semibold text-white uppercase tracking-wider mb-3 ${sidebarCollapsed ? 'hidden' : ''}`}>
+                  Account
+                </h3>
+              </div>
+
+              <button
+                onClick={() => setActiveTab('settings')}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  activeTab === 'settings'
+                    ? 'bg-[#1a2a6b] text-white border border-[#2a3a7b]'
+                    : 'text-white hover:bg-[#1a2a6b] hover:text-blue-100'
+                }`}
+              >
+                <Settings className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Settings</span>}
+              </button>
+
+              <button
+                onClick={() => navigate('/contact')}
+                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-[#1a2a6b] hover:text-blue-100"
+              >
+                <HelpCircle className="h-5 w-5" />
+                {!sidebarCollapsed && <span className="text-white">Help & Support</span>}
               </button>
             </div>
           </nav>
@@ -1116,7 +1382,7 @@ const StudentPortal: React.FC = () => {
               {/* Course Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {filteredCourses.map((course) => (
-                  <div key={course.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                  <div key={`course-grid-${course.id}`} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
@@ -1262,11 +1528,60 @@ const StudentPortal: React.FC = () => {
                       <div className="text-4xl mb-4">{achievement.icon}</div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">{achievement.title}</h3>
                       <p className="text-gray-600 mb-4">{achievement.description}</p>
-                      <div className="flex justify-between items-center text-sm">
+                      <div className="flex justify-between items-center text-sm mb-4">
                         <span className="text-gray-500">{achievement.earnedDate}</span>
                         <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
                           +{achievement.points} pts
                         </span>
+                      </div>
+                      
+                      {/* Social Media Sharing */}
+                      <div className="border-t border-gray-100 pt-4">
+                        <p className="text-sm text-gray-600 mb-3">Share your achievement:</p>
+                        <div className="flex justify-center space-x-2">
+                          <button
+                            onClick={() => shareToSocialMedia('twitter', achievement)}
+                            className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+                            title="Share on Twitter"
+                          >
+                            <Twitter className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => shareToSocialMedia('facebook', achievement)}
+                            className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+                            title="Share on Facebook"
+                          >
+                            <Facebook className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => shareToSocialMedia('linkedin', achievement)}
+                            className="p-2 bg-blue-700 text-white rounded-full hover:bg-blue-800 transition-colors"
+                            title="Share on LinkedIn"
+                          >
+                            <Linkedin className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => shareToSocialMedia('instagram', achievement)}
+                            className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:from-purple-600 hover:to-pink-600 transition-colors"
+                            title="Share on Instagram"
+                          >
+                            <Instagram className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => shareToSocialMedia('youtube', achievement)}
+                            className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+                            title="Share on YouTube"
+                          >
+                            <Youtube className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => shareToSocialMedia('copy', achievement)}
+                            className="p-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors"
+                            title="Copy Link"
+                          >
+                            <Share2 className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1322,7 +1637,7 @@ const StudentPortal: React.FC = () => {
                     <p className="text-gray-600 mb-4">Keep up the great work!</p>
                     <div className="flex justify-center space-x-1">
                       {Array.from({ length: 7 }, (_, i) => (
-                        <div key={i} className="w-3 h-3 bg-blue-500 rounded-full" />
+                        <div key={`streak-day-${i}`} className="w-3 h-3 bg-blue-500 rounded-full" />
                       ))}
                     </div>
                   </div>
@@ -1337,7 +1652,7 @@ const StudentPortal: React.FC = () => {
                 <div className="p-6">
                   <div className="space-y-4">
                     {courses.map((course) => (
-                      <div key={course.id} className="border-b border-gray-100 pb-4 last:border-b-0">
+                      <div key={`course-progress-${course.id}`} className="border-b border-gray-100 pb-4 last:border-b-0">
                         <div className="flex justify-between items-center mb-2">
                           <h4 className="font-medium text-gray-900">{course.title}</h4>
                           <span className="text-sm text-gray-600">{course.progress}%</span>
@@ -1422,7 +1737,7 @@ const StudentPortal: React.FC = () => {
                 <div className="p-6">
                   <div className="space-y-4">
                     {Array.from({ length: 5 }, (_, i) => (
-                      <div key={i} className="flex items-start space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                      <div key={`discussion-${i}`} className="flex items-start space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
                         <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                           <User className="h-5 w-5 text-blue-600" />
                         </div>
@@ -1578,7 +1893,7 @@ const StudentPortal: React.FC = () => {
                       <h4 className="text-sm font-medium text-gray-700 mb-3">Lessons</h4>
                       {Array.from({ length: selectedCourse.totalLessons }, (_, index) => (
                         <div
-                          key={index}
+                          key={`lesson-${index}`}
                           className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors ${
                             index === currentLesson 
                               ? 'bg-blue-100 border border-blue-200' 
@@ -1750,7 +2065,7 @@ const StudentPortal: React.FC = () => {
                         
                         return (
                           <div
-                            key={index}
+                            key={`progress-lesson-${index}`}
                             className={`flex items-center space-x-3 p-3 rounded-lg border ${
                               isCompleted 
                                 ? 'bg-green-50 border-green-200' 

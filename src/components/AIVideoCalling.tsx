@@ -288,7 +288,7 @@ const AIVideoCalling = () => {
 
   if (isInCall && selectedTutor) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
         <div className="flex h-screen">
           {/* Main Video Area */}
           <div className="flex-1 flex flex-col">
@@ -300,8 +300,8 @@ const AIVideoCalling = () => {
                   <AvatarFallback>{selectedTutor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h2 className="text-lg font-semibold">{selectedTutor.name}</h2>
-                  <p className="text-sm text-gray-300">{selectedTutor.specialty}</p>
+                                  <h2 className="text-lg font-semibold text-yellow-400">{selectedTutor.name}</h2>
+                <p className="text-sm text-yellow-400">{selectedTutor.specialty}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -325,8 +325,8 @@ const AIVideoCalling = () => {
                       {selectedTutor.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
-                  <h3 className="text-xl font-semibold">{selectedTutor.name}</h3>
-                  <p className="text-gray-300">{selectedTutor.specialty}</p>
+                                  <h3 className="text-xl font-semibold text-yellow-400">{selectedTutor.name}</h3>
+                <p className="text-yellow-400">{selectedTutor.specialty}</p>
                   <Badge variant="secondary" className="mt-2 bg-green-600">
                     AI Tutor
                   </Badge>
@@ -344,7 +344,7 @@ const AIVideoCalling = () => {
                 />
                 {!isVideoOn && (
                   <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                    <CameraOff className="w-8 h-8 text-gray-400" />
+                    <CameraOff className="w-8 h-8 text-yellow-400" />
                   </div>
                 )}
               </div>
@@ -404,7 +404,7 @@ const AIVideoCalling = () => {
           {/* Chat Sidebar */}
           <div className="w-80 bg-gray-800 border-l border-gray-700 flex flex-col">
             <div className="p-4 border-b border-gray-700">
-              <h3 className="text-lg font-semibold">Chat with {selectedTutor.name}</h3>
+                              <h3 className="text-lg font-semibold text-yellow-400">Chat with {selectedTutor.name}</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -417,11 +417,11 @@ const AIVideoCalling = () => {
                     className={`max-w-xs px-3 py-2 rounded-lg ${
                       message.sender === 'user'
                         ? 'bg-blue-600 text-white'
-                        : 'bg-gray-700 text-gray-200'
+                        : 'bg-gray-700 text-white'
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
-                    <p className="text-xs opacity-70 mt-1">
+                                            <p className="text-sm text-white">{message.text}</p>
+                                            <p className="text-xs opacity-70 mt-1 text-white">
                       {message.timestamp.toLocaleTimeString()}
                     </p>
                   </div>
@@ -450,14 +450,14 @@ const AIVideoCalling = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-yellow-400 mb-4">
             AI Video Calling
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-yellow-400 max-w-2xl mx-auto">
             Connect with AI tutors and experts for personalized learning experiences. 
             Get real-time help, ask questions, and receive instant feedback.
           </p>
@@ -467,8 +467,8 @@ const AIVideoCalling = () => {
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center space-x-2">
-              <Filter className="w-5 h-5 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">Filters:</span>
+                              <Filter className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-medium text-yellow-400">Filters:</span>
             </div>
             
             <Select value={filterSubject} onValueChange={setFilterSubject}>
@@ -542,13 +542,13 @@ const AIVideoCalling = () => {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <CardTitle className="text-lg">{tutor.name}</CardTitle>
-                      <p className="text-sm text-gray-600">{tutor.specialty}</p>
+                                                                      <CardTitle className="text-lg text-yellow-400">{tutor.name}</CardTitle>
+                        <p className="text-sm text-yellow-400">{tutor.specialty}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="text-sm font-medium">{tutor.rating}</span>
+                                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                                            <span className="text-sm font-medium text-yellow-400">{tutor.rating}</span>
                   </div>
                 </div>
               </CardHeader>
@@ -556,18 +556,18 @@ const AIVideoCalling = () => {
               <CardContent className="space-y-3">
                 <div className="flex flex-wrap gap-2">
                   {tutor.subjects.slice(0, 3).map(subject => (
-                    <Badge key={subject} variant="secondary" className="text-xs">
+                                            <Badge key={subject} variant="secondary" className="text-xs text-yellow-400">
                       {subject}
                     </Badge>
                   ))}
                   {tutor.subjects.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
+                                            <Badge variant="outline" className="text-xs text-yellow-400">
                       +{tutor.subjects.length - 3} more
                     </Badge>
                   )}
                 </div>
                 
-                <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center justify-between text-sm text-white">
                   <div className="flex items-center space-x-1">
                     <Clock className="w-4 h-4" />
                     <span>{tutor.experience} years</span>
@@ -579,9 +579,9 @@ const AIVideoCalling = () => {
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <div className="text-lg font-semibold text-green-600">
-                    ${tutor.hourlyRate}/hr
-                  </div>
+                                                                  <div className="text-lg font-semibold text-yellow-400">
+                          ${tutor.hourlyRate}/hr
+                        </div>
                   <Badge 
                     variant={tutor.availability === 'online' ? 'default' : 'secondary'}
                     className={tutor.availability === 'online' ? 'bg-green-600' : 'bg-gray-500'}
@@ -606,38 +606,38 @@ const AIVideoCalling = () => {
         {/* No Results */}
         {filteredTutors.length === 0 && (
           <div className="text-center py-12">
-            <Video className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No tutors found</h3>
-            <p className="text-gray-600">Try adjusting your filters to find available tutors.</p>
+                            <Video className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-yellow-400 mb-2">No tutors found</h3>
+                <p className="text-yellow-400">Try adjusting your filters to find available tutors.</p>
           </div>
         )}
 
         {/* Features Section */}
-        <div className="mt-16 bg-white rounded-lg shadow-sm p-8">
-          <h2 className="text-3xl font-bold text-center mb-8">Why Choose AI Video Calling?</h2>
+                  <div className="mt-16 bg-gray-800 rounded-lg shadow-sm p-8 border border-gray-700">
+                          <h2 className="text-3xl font-bold text-center mb-8 text-yellow-400">Why Choose AI Video Calling?</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-blue-600" />
+                              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <Clock className="w-8 h-8 text-yellow-400" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">24/7 Availability</h3>
-              <p className="text-gray-600">Get help anytime, anywhere with our AI tutors that never sleep.</p>
+                                              <h3 className="text-xl font-semibold mb-2 text-yellow-400">24/7 Availability</h3>
+                <p className="text-yellow-400">Get help anytime, anywhere with our AI tutors that never sleep.</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-green-600" />
+                              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <Star className="w-8 h-8 text-yellow-400" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Expert Knowledge</h3>
-              <p className="text-gray-600">Access to specialized knowledge across all subjects and skill levels.</p>
+                                              <h3 className="text-xl font-semibold mb-2 text-yellow-400">Expert Knowledge</h3>
+                <p className="text-yellow-400">Access to specialized knowledge across all subjects and skill levels.</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageSquare className="w-8 h-8 text-purple-600" />
+                              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <MessageSquare className="w-8 h-8 text-yellow-400" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Personalized Learning</h3>
-              <p className="text-gray-600">Tailored explanations and adaptive learning based on your needs.</p>
+                                              <h3 className="text-xl font-semibold mb-2 text-yellow-400">Personalized Learning</h3>
+                <p className="text-yellow-400">Tailored explanations and adaptive learning based on your needs.</p>
             </div>
           </div>
         </div>

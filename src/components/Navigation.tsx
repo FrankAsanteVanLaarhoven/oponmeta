@@ -97,10 +97,12 @@ const RESOURCES_TOOLS = [
   { icon: <Shield className="w-5 h-5 text-[#1a2a6b]" />, name: 'Plagiarism Checker', slug: 'plagiarism-checker', description: 'Premium AI-powered plagiarism detection', isPremium: true },
   { icon: <CheckCircle className="w-5 h-5 text-green-400" />, name: 'Grammar Checker', slug: 'grammar-checker', description: 'Free AI grammar and style checker' },
   { icon: <Crown className="w-5 h-5 text-yellow-500" />, name: 'Get Premium', slug: 'get-premium', description: 'Remove ads' },
+  { icon: <CreditCard className="w-5 h-5 text-blue-500" />, name: 'Subscription', slug: 'subscription', description: 'Manage your subscription plans' },
   { icon: <Users className="w-5 h-5 text-[#2a3a7b]" />, name: 'Graduate Profiles', slug: 'graduate-profiles', description: 'Read graduate success stories' },
   { icon: <Award className="w-5 h-5 text-yellow-400" />, name: 'Certification', slug: 'certification', description: 'View and verify course certificates', isNew: true },
   { icon: <Brain className="w-5 h-5 text-[#2a3a7b]" />, name: 'How to Build a Growth Mindset', slug: 'growth-mindset', description: 'Practical strategies for lifelong learning and personal development' },
   { icon: <Users className="w-5 h-5 text-green-300" />, name: 'Community', slug: 'community', description: 'Connect with learners and share experiences' },
+  { icon: <Shield className="w-5 h-5 text-red-600" />, name: 'Super Admin', slug: 'super-admin', description: 'Enterprise governance and system administration', isAdmin: true },
 ];
 
 const Navigation = () => {
@@ -210,13 +212,9 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-1" ref={dropdownRef}>
             {/* Main Navigation Links */}
-            <Link
-              to="/about"
-              className="px-3 py-2 text-base font-medium text-white hover:bg-white/10 rounded transition-all duration-200 flex items-center border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/20"
-            >
-              <Users className="w-4 h-4 mr-1" />
-              ABOUT
-            </Link>
+
+
+
 
             
             {/* Programmes Dropdown */}
@@ -387,7 +385,7 @@ const Navigation = () => {
                   {RESOURCES_TOOLS.map((resource) => (
                     <Link
                       key={resource.slug}
-                      to={`/resources/${resource.slug}`}
+                      to={resource.slug === 'super-admin' ? '/super-admin' : `/resources/${resource.slug}`}
                       className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                       onClick={() => setActiveDropdown(null)}
                     >
@@ -491,17 +489,17 @@ const Navigation = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown('language')}
-                className="flex items-center text-white hover:text-gray-200 transition-colors p-2 rounded-lg hover:bg-white/10"
+                className="flex items-center text-white hover:text-yellow-400 transition-colors p-2 rounded-lg hover:bg-white/10 border border-transparent hover:border-yellow-400/30"
               >
                 <Globe className="h-5 w-5" />
                 <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'language' ? 'rotate-180' : ''}`} />
               </button>
               {activeDropdown === 'language' && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">English</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Spanish</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">French</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">German</a>
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-2xl py-2 z-50 border-2 border-yellow-400/30 backdrop-blur-sm">
+                  <a href="#" className="block px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-b border-gray-100 last:border-b-0">English</a>
+                  <a href="#" className="block px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-b border-gray-100 last:border-b-0">Spanish</a>
+                  <a href="#" className="block px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-b border-gray-100 last:border-b-0">French</a>
+                  <a href="#" className="block px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-b border-gray-100 last:border-b-0">German</a>
                 </div>
               )}
             </div>
@@ -588,14 +586,9 @@ const Navigation = () => {
               </div>
               
               {/* Main Navigation Links */}
-              <Link
-                to="/about"
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Users className="w-4 h-4 mr-2" />
-                ABOUT
-              </Link>
+
+
+
 
               
               {/* Programmes */}
@@ -779,7 +772,7 @@ const Navigation = () => {
                   {RESOURCES_TOOLS.map((resource) => (
                     <Link
                       key={resource.slug}
-                      to={`/resources/${resource.slug}`}
+                      to={resource.slug === 'super-admin' ? '/super-admin' : `/resources/${resource.slug}`}
                       className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => {
                         setActiveDropdown(null);
