@@ -25,7 +25,8 @@ import {
   Eye,
   EyeOff,
   ChevronDown,
-  Settings
+  Settings,
+  HelpCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
