@@ -432,7 +432,6 @@ const CourseCreationWizard: React.FC = () => {
 
     return () => clearInterval(autoSaveInterval);
   }, [courseData, courseStatus]);
-  ];
 
   // AI Course Generation
   const handleAIGenerate = async () => {
