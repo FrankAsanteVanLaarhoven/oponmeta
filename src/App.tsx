@@ -98,6 +98,7 @@ const InformationTechnology = lazy(() => import('./components/InformationTechnol
 const EducationTraining = lazy(() => import('./components/EducationTraining'));
 const BusinessManagement = lazy(() => import('./components/BusinessManagement'));
 const MarketingSales = lazy(() => import('./components/MarketingSales'));
+const WorldClassLMSFeatures = lazy(() => import('./components/WorldClassLMSFeatures'));
 const AgricultureFood = lazy(() => import('./components/AgricultureFood'));
 const HospitalityTourism = lazy(() => import('./components/HospitalityTourism'));
 const CareerReadyPlan = lazy(() => import('./components/CareerReadyPlan'));
@@ -393,6 +394,7 @@ function App() {
           <Route path="/international-payment" element={<InternationalPaymentForm />} />
           <Route path="/theme-demo" element={<ThemeDemo />} />
           <Route path="/test-yellow-buttons" element={<TestYellowButtons />} />
+          <Route path="/world-class-lms-features" element={<WorldClassLMSFeatures />} />
           
           {/* Placeholder Routes for Missing Components */}
           <Route path="/growth-mindset" element={<GrowthMindset />} />
