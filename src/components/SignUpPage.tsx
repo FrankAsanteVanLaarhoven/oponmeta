@@ -648,7 +648,7 @@ const SignUpPage: React.FC = () => {
         </div>
 
         {/* Right Side - Features */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-blue-600 to-purple-700 p-8 items-center justify-center">
+        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-slate-700 to-zinc-800 p-8 items-center justify-center">
           <div className="max-w-md text-white">
             <h2 className="text-3xl font-bold mb-6">Why Choose OponMeta?</h2>
             <div className="space-y-6">
@@ -658,7 +658,7 @@ const SignUpPage: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">AI-Powered Learning</h3>
-                  <p className="text-blue-100 text-sm">Personalized learning paths and AI tutors</p>
+                  <p className="text-slate-200 text-sm">Personalized learning paths and AI tutors</p>
                 </div>
               </div>
               
