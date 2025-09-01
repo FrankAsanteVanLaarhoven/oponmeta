@@ -10,7 +10,7 @@ import {
   Truck, Music, Video, Handshake, Compass, Monitor, FileText,
   ChevronRight, Download, CheckCircle, Crown, Brain
 } from "lucide-react";
-import ThemeToggle from './ThemeToggle';
+import { EnhancedThemeSwitcher } from './EnhancedThemeSwitcher';
 import { CompactLanguageSelector } from './LanguageSelector';
 
 // Course categories data (Non-career focused categories)
@@ -168,40 +168,66 @@ const Navigation = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
               <div className="relative">
-                                 <img
-                   src="/logo.png"
-                   alt="OponMeta Logo"
-                   className="h-12 w-12 mr-3 animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50"
-                   style={{ minWidth: '3rem' }}
-                   onError={(e) => {
-                     // Fallback to other logo files if main logo fails
-                     const target = e.target as HTMLImageElement;
-                     if (target.src.includes('/logo.png')) {
-                       target.src = '/oponmeta-logo .png';
-                     } else if (target.src.includes('oponmeta-logo')) {
-                       target.src = '/branding/logo.png';
-                     } else {
-                       // Final fallback - hide image and show text only
-                       target.style.display = 'none';
-                     }
-                   }}
-                 />
-                {/* Fallback logo circle if image fails to load */}
-                <div className="h-12 w-12 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center animate-pulse hover:animate-spin transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:drop-shadow-yellow-400/50 hidden">
-                  <span className="text-white font-bold text-lg">O</span>
+                {/* Animated logo container with floating effect */}
+                <div className="relative group/logo logo-container">
+                  <img
+                    src="/logo.png"
+                    alt="OponMeta Logo"
+                    className="h-12 w-12 mr-3 transition-all duration-700 ease-out group-hover/logo:scale-110 group-hover/logo:rotate-12 group-hover/logo:drop-shadow-2xl group-hover/logo:drop-shadow-yellow-400/50 logo-entrance logo-rotate"
+                    style={{ 
+                      minWidth: '3rem',
+                      filter: 'drop-shadow(0 4px 8px rgba(255, 199, 44, 0.2))',
+                      animation: 'logoFloat 3s ease-in-out infinite'
+                    }}
+                    onError={(e) => {
+                      // Fallback to other logo files if main logo fails
+                      const target = e.target as HTMLImageElement;
+                      if (target.src.includes('/logo.png')) {
+                        target.src = '/oponmeta-logo .png';
+                      } else if (target.src.includes('oponmeta-logo')) {
+                        target.src = '/branding/logo.png';
+                      } else {
+                        // Final fallback - hide image and show text only
+                        target.style.display = 'none';
+                      }
+                    }}
+                  />
+                  
+                  {/* Glow effect behind logo */}
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-400/20 via-yellow-500/30 to-yellow-400/20 rounded-full blur-xl scale-150 opacity-0 group-hover/logo:opacity-100 group-hover/logo:scale-125 transition-all duration-700 ease-out"></div>
+                  
+                  {/* Floating particles effect */}
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full opacity-0 group-hover/logo:opacity-100 animate-ping particle"></div>
+                  <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-yellow-500 rounded-full opacity-0 group-hover/logo:opacity-100 animate-ping particle" style={{ animationDelay: '0.5s' }}></div>
+                  
+                  {/* Fallback logo circle if image fails to load */}
+                  <div className="h-12 w-12 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-700 ease-out group-hover/logo:scale-110 group-hover/logo:rotate-12 group-hover/logo:drop-shadow-2xl group-hover/logo:drop-shadow-yellow-400/50 hidden">
+                    <span className="text-white font-bold text-lg">O</span>
+                  </div>
                 </div>
               </div>
-              <span
-                className="text-3xl font-extrabold group-hover:scale-105 transition-transform duration-300"
-                style={{
-                  color: '#FFC72C',
-                  letterSpacing: '0.03em',
-                  fontFamily: 'inherit',
-                  textShadow: '0 0 10px rgba(255, 199, 44, 0.3)',
-                }}
-              >
-                OponMeta
-              </span>
+              
+              {/* Enhanced brand text with animations */}
+              <div className="relative group/text">
+                <span
+                  className="text-3xl font-extrabold transition-all duration-700 ease-out group-hover/text:scale-105 group-hover/text:translate-x-1 text-entrance"
+                  style={{
+                    color: '#FFC72C',
+                    letterSpacing: '0.03em',
+                    fontFamily: 'inherit',
+                    textShadow: '0 0 10px rgba(255, 199, 44, 0.3)',
+                    animation: 'textGlow 2s ease-in-out infinite alternate'
+                  }}
+                >
+                  OponMeta
+                </span>
+                
+                {/* Text glow effect */}
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-400/10 via-yellow-500/20 to-yellow-400/10 blur-lg scale-110 opacity-0 group-hover/text:opacity-100 transition-all duration-700 ease-out"></div>
+                
+                {/* Underline animation */}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 group-hover/text:w-full transition-all duration-700 ease-out"></div>
+              </div>
             </Link>
           </div>
 
@@ -524,8 +550,13 @@ const Navigation = () => {
               size="sm"
             />
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* Theme Switcher */}
+            <EnhancedThemeSwitcher 
+              variant="toggle" 
+              size="sm" 
+              showLabels={false}
+              className="text-white hover:text-yellow-400 transition-colors"
+            />
 
             {/* Sign In Button */}
             <Link
@@ -853,9 +884,14 @@ const Navigation = () => {
                 </div>
               )}
 
-              {/* Mobile Theme Toggle */}
+              {/* Mobile Theme Switcher */}
               <div className="w-full px-3 py-2">
-                <ThemeToggle />
+                <EnhancedThemeSwitcher 
+                  variant="buttons" 
+                  size="sm" 
+                  showLabels={true}
+                  className="w-full justify-center"
+                />
               </div>
 
               {/* Mobile Language Selector */}

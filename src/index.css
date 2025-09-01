@@ -43,7 +43,7 @@
 }
 
 /* Light mode overrides - Force white backgrounds with proper contrast */
-[data-theme="light"] {
+[data-theme="light"], .light {
   --background: #ffffff !important;
   --foreground: #1a1a1a !important;
   --card: #ffffff !important;
@@ -72,7 +72,7 @@
 }
 
 /* Dark mode - Preserve original colors with proper text contrast */
-[data-theme="dark"] {
+[data-theme="dark"], .dark {
   --background: #0f172a;
   --foreground: #f8fafc;
   --primary: #3b82f6;
@@ -333,5 +333,278 @@ input:focus, select:focus, textarea:focus {
   
   .safe-area-right {
     padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* ENHANCED THEME FORCING - Ensure white backgrounds in light mode */
+[data-theme="light"] *,
+.light * {
+  background-color: var(--background) !important;
+}
+
+[data-theme="light"] body,
+.light body {
+  background-color: #ffffff !important;
+}
+
+[data-theme="light"] .App,
+.light .App {
+  background-color: #ffffff !important;
+}
+
+[data-theme="light"] .min-h-screen,
+.light .min-h-screen {
+  background-color: #ffffff !important;
+}
+
+/* Force white backgrounds for all major sections in light mode */
+[data-theme="light"] .bg-gray-50,
+[data-theme="light"] .bg-gray-100,
+[data-theme="light"] .bg-gray-200,
+[data-theme="light"] .bg-gray-300,
+[data-theme="light"] .bg-gray-400,
+[data-theme="light"] .bg-gray-500,
+[data-theme="light"] .bg-gray-600,
+[data-theme="light"] .bg-gray-700,
+[data-theme="light"] .bg-gray-800,
+[data-theme="light"] .bg-gray-900,
+.light .bg-gray-50,
+.light .bg-gray-100,
+.light .bg-gray-200,
+.light .bg-gray-300,
+.light .bg-gray-400,
+.light .bg-gray-500,
+.light .bg-gray-600,
+.light .bg-gray-700,
+.light .bg-gray-800,
+.light .bg-gray-900 {
+  background-color: #ffffff !important;
+}
+
+/* Force white backgrounds for all colored backgrounds in light mode */
+[data-theme="light"] [class*="bg-"],
+.light [class*="bg-"] {
+  background-color: #ffffff !important;
+}
+
+/* Ensure proper text contrast in light mode */
+[data-theme="light"] [class*="text-"],
+.light [class*="text-"] {
+  color: #1a1a1a !important;
+}
+
+/* Specific component overrides for light mode */
+[data-theme="light"] .card,
+[data-theme="light"] .bg-card,
+.light .card,
+.light .bg-card {
+  background-color: #ffffff !important;
+}
+
+[data-theme="light"] .bg-muted,
+.light .bg-muted {
+  background-color: #f8fafc !important;
+}
+
+[data-theme="light"] .bg-secondary,
+.light .bg-secondary {
+  background-color: #ffffff !important;
+}
+
+/* Force white backgrounds for all page sections in light mode */
+[data-theme="light"] .bg-blue-600,
+[data-theme="light"] .bg-blue-800,
+[data-theme="light"] .bg-indigo-600,
+[data-theme="light"] .bg-purple-600,
+[data-theme="light"] .bg-gradient-to-r,
+[data-theme="light"] .bg-gradient-to-br,
+.light .bg-blue-600,
+.light .bg-blue-800,
+.light .bg-indigo-600,
+.light .bg-purple-600,
+.light .bg-gradient-to-r,
+.light .bg-gradient-to-br {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Ensure all text is visible in light mode */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6,
+[data-theme="light"] p,
+[data-theme="light"] span,
+[data-theme="light"] div,
+.light h1,
+.light h2,
+.light h3,
+.light h4,
+.light h5,
+.light h6,
+.light p,
+.light span,
+.light div {
+  color: #1a1a1a !important;
+}
+
+/* Force white backgrounds for navigation and header elements */
+[data-theme="light"] nav,
+[data-theme="light"] header,
+[data-theme="light"] .navbar,
+[data-theme="light"] .header,
+.light nav,
+.light header,
+.light .navbar,
+.light .header {
+  background-color: #ffffff !important;
+}
+
+/* Force white backgrounds for footer elements */
+[data-theme="light"] footer,
+[data-theme="light"] .footer,
+.light footer,
+.light .footer {
+  background-color: #ffffff !important;
+}
+
+/* Custom Logo Animations */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 199, 44, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 199, 44, 0.6), 0 0 30px rgba(255, 199, 44, 0.4);
+  }
+}
+
+/* Enhanced hover effects for logo */
+.logo-container:hover .logo-glow {
+  animation: logoGlow 0.6s ease-out forwards;
+}
+
+@keyframes logoGlow {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Smooth logo rotation on hover */
+.logo-rotate {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-rotate:hover {
+  transform: rotate(12deg) scale(1.1);
+}
+
+/* Particle animation for logo */
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.2);
+  }
+}
+
+.particle {
+  animation: particleFloat 2s ease-in-out infinite;
+}
+
+.particle:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.particle:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Logo entrance animation */
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  60% {
+    transform: translateY(5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.logo-entrance {
+  animation: logoEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Text entrance animation */
+@keyframes textEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.9);
+  }
+  60% {
+    transform: translateX(5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+  }
+}
+
+.text-entrance {
+  animation: textEntrance 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+/* Hover state improvements */
+.logo-container:hover .particle {
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive logo animations */
+@media (max-width: 768px) {
+  @keyframes logoFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-2px) rotate(0deg);
+    }
+  }
+  
+  .logo-container:hover .logo-glow {
+    transform: scale(1.05);
   }
 }

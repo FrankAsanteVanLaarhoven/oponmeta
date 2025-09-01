@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Sun, Moon, Monitor, Check } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import { SmartText } from './ui/SmartText';
+import { SmartText } from './SmartText';
 
 interface ThemeToggleProps {
   variant?: 'button' | 'dropdown' | 'buttons';
