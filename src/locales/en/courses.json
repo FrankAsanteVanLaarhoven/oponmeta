@@ -1,0 +1,31 @@
+{
+  "course": {
+    "title": "Course",
+    "description": "Description",
+    "instructor": "Instructor",
+    "duration": "Duration",
+    "level": "Level",
+    "enroll": "Enroll",
+    "start": "Start Course",
+    "continue": "Continue",
+    "complete": "Complete",
+    "certificate": "Certificate"
+  },
+  "lesson": {
+    "title": "Lesson",
+    "video": "Video",
+    "text": "Text",
+    "quiz": "Quiz",
+    "assignment": "Assignment",
+    "resources": "Resources"
+  },
+  "assessment": {
+    "title": "Assessment",
+    "question": "Question",
+    "answer": "Answer",
+    "submit": "Submit",
+    "score": "Score",
+    "pass": "Pass",
+    "fail": "Fail"
+  }
+}

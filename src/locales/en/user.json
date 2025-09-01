@@ -1,0 +1,29 @@
+{
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit Profile",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "avatar": "Avatar",
+    "bio": "Biography"
+  },
+  "settings": {
+    "title": "Settings",
+    "account": "Account",
+    "privacy": "Privacy",
+    "notifications": "Notifications",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "emailNotifications": "Email Notifications",
+    "pushNotifications": "Push Notifications",
+    "marketingEmails": "Marketing Emails",
+    "language": "Language",
+    "timezone": "Timezone"
+  }
+}

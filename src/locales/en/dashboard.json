@@ -1,0 +1,25 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "courses": "Courses",
+    "progress": "Progress",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "stats": {
+    "totalCourses": "Total Courses",
+    "completedCourses": "Completed Courses",
+    "inProgress": "In Progress",
+    "certificates": "Certificates",
+    "totalHours": "Total Hours",
+    "averageScore": "Average Score"
+  },
+  "recent": {
+    "title": "Recent Activity",
+    "lastLogin": "Last Login",
+    "courseStarted": "Course Started",
+    "lessonCompleted": "Lesson Completed",
+    "assessmentTaken": "Assessment Taken"
+  }
+}

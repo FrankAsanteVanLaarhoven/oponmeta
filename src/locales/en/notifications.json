@@ -1,0 +1,23 @@
+{
+  "notifications": {
+    "title": "Notifications",
+    "all": "All Notifications",
+    "unread": "Unread",
+    "markAllRead": "Mark All as Read",
+    "clearAll": "Clear All"
+  },
+  "types": {
+    "course": "Course",
+    "system": "System",
+    "achievement": "Achievement",
+    "reminder": "Reminder",
+    "update": "Update"
+  },
+  "messages": {
+    "courseStarted": "Course started: {courseName}",
+    "lessonCompleted": "Lesson completed: {lessonName}",
+    "achievementUnlocked": "Achievement unlocked: {achievementName}",
+    "courseReminder": "Reminder: Continue your course",
+    "systemUpdate": "System update available"
+  }
+}

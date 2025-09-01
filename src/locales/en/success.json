@@ -1,0 +1,25 @@
+{
+  "success": {
+    "general": "Operation completed successfully",
+    "saved": "Changes saved successfully",
+    "created": "Item created successfully",
+    "updated": "Item updated successfully",
+    "deleted": "Item deleted successfully",
+    "enrolled": "Successfully enrolled in course",
+    "completed": "Course completed successfully"
+  },
+  "messages": {
+    "welcome": "Welcome to the platform",
+    "login": "Successfully logged in",
+    "logout": "Successfully logged out",
+    "registration": "Account created successfully",
+    "passwordReset": "Password reset email sent",
+    "emailVerified": "Email verified successfully"
+  },
+  "actions": {
+    "continue": "Continue",
+    "goToDashboard": "Go to Dashboard",
+    "viewCourse": "View Course",
+    "downloadCertificate": "Download Certificate"
+  }
+}

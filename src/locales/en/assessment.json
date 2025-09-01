@@ -1,0 +1,28 @@
+{
+  "assessment": {
+    "title": "Assessment",
+    "start": "Start Assessment",
+    "submit": "Submit Assessment",
+    "review": "Review Answers",
+    "score": "Score",
+    "pass": "Pass",
+    "fail": "Fail",
+    "retake": "Retake"
+  },
+  "question": {
+    "title": "Question",
+    "multipleChoice": "Multiple Choice",
+    "trueFalse": "True/False",
+    "essay": "Essay",
+    "matching": "Matching",
+    "fillBlank": "Fill in the Blank"
+  },
+  "result": {
+    "title": "Result",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "feedback": "Feedback",
+    "explanation": "Explanation",
+    "next": "Next Question"
+  }
+}

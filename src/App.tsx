@@ -175,7 +175,12 @@ function App() {
           <NotificationProvider>
             <MobileProvider>
               <LanguageProvider>
-                <BrowserRouter>
+                <BrowserRouter
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+          }}
+        >
                   <div className="App min-h-screen transition-colors duration-300">
                     <Navigation />
                     <Suspense fallback={<LoadingSpinner />}>

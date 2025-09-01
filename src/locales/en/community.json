@@ -1,0 +1,28 @@
+{
+  "community": {
+    "title": "Community",
+    "forums": "Forums",
+    "discussions": "Discussions",
+    "groups": "Groups",
+    "members": "Members",
+    "events": "Events"
+  },
+  "forum": {
+    "title": "Forum",
+    "topic": "Topic",
+    "reply": "Reply",
+    "post": "Post",
+    "edit": "Edit",
+    "delete": "Delete",
+    "like": "Like",
+    "share": "Share"
+  },
+  "group": {
+    "title": "Group",
+    "join": "Join Group",
+    "leave": "Leave Group",
+    "members": "Members",
+    "posts": "Posts",
+    "events": "Events"
+  }
+}

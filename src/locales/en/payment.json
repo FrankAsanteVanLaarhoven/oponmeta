@@ -1,0 +1,32 @@
+{
+  "payment": {
+    "title": "Payment",
+    "amount": "Amount",
+    "currency": "Currency",
+    "method": "Payment Method",
+    "card": "Credit Card",
+    "paypal": "PayPal",
+    "stripe": "Stripe",
+    "paystack": "Paystack",
+    "flutterwave": "Flutterwave"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "summary": "Order Summary",
+    "total": "Total",
+    "tax": "Tax",
+    "discount": "Discount",
+    "pay": "Pay Now",
+    "processing": "Processing..."
+  },
+  "invoice": {
+    "title": "Invoice",
+    "number": "Invoice Number",
+    "date": "Date",
+    "due": "Due Date",
+    "status": "Status",
+    "paid": "Paid",
+    "pending": "Pending",
+    "overdue": "Overdue"
+  }
+}

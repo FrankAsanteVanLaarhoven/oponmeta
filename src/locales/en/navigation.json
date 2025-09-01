@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "courses": "Courses",
+    "course": "Course",
+    "lesson": "Lesson",
+    "assessment": "Assessment"
+  },
+  "footer": {
+    "company": "Company",
+    "support": "Support",
+    "legal": "Legal",
+    "social": "Social"
+  }
+}
