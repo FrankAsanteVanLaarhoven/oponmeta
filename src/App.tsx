@@ -137,6 +137,7 @@ const PlagiarismCheckerPage = lazy(() => import('./components/PlagiarismCheckerP
 const BlogsPage = lazy(() => import('./components/BlogsPage'));
 const DownloadAppPage = lazy(() => import('./components/DownloadAppPage'));
 const LoginPage = lazy(() => import('./components/LoginPage'));
+const SignUpPage = lazy(() => import('./components/SignUpPage'));
 const SuperAdminDashboard = lazy(() => import('./components/SuperAdminDashboard'));
 const Workshop = lazy(() => import('./components/Workshop'));
 const Partners = lazy(() => import('./components/Partners'));
@@ -202,6 +203,7 @@ function App() {
           
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           
           {/* Courses Page */}
           <Route path="/courses" element={<Programme />} />
