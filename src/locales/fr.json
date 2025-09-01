@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarification",
+    "about": "À propos",
+    "signIn": "Se connecter",
+    "getStarted": "Commencer"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur"
+  },
+  "cta": {
+    "title": "Prêt à façonner votre avenir ?",
+    "subtitle": "Rejoignez des milliers d'apprenants qui font progresser leur carrière avec notre plateforme d'éducation mondiale.",
+    "startLearning": "Commencer à apprendre",
+    "becomeInstructor": "Devenir un instructeur mondial"
+  }
+} 

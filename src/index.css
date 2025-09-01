@@ -1,0 +1,337 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Enhanced CSS Variables System with Text Contrast */
+:root {
+  /* Light mode - Force white backgrounds with high contrast text */
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --accent: #f59e0b;
+  --muted: #f8fafc;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  
+  /* Text contrast variables for different backgrounds */
+  --text-on-white: #1a1a1a;
+  --text-on-light: #2d3748;
+  --text-on-primary: #ffffff;
+  --text-on-secondary: #ffffff;
+  --text-on-accent: #1a1a1a;
+  --text-on-dark: #ffffff;
+  
+  /* Page-specific original colors (preserved for dark mode) */
+  --page-hero-bg: #3b82f6;
+  --page-hero-text: #ffffff;
+  --page-section-bg: #f8fafc;
+  --page-section-text: #1a1a1a;
+  --page-feature-bg: #1e293b;
+  --page-feature-text: #ffffff;
+  --page-footer-bg: #0f172a;
+  --page-footer-text: #ffffff;
+  
+  /* Semantic text colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-inverse: #ffffff;
+  --text-success: #059669;
+  --text-warning: #d97706;
+  --text-error: #dc2626;
+}
+
+/* Light mode overrides - Force white backgrounds with proper contrast */
+[data-theme="light"] {
+  --background: #ffffff !important;
+  --foreground: #1a1a1a !important;
+  --card: #ffffff !important;
+  --muted: #f8fafc !important;
+  
+  /* Override ALL page backgrounds to white in light mode */
+  --page-hero-bg: #ffffff !important;
+  --page-hero-text: #1a1a1a !important;
+  --page-section-bg: #ffffff !important;
+  --page-section-text: #1a1a1a !important;
+  --page-feature-bg: #ffffff !important;
+  --page-feature-text: #1a1a1a !important;
+  --page-footer-bg: #ffffff !important;
+  --page-footer-text: #1a1a1a !important;
+  
+  /* Force high contrast text colors */
+  --text-primary: #1a1a1a !important;
+  --text-secondary: #4a5568 !important;
+  --text-muted: #718096 !important;
+  --text-inverse: #ffffff !important;
+  
+  /* Ensure button and interactive text contrast */
+  --text-on-primary: #ffffff;
+  --text-on-secondary: #ffffff;
+  --text-on-accent: #1a1a1a;
+}
+
+/* Dark mode - Preserve original colors with proper text contrast */
+[data-theme="dark"] {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --accent: #fbbf24;
+  --muted: #1e293b;
+  --border: #334155;
+  --card: #1e293b;
+  
+  /* Keep original page colors with appropriate text */
+  --page-hero-bg: #1e40af;
+  --page-hero-text: #ffffff;
+  --page-section-bg: #1e293b;
+  --page-section-text: #f8fafc;
+  --page-feature-bg: #0f172a;
+  --page-feature-text: #f8fafc;
+  --page-footer-bg: #020617;
+  --page-footer-text: #f8fafc;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #1a1a1a;
+  --text-success: #10b981;
+  --text-warning: #f59e0b;
+  --text-error: #ef4444;
+}
+
+/* System mode with dynamic text adaptation */
+[data-theme="system"] {
+  color-scheme: light dark;
+  
+  /* Use light-dark() function for automatic adaptation */
+  --background: light-dark(#ffffff, #0f172a);
+  --foreground: light-dark(#1a1a1a, #f8fafc);
+  --primary: light-dark(#2563eb, #3b82f6);
+  --secondary: light-dark(#64748b, #64748b);
+  --accent: light-dark(#f59e0b, #fbbf24);
+  --muted: light-dark(#f8fafc, #1e293b);
+  --border: light-dark(#e2e8f0, #334155);
+  --card: light-dark(#ffffff, #1e293b);
+  
+  /* System mode page backgrounds */
+  --page-hero-bg: light-dark(#ffffff, #1e40af);
+  --page-hero-text: light-dark(#1a1a1a, #ffffff);
+  --page-section-bg: light-dark(#ffffff, #1e293b);
+  --page-section-text: light-dark(#1a1a1a, #f8fafc);
+  --page-feature-bg: light-dark(#ffffff, #0f172a);
+  --page-feature-text: light-dark(#1a1a1a, #f8fafc);
+  --page-footer-bg: light-dark(#ffffff, #020617);
+  --page-footer-text: light-dark(#1a1a1a, #f8fafc);
+  
+  --text-primary: light-dark(#1a1a1a, #f8fafc);
+  --text-secondary: light-dark(#4a5568, #cbd5e1);
+  --text-muted: light-dark(#718096, #94a3b8);
+  --text-inverse: light-dark(#ffffff, #1a1a1a);
+}
+
+/* Global text color classes */
+.text-adaptive {
+  color: var(--foreground);
+}
+
+.text-on-background {
+  color: var(--foreground);
+}
+
+.text-contrast-high {
+  color: var(--text-primary);
+}
+
+.text-contrast-medium {
+  color: var(--text-secondary);
+}
+
+.text-contrast-low {
+  color: var(--text-muted);
+}
+
+.text-inverse {
+  color: var(--text-inverse);
+}
+
+/* Apply theme variables globally with smooth transitions */
+* {
+  transition: 
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Enhanced contrast for interactive elements */
+button, input, select, textarea {
+  color: var(--foreground);
+}
+
+/* Ensure proper contrast for form elements */
+input:focus, select:focus, textarea:focus {
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+/* Shadcn/ui CSS Variables */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Mobile-first responsive design */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: clamp(14px, 1vw + 0.75rem, 18px);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Touch-friendly focus states */
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+  }
+}
+
+/* Critical text visibility overrides */
+.instructor-portal * {
+  color: #000000 !important;
+}
+
+.sidebar-white-text * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.checkout-page * {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+  }
+  
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Safe area support for mobile devices */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-area-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}

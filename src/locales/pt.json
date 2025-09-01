@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "features": "Recursos",
+    "pricing": "Preços",
+    "about": "Sobre",
+    "signIn": "Entrar",
+    "getStarted": "Começar"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro"
+  },
+  "cta": {
+    "title": "Pronto para moldar seu futuro?",
+    "subtitle": "Junte-se a milhares de estudantes que estão avançando em suas carreiras com nossa plataforma educacional global.",
+    "startLearning": "Comece a aprender agora",
+    "becomeInstructor": "Torne-se um instrutor global"
+  }
+} 

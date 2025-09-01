@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "features": "功能",
+    "pricing": "定价",
+    "about": "关于",
+    "signIn": "登录",
+    "getStarted": "开始"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误"
+  },
+  "cta": {
+    "title": "准备好塑造你的未来了吗？",
+    "subtitle": "加入数千名通过我们全球教育平台推进职业发展的学习者。",
+    "startLearning": "立即开始学习",
+    "becomeInstructor": "成为全球讲师"
+  }
+} 

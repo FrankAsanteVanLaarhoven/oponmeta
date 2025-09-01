@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "extractedAt": "2024-01-15T10:00:00Z",
+    "totalFiles": 150,
+    "languages": ["en", "es", "fr", "de", "zh", "ja", "ar", "ru", "pt", "it", "ko", "nl"],
+    "types": ["page", "blog", "rto-qualification"]
+  },
+  "content": [
+    {
+      "id": "1",
+      "language": "en",
+      "title": "Welcome to OponMeta",
+      "description": "Your gateway to professional development and technical education",
+      "content": "OponMeta is a global EdTech powerhouse pioneering the future of digital learning. We craft transformative experiences in professional development and technical education, equipping today's learners and tomorrow's leaders with cutting-edge skills and knowledge.",
+      "slug": "welcome",
+      "type": "page",
+      "filePath": "/pages/welcome.md",
+      "tags": ["welcome", "introduction", "about"],
+      "topics": ["education", "technology", "learning"]
+    },
+    {
+      "id": "2",
+      "language": "en",
+      "title": "Getting Started with Python Programming",
+      "description": "Learn the fundamentals of Python programming language",
+      "content": "Python is a versatile programming language that's perfect for beginners. In this course, you'll learn the fundamentals of Python programming, including variables, data types, control structures, functions, and object-oriented programming.",
+      "slug": "python-basics",
+      "type": "blog",
+      "filePath": "/blog/python-basics.md",
+      "tags": ["python", "programming", "beginners"],
+      "topics": ["programming", "python", "coding"]
+    },
+    {
+      "id": "3",
+      "language": "en",
+      "title": "Advanced JavaScript Development",
+      "description": "Master advanced JavaScript concepts and modern development practices",
+      "content": "Take your JavaScript skills to the next level with advanced concepts like closures, prototypes, async/await, and modern ES6+ features. Learn how to build scalable applications and work with modern frameworks.",
+      "slug": "advanced-javascript",
+      "type": "blog",
+      "filePath": "/blog/advanced-javascript.md",
+      "tags": ["javascript", "advanced", "development"],
+      "topics": ["programming", "javascript", "web-development"]
+    },
+    {
+      "id": "4",
+      "language": "en",
+      "title": "Data Science Fundamentals",
+      "description": "Introduction to data science and analytics",
+      "content": "Data science is the field of study that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data. This course covers the fundamentals of data science, including data collection, cleaning, analysis, and visualization.",
+      "slug": "data-science-fundamentals",
+      "type": "rto-qualification",
+      "filePath": "/qualifications/data-science.md",
+      "tags": ["data-science", "analytics", "statistics"],
+      "topics": ["data-science", "analytics", "statistics"]
+    },
+    {
+      "id": "5",
+      "language": "es",
+      "title": "Bienvenido a OponMeta",
+      "description": "Tu puerta de entrada al desarrollo profesional y la educación técnica",
+      "content": "OponMeta es una potencia global de EdTech que está allanando el camino para el futuro del aprendizaje digital. Creamos experiencias transformadoras en desarrollo profesional y educación técnica, equipando a los estudiantes de hoy y a los líderes del mañana con habilidades y conocimientos de vanguardia.",
+      "slug": "bienvenido",
+      "type": "page",
+      "filePath": "/pages/bienvenido.md",
+      "tags": ["bienvenida", "introducción", "sobre-nosotros"],
+      "topics": ["educación", "tecnología", "aprendizaje"]
+    }
+  ]
+}

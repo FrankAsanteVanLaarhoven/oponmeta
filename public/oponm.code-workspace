@@ -1,0 +1,56 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../OponMeta-backup/src/api"
+		},
+		{
+			"path": "../../OponMeta-backup/src/companions"
+		},
+		{
+			"path": "../../OponMeta-backup/src/data"
+		},
+		{
+			"path": "../../OponMeta-backup/src/hooks"
+		},
+		{
+			"path": "../../OponMeta-backup/src/lib"
+		},
+		{
+			"path": "../../OponMeta-backup/src/locales"
+		},
+		{
+			"path": "../../OponMeta-backup/src/my-journey"
+		},
+		{
+			"path": "../../OponMeta-backup/src/services"
+		},
+		{
+			"path": "../../OponMeta-backup/src/subscription"
+		},
+		{
+			"path": "../../OponMeta-backup/src/types"
+		},
+		{
+			"path": "../../OponMeta-backup/src/utils"
+		},
+		{
+			"path": "../../OponMeta-backup/src/config"
+		},
+		{
+			"path": "../../OponMeta-backup/src/context"
+		},
+		{
+			"path": "../../OponMeta-backup/sentry-example-page"
+		},
+		{
+			"path": "../../OponMeta-LMS-main/scripts"
+		},
+		{
+			"path": "../../OponMeta-LMS-main/multilingual"
+		}
+	],
+	"settings": {}
+}

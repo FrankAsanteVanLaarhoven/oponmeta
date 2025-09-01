@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "about": "Über uns",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen"
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler"
+  },
+  "cta": {
+    "title": "Bereit, Ihre Zukunft zu gestalten?",
+    "subtitle": "Schließen Sie sich Tausenden von Lernenden an, die mit unserer globalen Bildungsplattform ihre Karriere vorantreiben.",
+    "startLearning": "Jetzt Lernen Starten",
+    "becomeInstructor": "Globaler Dozent werden"
+  }
+} 
