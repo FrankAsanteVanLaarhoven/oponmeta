@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const plans = [
   {
@@ -50,7 +51,20 @@ const plans = [
   },
 ];
 
-const Pricing = () => (
+const Pricing = () => {
+  const navigate = useNavigate();
+
+  const handlePlanClick = (planName: string) => {
+    if (planName === 'Enterprise') {
+      // For enterprise, you might want to route to a contact page
+      navigate('/contact');
+    } else {
+      // For all other plans, route to signup
+      navigate('/signup');
+    }
+  };
+
+  return (
   <>
     <section className="w-full bg-[#f6f9fc] py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
@@ -100,6 +114,7 @@ const Pricing = () => (
               
               {/* CTA Button */}
               <button 
+                onClick={() => handlePlanClick(plan.name)}
                 className={`w-full py-3 px-4 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 mt-auto ${
                   plan.highlight 
                     ? 'bg-[#FFD700] text-[#0a174e] hover:bg-yellow-400 hover:shadow-lg' 
@@ -126,12 +141,16 @@ const Pricing = () => (
         <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
           Join OponMeta today and access world-class courses, mentorship, and a global learning community—all at flexible, affordable prices.
         </p>
-        <button className="px-8 py-4 bg-gradient-to-r from-[#FFD700] to-orange-500 text-white font-bold text-lg rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
-          Start Learning Now
+        <button 
+          onClick={() => navigate('/signup')}
+          className="px-8 py-4 bg-gradient-to-r from-[#FFD700] to-orange-500 text-white font-bold text-lg rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+        >
+          Get Started
         </button>
       </div>
     </div>
   </>
-);
+  );
+};
 
 export default Pricing; 

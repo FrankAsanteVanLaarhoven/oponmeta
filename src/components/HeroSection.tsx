@@ -42,7 +42,7 @@ const HeroSection = memo(() => {
               OponMeta is redefining how the world learns. As a Global Edtech Powerhouse, we fuse innovation and accessibility to build scalable solutions in professional development and technical education. We don't just adapt to the future of work—we're shaping it.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button size="lg" className="bg-white text-[#0a174e] hover:bg-gray-100" onClick={() => navigate("/free-trial")}>Start Your Free Trial</Button>
+              <Button size="lg" className="bg-white text-[#0a174e] hover:bg-gray-100" onClick={() => navigate("/signup")}>Get Started</Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" onClick={() => navigate("/get-demo")}> <Play className="mr-2 h-5 w-5" /> Request a Demo</Button>
             </div>
             {/* Trust Indicators */}
