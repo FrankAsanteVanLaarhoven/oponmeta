@@ -11,7 +11,7 @@ import {
   ChevronRight, Download, CheckCircle, Crown, Brain
 } from "lucide-react";
 import { EnhancedThemeSwitcher } from './EnhancedThemeSwitcher';
-import { CompactLanguageSelector } from './LanguageSelector';
+import { CompactLanguageSelector, SearchableLanguageSelector } from './LanguageSelector';
 
 // Course categories data (Non-career focused categories)
 const COURSE_CATEGORIES = [
