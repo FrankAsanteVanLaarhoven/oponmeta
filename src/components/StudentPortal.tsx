@@ -3673,7 +3673,7 @@ const getLessonDescription = (lessonIndex: number): string => {
     'Understand the basics of email marketing and building effective email campaigns.',
     'Learn Search Engine Optimization fundamentals to improve your online visibility.',
     'Explore paid advertising options and how to create effective ad campaigns.',
-    'Learn to measure and analyze your marketing performance with key metrics.',
+                    'Learn to measure and analyse your marketing performance with key metrics.',
     'Build a strong brand identity and maintain brand consistency.',
     'Develop strategies for building and maintaining customer relationships.',
     'Automate your marketing processes for better efficiency and results.',

@@ -63,7 +63,7 @@ const MOCK_WEBINARS: Webinar[] = [
   {
     id: '2',
     title: 'AI in Education: Transforming Learning Experiences',
-    description: 'Explore how artificial intelligence is revolutionizing education and creating personalized learning paths.',
+                    description: 'Explore how artificial intelligence is revolutionising education and creating personalised learning paths.',
     instructor: {
       name: 'Dr. Michael Chen',
       avatar: '/avatars/michael.jpg',
@@ -491,7 +491,7 @@ const Webinars: React.FC = () => {
               </div>
               
               <div>
-                <Label htmlFor="company" className="text-black">Company/Organization</Label>
+                <Label htmlFor="company" className="text-black">Company/Organisation</Label>
                 <Input
                   id="company"
                   value={registrationForm.company}

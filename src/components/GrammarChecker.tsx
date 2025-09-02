@@ -58,10 +58,10 @@ const GrammarChecker = () => {
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const { toast } = useToast();
 
-  const analyzeGrammar = async () => {
+  const analyseGrammar = async () => {
     if (!text.trim()) {
       toast({
-        title: "No text to analyze",
+        title: "No text to analyse",
         description: "Please enter text to check for grammar and style issues",
         variant: "destructive"
       });
@@ -256,7 +256,7 @@ const GrammarChecker = () => {
                   {text.split(' ').length} words
                 </div>
                 <Button 
-                  onClick={analyzeGrammar} 
+                  onClick={analyseGrammar} 
                   disabled={isAnalyzing || !text.trim()}
                   className="flex items-center gap-2"
                 >

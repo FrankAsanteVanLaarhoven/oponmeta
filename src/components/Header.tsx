@@ -26,7 +26,7 @@ const PROGRAMME_CATEGORIES = [
   'Art Design and Creative Media',
   'Drama, Theatre and Performance',
   'Mentorship & Career Readiness',
-  'Specialized Industry Tracks',
+          'Specialised Industry Tracks',
   'Real Estate and Estate Management',
   'Hospitality, Tourism and Events',
   'Public Safety and Emergency Services',

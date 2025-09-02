@@ -78,7 +78,7 @@ const PERSONALITY_QUESTIONS: Question[] = [
     id: '3',
     text: 'In a conflict situation, I usually:',
     options: [
-      'Analyze the situation and find a logical solution',
+              'Analyse the situation and find a logical solution',
       'Address the issue directly and openly',
       'Focus on finding a quick resolution',
       'Try to understand everyone\'s perspective'

@@ -633,7 +633,7 @@ const LearningManagementSystem = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Learning Management System</h1>
-          <p className="text-xl text-gray-600">Manage your educational platform, track student progress, and analyze performance</p>
+                          <p className="text-xl text-gray-600">Manage your educational platform, track student progress, and analyse performance</p>
         </div>
 
         {/* Navigation Tabs */}

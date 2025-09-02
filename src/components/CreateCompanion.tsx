@@ -409,7 +409,7 @@ const CreateCompanion: React.FC = () => {
                        id="description"
                        value={formData.description}
                        onChange={(e) => handleInputChange('description', e.target.value)}
-                       placeholder="Describe what this companion specializes in and how they can help learners..."
+                       placeholder="Describe what this companion specialises in and how they can help learners..."
                        className="mt-1 bg-white text-gray-900 border-gray-300 placeholder-gray-600"
                        rows={4}
                        required

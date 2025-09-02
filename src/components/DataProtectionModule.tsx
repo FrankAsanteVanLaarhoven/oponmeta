@@ -93,7 +93,7 @@ const DataProtectionModule: React.FC = () => {
       id: '1',
       type: 'personal_data',
       severity: 'medium',
-      description: 'Unauthorized access to user profile data',
+                      description: 'Unauthorised access to user profile data',
       affectedUsers: 150,
       discoveredAt: new Date('2024-01-15T10:30:00'),
       reportedAt: new Date('2024-01-15T11:45:00'),

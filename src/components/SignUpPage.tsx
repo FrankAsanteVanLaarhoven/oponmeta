@@ -40,7 +40,7 @@ const SignUpPage: React.FC = () => {
     password: '',
     confirmPassword: '',
     dateOfBirth: '',
-    organization: '',
+    organisation: '',
     role: '',
     interests: [] as string[],
     agreeToTerms: false,
@@ -141,7 +141,7 @@ const SignUpPage: React.FC = () => {
     }
 
     if (step === 3) {
-      if (!formData.organization) newErrors.organization = 'Organization is required';
+      if (!formData.organisation) newErrors.organisation = 'Organisation is required';
       if (!formData.role) newErrors.role = 'Role is required';
       if (formData.interests.length === 0) newErrors.interests = 'Please select at least one interest';
       if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to the terms and conditions';
@@ -463,23 +463,23 @@ const SignUpPage: React.FC = () => {
                 >
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Organization/Company *
+                      Organisation/Company *
                     </label>
                     <div className="relative">
                       <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                       <input
                         type="text"
-                        name="organization"
-                        value={formData.organization}
+                        name="organisation"
+                        value={formData.organisation}
                         onChange={handleInputChange}
                         className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          errors.organization ? 'border-red-500' : 'border-gray-300'
+                          errors.organisation ? 'border-red-500' : 'border-gray-300'
                         }`}
-                        placeholder="Enter your organization"
+                        placeholder="Enter your organisation"
                       />
                     </div>
-                    {errors.organization && (
-                      <p className="text-red-500 text-sm mt-1">{errors.organization}</p>
+                    {errors.organisation && (
+                      <p className="text-red-500 text-sm mt-1">{errors.organisation}</p>
                     )}
                   </div>
 
@@ -658,7 +658,7 @@ const SignUpPage: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">AI-Powered Learning</h3>
-                  <p className="text-slate-200 text-sm">Personalized learning paths and AI tutors</p>
+                  <p className="text-slate-200 text-sm">Personalised learning paths and AI tutors</p>
                 </div>
               </div>
               

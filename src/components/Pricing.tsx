@@ -30,7 +30,7 @@ const plans = [
     price: '$39/mo',
     features: [
       '1-on-1 mentorship sessions',
-      'Personalized learning path',
+                      'Personalised learning path',
       'Career coaching and resume reviews',
       'Exclusive partner opportunities',
     ],

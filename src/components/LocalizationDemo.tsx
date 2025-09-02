@@ -72,7 +72,7 @@ const LocalizationDemo: React.FC = () => {
           priority: 'high'
         },
         {
-          content: 'AI-powered learning, personalized courses, expert instructors',
+                          content: 'AI-powered learning, personalised courses, expert instructors',
           sourceLanguage: 'en',
           targetLanguage: 'es',
           context: 'homepage',

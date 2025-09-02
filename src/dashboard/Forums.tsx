@@ -28,7 +28,7 @@ const Forums = () => {
   const discussions = [
     {
       id: 1,
-      title: "How to optimize learning efficiency with machine learning?",
+                      title: "How to optimise learning efficiency with machine learning?",
       author: "Sarah Chen",
       avatar: "/uploads/avatar1.jpg",
       category: "Study Tips",

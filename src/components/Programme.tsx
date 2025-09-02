@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search, 
@@ -17,8 +17,14 @@ import {
   Play,
   Download,
   Share2,
-  Heart
+  Heart,
+  ShoppingCart,
+  CreditCard,
+  X
 } from 'lucide-react';
+import { toast } from 'sonner';
+import { createStripeCheckoutSession } from '../api/stripe';
+import EnhancedPaymentModal from './EnhancedPaymentModal';
 
 const Programme = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -29,6 +35,10 @@ const Programme = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
+  const [cart, setCart] = useState<any[]>([]);
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [showEnhancedPurchaseModal, setShowEnhancedPurchaseModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
   const [courses, setCourses] = useState([
     {
@@ -126,6 +136,22 @@ const Programme = () => {
       certificate: true,
       tags: ['Sustainability', 'Environment', 'Green Technology'],
       image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400'
+    },
+    {
+      id: 7,
+      title: 'Introduction to Web Development',
+      description: 'Learn the basics of HTML, CSS, and JavaScript for web development',
+      category: 'Technology and Digital Skills',
+      level: 'Beginner',
+      duration: '6 weeks',
+      rating: 4.7,
+      students: 3245,
+      price: 0,
+      instructor: 'Prof. Maria Garcia',
+      language: 'English',
+      certificate: true,
+      tags: ['Web Development', 'HTML', 'CSS', 'JavaScript'],
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400'
     }
   ]);
 
@@ -200,6 +226,110 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
   const deleteCourse = (id) => {
     setCourses(courses.filter(course => course.id !== id));
   };
+
+  // Cart and purchase functions
+  const addToCart = (course: any) => {
+    if (!cart.find(item => item.id === course.id)) {
+      setCart([...cart, course]);
+      toast.success(`${course.title} added to cart!`);
+    } else {
+      toast.info(`${course.title} is already in your cart!`);
+    }
+  };
+
+  const removeFromCart = (courseId: number) => {
+    setCart(cart.filter(item => item.id !== courseId));
+    toast.success("Course removed from cart!");
+  };
+
+  const handlePurchaseCourse = (course: any) => {
+    setSelectedCourse(course);
+    setShowEnhancedPurchaseModal(true);
+  };
+
+  const handlePurchaseFromCart = async () => {
+    try {
+      if (cart.length === 0) return;
+      
+      // Filter out free courses
+      const paidCourses = cart.filter(course => course.price > 0);
+      const freeCourses = cart.filter(course => course.price === 0);
+      
+      // Handle free courses immediately
+      if (freeCourses.length > 0) {
+        toast.success(`${freeCourses.length} free course(s) enrolled successfully!`);
+      }
+      
+      // Handle paid courses with Stripe checkout
+      if (paidCourses.length > 0) {
+        const result = await createStripeCheckoutSession({
+          courses: paidCourses.map(course => ({
+            courseId: course.id,
+            courseTitle: course.title,
+            amount: course.price,
+            instructor: course.instructor
+          })),
+          totalAmount: paidCourses.reduce((sum, course) => sum + course.price, 0) * 100,
+          currency: 'usd',
+          successUrl: `${window.location.origin}/courses?success=true&cart=true`,
+          cancelUrl: `${window.location.origin}/courses?canceled=true`,
+          metadata: {
+            courseCount: paidCourses.length.toString(),
+            courseIds: paidCourses.map(c => c.id).join(','),
+            totalAmount: paidCourses.reduce((sum, course) => sum + course.price, 0).toString()
+          }
+        });
+        
+        if (result && result.url) {
+          // Clear cart and redirect to Stripe checkout
+          setCart([]);
+          setShowCartModal(false);
+          window.location.href = result.url;
+        } else {
+          toast.error("Failed to create checkout session");
+        }
+      } else {
+        // All courses are free
+        setCart([]);
+        setShowCartModal(false);
+        toast.success("All courses enrolled successfully!");
+      }
+    } catch (error) {
+      console.error('Cart checkout error:', error);
+      toast.error("Failed to process cart checkout. Please try again.");
+    }
+  };
+
+  const handleCompletePurchase = async (courseId: string) => {
+    // This will be handled by the enhanced payment modal
+    toast.success("Payment completed successfully!");
+    setShowEnhancedPurchaseModal(false);
+    setSelectedCourse(null);
+  };
+
+  const isInCart = (courseId: number) => cart.find(item => item.id === courseId);
+
+  // Handle Stripe checkout return
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const courseId = urlParams.get('courseId');
+    const cart = urlParams.get('cart');
+    
+    if (success === 'true') {
+      if (cart === 'true') {
+        toast.success("Cart checkout completed successfully! You can now access your courses.");
+      } else if (courseId) {
+        const course = courses.find(c => c.id.toString() === courseId);
+        if (course) {
+          toast.success(`${course.title} purchased successfully! You can now access the course.`);
+        }
+      }
+      
+      // Clean up URL parameters
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [courses]);
 
   const filteredCourses = courses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -394,6 +524,20 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
                     <Plus className="w-4 h-4 mr-2" />
                     Add Course
                   </button>
+                  
+                  {/* Cart Button */}
+                  <button
+                    onClick={() => setShowCartModal(true)}
+                    className="relative bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    Cart
+                    {cart.length > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
+                        {cart.length}
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -417,7 +561,7 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
                               <span className="text-sm text-gray-600 ml-1">{course.rating}</span>
                             </div>
                           </div>
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between mb-3">
                             <span className="text-sm text-gray-500">{course.level}</span>
                             <div className="flex space-x-2">
                               <button
@@ -436,6 +580,39 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             </div>
+                          </div>
+                          
+                          {/* Purchase and Cart Actions */}
+                          <div className="flex space-x-2">
+                            {course.price === 0 ? (
+                              <button
+                                onClick={() => handleCompletePurchase(course.id)}
+                                className="flex-1 bg-green-600 text-white py-2 px-3 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                              >
+                                Enroll Free
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handlePurchaseCourse(course)}
+                                className="flex-1 bg-blue-600 text-white py-2 px-3 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                              >
+                                Buy Now - ${course.price}
+                              </button>
+                            )}
+                            
+                            {course.price > 0 && (
+                              <button
+                                onClick={() => addToCart(course)}
+                                className={`px-3 py-2 rounded-lg transition-colors text-sm font-medium ${
+                                  isInCart(course.id)
+                                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                                    : 'bg-yellow-500 text-white hover:bg-yellow-600'
+                                }`}
+                                disabled={isInCart(course.id)}
+                              >
+                                {isInCart(course.id) ? 'In Cart' : 'Add to Cart'}
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -466,23 +643,60 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
                                 </span>
                               </div>
                             </div>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex flex-col items-end space-y-2">
                               <span className="text-blue-600 font-semibold">${course.price}</span>
-                              <button
-                                onClick={() => {
-                                  setEditingCourse(course);
-                                  setShowEditModal(true);
-                                }}
-                                className="text-blue-600 hover:text-blue-800"
-                              >
-                                <Edit className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={() => deleteCourse(course.id)}
-                                className="text-red-600 hover:text-red-800"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
+                              
+                              {/* Purchase and Cart Actions */}
+                              <div className="flex space-x-2">
+                                {course.price === 0 ? (
+                                  <button
+                                    onClick={() => handleCompletePurchase(course.id)}
+                                    className="bg-green-600 text-white py-2 px-3 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                                  >
+                                    Enroll Free
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={() => handlePurchaseCourse(course)}
+                                    className="bg-blue-600 text-white py-2 px-3 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                                  >
+                                    Buy Now
+                                  </button>
+                                )}
+                                
+                                {course.price > 0 && (
+                                  <button
+                                    onClick={() => addToCart(course)}
+                                    className={`px-3 py-2 rounded-lg transition-colors text-sm font-medium ${
+                                      isInCart(course.id)
+                                        ? 'bg-gray-400 text-white cursor-not-allowed'
+                                        : 'bg-yellow-500 text-white hover:bg-yellow-600'
+                                    }`}
+                                    disabled={isInCart(course.id)}
+                                  >
+                                    {isInCart(course.id) ? 'In Cart' : 'Add to Cart'}
+                                  </button>
+                                )}
+                              </div>
+                              
+                              {/* Admin Actions */}
+                              <div className="flex space-x-2">
+                                <button
+                                  onClick={() => {
+                                    setEditingCourse(course);
+                                    setShowEditModal(true);
+                                  }}
+                                  className="text-blue-600 hover:text-blue-800"
+                                >
+                                  <Edit className="w-4 h-4" />
+                                </button>
+                                <button
+                                  onClick={() => deleteCourse(course.id)}
+                                  className="text-red-600 hover:text-red-800"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -734,6 +948,93 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
             </div>
           </div>
         </div>
+      )}
+
+      {/* Shopping Cart Modal */}
+      {showCartModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold text-gray-900">Shopping Cart</h3>
+                <button
+                  onClick={() => setShowCartModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              {cart.length === 0 ? (
+                <div className="text-center py-8">
+                  <ShoppingCart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600">Your cart is empty</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((course) => (
+                    <div key={course.id} className="flex items-center gap-4 p-4 border rounded-lg">
+                      <img 
+                        src={course.image} 
+                        alt={course.title}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900">{course.title}</h4>
+                        <p className="text-sm text-gray-600">{course.instructor}</p>
+                        <p className="text-lg font-bold text-green-600">
+                          {course.price === 0 ? 'Free' : `$${course.price}`}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(course.id)}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                  
+                  <div className="border-t pt-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-lg font-semibold">Total:</span>
+                      <span className="text-lg font-bold text-green-600">
+                        ${cart.reduce((sum, course) => sum + (course.price === 0 ? 0 : course.price), 0).toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={handlePurchaseFromCart}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium"
+                      >
+                        <CreditCard className="h-4 w-4 mr-2 inline" />
+                        Checkout
+                      </button>
+                      <button 
+                        onClick={() => setShowCartModal(false)}
+                        className="px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+                      >
+                        Continue Shopping
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Enhanced Payment Modal */}
+      {showEnhancedPurchaseModal && selectedCourse && (
+        <EnhancedPaymentModal
+          isOpen={showEnhancedPurchaseModal}
+          onClose={() => setShowEnhancedPurchaseModal(false)}
+          course={selectedCourse}
+          onSuccess={handleCompletePurchase}
+        />
       )}
     </div>
   );

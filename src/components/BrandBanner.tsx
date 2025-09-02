@@ -38,7 +38,7 @@ const BrandBanner = () => {
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20">
             <h2 className="text-2xl font-bold text-[#FFD700] mb-4">Our Mission</h2>
             <p className="text-gray-200 leading-relaxed">
-              To democratize education through innovative technology, expert-led instruction, and personalized learning pathways. We're committed to empowering individuals with the skills, knowledge, and confidence needed to thrive in an ever-evolving world.
+                              To democratise education through innovative technology, expert-led instruction, and personalised learning pathways. We're committed to empowering individuals with the skills, knowledge, and confidence needed to thrive in an ever-evolving world.
             </p>
           </div>
         </div>

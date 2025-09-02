@@ -61,7 +61,7 @@ const EducationTraining = () => {
       rating: 4.6,
       students: 1678,
       price: 449,
-      description: 'Specialized training in special education, inclusive teaching, and differentiated instruction.',
+                      description: 'Specialised training in special education, inclusive teaching, and differentiated instruction.',
       topics: ['Special Education', 'Inclusive Teaching', 'Differentiated Instruction', 'Learning Disabilities'],
       skills: ['Special Education', 'Inclusive Teaching', 'Differentiated Instruction', 'Learning Support'],
       status: 'active',
@@ -587,7 +587,7 @@ const EducationTraining = () => {
                     },
                     {
                       title: 'Special Education Teacher',
-                      description: 'Provide specialized instruction and support for students with disabilities',
+                      description: 'Provide specialised instruction and support for students with disabilities',
                       salary: '$55,000 - $110,000',
                       requirements: ['Special education certification', 'Teaching experience', 'Inclusive teaching skills', 'Patience and empathy']
                     },

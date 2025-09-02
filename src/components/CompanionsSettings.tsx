@@ -126,7 +126,7 @@ const CompanionsSettings: React.FC = () => {
             Back to Library
           </Button>
           <h1 className="text-4xl font-bold text-white mb-2">Companions Settings</h1>
-          <p className="text-white text-lg">Customize your AI companion experience</p>
+                          <p className="text-white text-lg">Customise your AI companion experience</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

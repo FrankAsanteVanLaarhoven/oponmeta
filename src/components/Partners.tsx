@@ -151,7 +151,7 @@ const Partners = () => {
       logo: 'https://via.placeholder.com/120x60/7c3aed/ffffff?text=EduTech',
       category: 'Non-Profit',
       partnershipType: 'Academic',
-      description: 'Non-profit organization dedicated to making quality education accessible to all.',
+                      description: 'Non-profit organisation dedicated to making quality education accessible to all.',
       collaborationAreas: ['Educational Access', 'Scholarship Programs', 'Community Outreach', 'Digital Literacy'],
       contactPerson: 'Amanda Foster',
       contactEmail: 'partnerships@edutech.org',
@@ -197,7 +197,7 @@ const Partners = () => {
           Our Partners: Building the Future of Learning Together
         </motion.h1>
         <motion.p className="text-lg text-gray-700 mb-6" variants={headingVariants}>
-          OponMeta collaborates with leading organizations, universities, and industry partners to deliver world-class education and opportunities.
+                          OponMeta collaborates with leading organisations, universities, and industry partners to deliver world-class education and opportunities.
         </motion.p>
       </motion.div>
 
@@ -508,7 +508,7 @@ const Partners = () => {
                   {partnershipTypes.map(type => (
                     <div key={type} className="p-3 border border-gray-200 rounded-lg">
                       <h4 className="font-semibold text-[#0a174e]">{type}</h4>
-                      <p className="text-sm text-gray-600">Customized collaboration opportunities</p>
+                      <p className="text-sm text-gray-600">Customised collaboration opportunities</p>
                     </div>
                   ))}
                 </div>
@@ -597,7 +597,7 @@ const Partners = () => {
             <h3 className="text-xl font-bold text-[#0a174e] mb-4">Partnership Application</h3>
             <form className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
-                <input type="text" placeholder="Organization Name" className="border border-gray-300 rounded-md px-3 py-2" />
+                <input type="text" placeholder="Organisation Name" className="border border-gray-300 rounded-md px-3 py-2" />
                 <input type="email" placeholder="Contact Email" className="border border-gray-300 rounded-md px-3 py-2" />
               </div>
               <div className="grid md:grid-cols-2 gap-4">
@@ -619,7 +619,7 @@ const Partners = () => {
                 </select>
               </div>
               <textarea 
-                placeholder="Tell us about your organization and why you'd like to partner with OponMeta..." 
+                placeholder="Tell us about your organisation and why you'd like to partner with OponMeta..." 
                 className="w-full border border-gray-300 rounded-md px-3 py-2" 
                 rows={4}
               />
@@ -657,7 +657,7 @@ const Partners = () => {
                 <input type="text" className="w-full border border-gray-300 rounded-md px-3 py-2" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Your Organization</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Your Organisation</label>
                 <input type="text" className="w-full border border-gray-300 rounded-md px-3 py-2" />
               </div>
               <div>

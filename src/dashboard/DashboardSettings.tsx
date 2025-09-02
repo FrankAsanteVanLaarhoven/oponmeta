@@ -369,7 +369,7 @@ const DashboardSettings = () => {
                 <CardTitle>Branding & Customization</CardTitle>
               </div>
               <p className="text-gray-600">
-                Personalize your vendor space. These settings control how your courses and profile appear to students.
+                Personalise your vendor space. These settings control how your courses and profile appear to students.
               </p>
             </CardHeader>
             <CardContent>
@@ -425,7 +425,7 @@ const DashboardSettings = () => {
                       />
                       <div className="flex flex-col">
                         <span className="text-sm font-medium">{brandingData.primaryColor}</span>
-                        <span className="text-xs text-gray-500">Click to customize</span>
+                        <span className="text-xs text-gray-500">Click to customise</span>
                       </div>
                     </div>
                   </div>
@@ -450,7 +450,7 @@ const DashboardSettings = () => {
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Custom CSS</h3>
                   <Textarea
-                    placeholder="Add custom CSS to further customize your vendor space..."
+                    placeholder="Add custom CSS to further customise your vendor space..."
                     rows={6}
                     className="font-mono text-sm"
                   />

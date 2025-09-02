@@ -145,7 +145,7 @@ const DramaTheatrePerformance = () => {
   const careerPaths = [
     { title: 'Actor/Actress', salary: '$30,000 - $100,000+', skills: ['Performance', 'Character Development', 'Voice Training', 'Movement'] },
     { title: 'Theatre Director', salary: '$40,000 - $120,000', skills: ['Direction', 'Production Management', 'Artistic Vision', 'Leadership'] },
-    { title: 'Stage Manager', salary: '$35,000 - $80,000', skills: ['Production Coordination', 'Technical Management', 'Communication', 'Organization'] },
+    { title: 'Stage Manager', salary: '$35,000 - $80,000', skills: ['Production Coordination', 'Technical Management', 'Communication', 'Organisation'] },
     { title: 'Voice Coach', salary: '$35,000 - $85,000', skills: ['Voice Training', 'Speech Therapy', 'Performance Coaching', 'Communication'] },
     { title: 'Theatre Producer', salary: '$50,000 - $150,000', skills: ['Production Management', 'Budget Planning', 'Marketing', 'Business Development'] },
     { title: 'Dramatic Writer', salary: '$30,000 - $100,000', skills: ['Playwriting', 'Script Development', 'Storytelling', 'Creative Writing'] }

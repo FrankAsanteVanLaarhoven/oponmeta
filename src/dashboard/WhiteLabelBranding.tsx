@@ -255,13 +255,13 @@ const WhiteLabelBranding: React.FC = () => {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <Palette className="w-5 h-5" />
-            <span>{t('colorScheme')}</span>
+                            <span>{t('colourScheme')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Color Presets */}
           <div>
-            <Label className="text-sm font-medium mb-3 block">{t('colorPresets')}</Label>
+                            <Label className="text-sm font-medium mb-3 block">{t('colourPresets')}</Label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {colorPresets.map((preset) => (
                 <div
@@ -283,7 +283,7 @@ const WhiteLabelBranding: React.FC = () => {
           {/* Custom Colors */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="primary-color">{t('primaryColor')}</Label>
+                              <Label htmlFor="primary-color">{t('primaryColour')}</Label>
               <div className="flex space-x-2 mt-1">
                 <Input
                   id="primary-color"
@@ -301,7 +301,7 @@ const WhiteLabelBranding: React.FC = () => {
             </div>
 
             <div>
-              <Label htmlFor="secondary-color">{t('secondaryColor')}</Label>
+                              <Label htmlFor="secondary-color">{t('secondaryColour')}</Label>
               <div className="flex space-x-2 mt-1">
                 <Input
                   id="secondary-color"
@@ -319,7 +319,7 @@ const WhiteLabelBranding: React.FC = () => {
             </div>
 
             <div>
-              <Label htmlFor="accent-color">{t('accentColor')}</Label>
+                              <Label htmlFor="accent-color">{t('accentColour')}</Label>
               <div className="flex space-x-2 mt-1">
                 <Input
                   id="accent-color"
@@ -613,7 +613,7 @@ const WhiteLabelBranding: React.FC = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">{t('whiteLabelBranding')}</h1>
         <p className="text-gray-600">
-          {t('customizeYourPlatformBranding')}
+                          {t('customiseYourPlatformBranding')}
         </p>
       </div>
 

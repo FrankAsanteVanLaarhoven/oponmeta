@@ -85,7 +85,7 @@ const About = () => (
     <div className="max-w-3xl mx-auto text-center mb-10">
       <h2 className="text-2xl font-bold text-white mb-4">About Us</h2>
       <p className="text-gray-200 mb-2">We are a global EdTech powerhouse pioneering the future of digital learning. We craft transformative experiences in professional development and technical education, equipping today's learners and tomorrow's leaders with cutting-edge skills and knowledge. From interactive learning modules to scalable learning platforms, we empower institutions and individuals to unlock their full potential—redefining what learning can achieve across borders and industries.</p>
-      <p className="text-gray-200 mb-2">Our mission is to democratize access to world-class education through innovative technology and personalized learning experiences. By fostering a culture of excellence and innovation, we support professionals in unlocking their full potential and shaping the future of global industries.</p>
+      <p className="text-gray-200 mb-2">Our mission is to democratise access to world-class education through innovative technology and personalised learning experiences. By fostering a culture of excellence and innovation, we support professionals in unlocking their full potential and shaping the future of global industries.</p>
     </div>
 
     {/* Approach Section */}

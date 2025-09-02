@@ -52,7 +52,7 @@ const HealthHealthcareInnovation = () => {
     {
       id: 2,
       title: 'Healthcare Data Analytics',
-      description: 'Learn to analyze healthcare data for improved patient outcomes',
+                      description: 'Learn to analyse healthcare data for improved patient outcomes',
       level: 'Intermediate',
       duration: '10 weeks',
       rating: 4.7,

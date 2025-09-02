@@ -44,7 +44,7 @@ const SpecialisedIndustryTracks = () => {
       rating: 4.8,
       students: 1247,
       price: 449,
-      description: 'Specialized cybersecurity training for protecting critical infrastructure and industrial systems.',
+                      description: 'Specialised cybersecurity training for protecting critical infrastructure and industrial systems.',
       topics: ['Industrial Security', 'SCADA Systems', 'Threat Detection', 'Incident Response'],
       skills: ['Cybersecurity', 'Industrial Security', 'SCADA', 'Threat Analysis'],
       status: 'active',
@@ -189,7 +189,7 @@ const SpecialisedIndustryTracks = () => {
             Specialised Industry Tracks
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Master specialized industry skills with expert-led training in advanced manufacturing, 
+                            Master specialised industry skills with expert-led training in advanced manufacturing, 
             cybersecurity, renewable energy, and cutting-edge technologies.
           </p>
         </motion.div>
@@ -233,7 +233,7 @@ const SpecialisedIndustryTracks = () => {
                 <div className="grid md:grid-cols-4 gap-6">
                   <div className="bg-white rounded-lg shadow p-6 text-center">
                     <div className="text-3xl font-bold text-[#0a174e] mb-2">{courses.length}</div>
-                    <div className="text-gray-600">Specialized Courses</div>
+                    <div className="text-gray-600">Specialised Courses</div>
                   </div>
                   <div className="bg-white rounded-lg shadow p-6 text-center">
                     <div className="text-3xl font-bold text-[#0a174e] mb-2">
@@ -310,7 +310,7 @@ const SpecialisedIndustryTracks = () => {
 
                 {/* Featured Courses */}
                 <div className="bg-white rounded-lg shadow p-6">
-                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">Featured Specialized Courses</h3>
+                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">Featured Specialised Courses</h3>
                   <div className="space-y-4">
                     {courses.slice(0, 3).map(course => (
                       <div key={course.id} className="border border-gray-200 rounded-lg p-4">
@@ -536,12 +536,12 @@ const SpecialisedIndustryTracks = () => {
                 animate={{ opacity: 1, x: 0 }}
                 className="bg-white rounded-lg shadow p-6"
               >
-                <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Career Paths in Specialized Industries</h3>
+                <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Career Paths in Specialised Industries</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
                     {
                       title: 'Manufacturing Engineer',
-                      description: 'Design and optimize manufacturing processes and systems',
+                      description: 'Design and optimise manufacturing processes and systems',
                       salary: '$75,000 - $140,000',
                       requirements: ['Engineering degree', 'Manufacturing experience', 'CAD/CAM skills']
                     },
@@ -655,7 +655,7 @@ const SpecialisedIndustryTracks = () => {
         {showCreateModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Create New Specialized Course</h3>
+                              <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Create New Specialised Course</h3>
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -808,7 +808,7 @@ const SpecialisedIndustryTracks = () => {
         {showEditModal && editingCourse && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Edit Specialized Course</h3>
+                              <h3 className="text-2xl font-bold text-[#0a174e] mb-6">Edit Specialised Course</h3>
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>

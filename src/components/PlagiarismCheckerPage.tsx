@@ -96,7 +96,7 @@ const PlagiarismCheckerPage: React.FC = () => {
     analysisTime: 2.3
   };
 
-  const handleAnalyze = async () => {
+  const handleAnalyse = async () => {
     if (!inputText.trim()) return;
     
     setIsAnalyzing(true);
@@ -183,7 +183,7 @@ Matched Text: "${result.matchedText}"
     {
       icon: Clock,
       title: 'Fast Analysis',
-      description: 'Get results in seconds with our optimized scanning engine'
+                      description: 'Get results in seconds with our optimised scanning engine'
     },
     {
       icon: Database,
@@ -274,7 +274,7 @@ Matched Text: "${result.matchedText}"
                   {inputText.length} characters
                 </div>
                 <button
-                  onClick={handleAnalyze}
+                  onClick={handleAnalyse}
                   disabled={isAnalyzing || !inputText.trim()}
                   className="flex items-center px-6 py-2 bg-yellow-400 text-gray-900 rounded-lg font-semibold hover:bg-yellow-300 disabled:bg-gray-600 disabled:text-gray-400 transition-colors"
                 >

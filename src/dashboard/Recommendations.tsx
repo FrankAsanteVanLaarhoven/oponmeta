@@ -61,7 +61,7 @@ const Recommendations = () => {
             <Brain className="h-5 w-5 text-cyan-300" />
             <span>Get AI Recommendations</span>
           </CardTitle>
-          <p className="text-gray-600">Our AI analyzes your learning patterns to suggest the most suitable courses.</p>
+                          <p className="text-gray-600">Our AI analyses your learning patterns to suggest the most suitable courses.</p>
         </CardHeader>
         <CardContent>
           {isAnalyzing ? (

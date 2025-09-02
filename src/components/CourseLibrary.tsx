@@ -32,6 +32,8 @@ import {
   X
 } from "lucide-react";
 import { toast } from 'sonner';
+import { createStripeCheckoutSession } from '../api/stripe';
+import CoursePurchaseFlow from './CoursePurchaseFlow';
 
 const CourseLibrary = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -40,7 +42,7 @@ const CourseLibrary = () => {
   const [sortBy, setSortBy] = useState("Most Popular");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
-  const [showCustomizeModal, setShowCustomizeModal] = useState(false);
+  const [showCustomiseModal, setShowCustomiseModal] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
@@ -63,6 +65,26 @@ const CourseLibrary = () => {
   ];
 
   useEffect(() => {
+    // Handle Stripe checkout return
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const courseId = urlParams.get('courseId');
+    const cart = urlParams.get('cart');
+    
+    if (success === 'true') {
+      if (cart === 'true') {
+        toast.success("Cart checkout completed successfully! You can now access your courses.");
+      } else if (courseId) {
+        const course = courses.find(c => c.id.toString() === courseId);
+        if (course) {
+          toast.success(`${course.title} purchased successfully! You can now access the course.`);
+        }
+      }
+      
+      // Clean up URL parameters
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
     // Mock data - in real app, this would fetch from API
     const mockCourses = [
       {
@@ -238,9 +260,9 @@ const CourseLibrary = () => {
   };
 
   const handleCustomiseView = () => {
-    setShowCustomizeModal(true);
-    toast.success("Customise View modal opened");
-  };
+  setShowCustomiseModal(true);
+  toast.success("Customise View modal opened");
+};
 
   const handleAddToLibrary = (courseId: number) => {
     toast.success(`Course added to library!`);
@@ -293,22 +315,107 @@ const CourseLibrary = () => {
     toast.success("Course removed from favorites!");
   };
 
-  const handlePurchaseCourse = (course: any) => {
+  const handlePurchaseCourse = async (course: any) => {
     setSelectedCourse(course);
     setShowPurchaseModal(true);
   };
 
-  const handlePurchaseFromCart = () => {
-    setShowCartModal(false);
-    setShowPurchaseModal(true);
+  const handlePurchaseFromCart = async () => {
+    try {
+      if (cart.length === 0) return;
+      
+      // Filter out free courses
+      const paidCourses = cart.filter(course => !course.isFree);
+      const freeCourses = cart.filter(course => course.isFree);
+      
+      // Handle free courses immediately
+      if (freeCourses.length > 0) {
+        toast.success(`${freeCourses.length} free course(s) enrolled successfully!`);
+      }
+      
+      // Handle paid courses with Stripe checkout
+      if (paidCourses.length > 0) {
+        const result = await createStripeCheckoutSession({
+          courses: paidCourses.map(course => ({
+            courseId: course.id,
+            courseTitle: course.title,
+            amount: course.price,
+            instructor: course.instructor
+          })),
+          totalAmount: paidCourses.reduce((sum, course) => sum + course.price, 0) * 100,
+          currency: 'usd',
+          successUrl: `${window.location.origin}/course-library?success=true&cart=true`,
+          cancelUrl: `${window.location.origin}/course-library?canceled=true`,
+          metadata: {
+            courseCount: paidCourses.length.toString(),
+            courseIds: paidCourses.map(c => c.id).join(','),
+            totalAmount: paidCourses.reduce((sum, course) => sum + course.price, 0).toString()
+          }
+        });
+        
+        if (result && result.url) {
+          // Clear cart and redirect to Stripe checkout
+          setCart([]);
+          setShowCartModal(false);
+          window.location.href = result.url;
+        } else {
+          toast.error("Failed to create checkout session");
+        }
+      } else {
+        // All courses are free
+        setCart([]);
+        setShowCartModal(false);
+        toast.success("All courses enrolled successfully!");
+      }
+    } catch (error) {
+      console.error('Cart checkout error:', error);
+      toast.error("Failed to process cart checkout. Please try again.");
+    }
   };
 
-  const handleCompletePurchase = () => {
-    toast.success("Purchase completed successfully!");
-    setCart([]);
-    setShowPurchaseModal(false);
-    setSelectedCourse(null);
+
+
+  const handleCompletePurchase = async () => {
+    if (!selectedCourse) return;
+    
+    try {
+      if (selectedCourse.isFree) {
+        // Handle free course enrolment
+        toast.success("Course enrolled successfully!");
+        setCart([]);
+        setShowPurchaseModal(false);
+        setSelectedCourse(null);
+        return;
+      }
+
+      // Create Stripe checkout session for paid courses
+      const result = await createStripeCheckoutSession({
+        courseId: selectedCourse.id,
+        courseTitle: selectedCourse.title,
+        amount: selectedCourse.price * 100,
+        currency: 'usd',
+        successUrl: `${window.location.origin}/course-library?success=true&courseId=${selectedCourse.id}`,
+        cancelUrl: `${window.location.origin}/course-library?canceled=true`,
+        metadata: {
+          courseId: selectedCourse.id.toString(),
+          courseTitle: selectedCourse.title,
+          instructor: selectedCourse.instructor
+        }
+      });
+      
+      if (result && result.url) {
+        // Redirect to Stripe checkout
+        window.location.href = result.url;
+      } else {
+        toast.error("Failed to create checkout session");
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error("Failed to process checkout. Please try again.");
+    }
   };
+
+
 
   const handleShareCourse = (course: any) => {
     if (navigator.share) {
@@ -893,84 +1000,17 @@ const CourseLibrary = () => {
           </div>
         )}
 
-        {/* Purchase Modal */}
-        {showPurchaseModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg max-w-md w-full mx-4">
-              <div className="p-6 border-b">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-gray-900">Complete Purchase</h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowPurchaseModal(false)}
-                  >
-                    <X className="h-5 w-5" />
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="p-6">
-                {selectedCourse && (
-                  <div className="mb-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <img 
-                        src={selectedCourse.image} 
-                        alt={selectedCourse.title}
-                        className="w-16 h-16 object-cover rounded"
-                      />
-                      <div>
-                        <h4 className="font-semibold text-gray-900">{selectedCourse.title}</h4>
-                        <p className="text-sm text-gray-600">{selectedCourse.instructor}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex items-center justify-between mb-2">
-                        <span>Course Price:</span>
-                        <span className="font-semibold">
-                          {selectedCourse.isFree ? 'Free' : `$${selectedCourse.price}`}
-                        </span>
-                      </div>
-                      {!selectedCourse.isFree && (
-                        <div className="flex items-center justify-between">
-                          <span>Processing Fee:</span>
-                          <span className="font-semibold">$2.99</span>
-                        </div>
-                      )}
-                      <div className="border-t pt-2 mt-2">
-                        <div className="flex items-center justify-between font-bold">
-                          <span>Total:</span>
-                          <span className="text-green-600">
-                            {selectedCourse.isFree ? 'Free' : `$${(selectedCourse.price + 2.99).toFixed(2)}`}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                <div className="space-y-3">
-                  <Button 
-                    onClick={handleCompletePurchase}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    <CreditCard className="h-4 w-4 mr-1" />
-                    {selectedCourse?.isFree ? 'Enroll Now' : 'Pay with Card'}
-                  </Button>
-                  
-                  <Button 
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => setShowPurchaseModal(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Enhanced Purchase Flow */}
+        <CoursePurchaseFlow
+          course={selectedCourse}
+          isOpen={showPurchaseModal}
+          onClose={() => setShowPurchaseModal(false)}
+          onSuccess={(courseId) => {
+            setShowPurchaseModal(false);
+            setSelectedCourse(null);
+            toast.success('Course purchased successfully!');
+          }}
+        />
 
         {/* Modals Placeholder */}
         {showAddCourseModal && (
@@ -989,16 +1029,16 @@ const CourseLibrary = () => {
           </div>
         )}
 
-        {showCustomizeModal && (
+        {showCustomiseModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
               <h3 className="text-lg font-semibold mb-4">Customise View</h3>
-              <p className="text-gray-600 mb-4">View customization options would be implemented here.</p>
+              <p className="text-gray-600 mb-4">View customisation options would be implemented here.</p>
               <div className="flex gap-2">
-                <Button onClick={() => setShowCustomizeModal(false)}>Cancel</Button>
+                <Button onClick={() => setShowCustomiseModal(false)}>Cancel</Button>
                 <Button onClick={() => {
-                  setShowCustomizeModal(false);
-                  toast.success("View customization opened!");
+                  setShowCustomiseModal(false);
+                  toast.success("View customisation opened!");
                 }}>Continue</Button>
               </div>
             </div>

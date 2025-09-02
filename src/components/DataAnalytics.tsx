@@ -232,7 +232,7 @@ const DataAnalytics = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">About Data & Analytics</h2>
                 <p className="text-gray-600 mb-4">
                   Data is the new currency of the digital age. Our comprehensive analytics program equips you with 
-                  the skills to collect, analyze, and interpret data to drive strategic business decisions.
+                  the skills to collect, analyse, and interpret data to drive strategic business decisions.
                 </p>
                 <p className="text-gray-600">
                   From basic statistical analysis to advanced machine learning, our courses cover the full spectrum 

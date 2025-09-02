@@ -58,8 +58,8 @@ const ProfessionalDevelopmentLeadership = () => {
       students: 1234,
       price: 199,
       area: 'Executive Leadership',
-      topics: ['Strategic Leadership', 'Change Management', 'Organizational Development', 'Executive Presence'],
-      skills: ['Strategic Planning', 'Change Leadership', 'Executive Communication', 'Organizational Design']
+              topics: ['Strategic Leadership', 'Change Management', 'Organisational Development', 'Executive Presence'],
+        skills: ['Strategic Planning', 'Change Leadership', 'Executive Communication', 'Organisational Design']
     },
     {
       id: 3,
@@ -144,7 +144,7 @@ const ProfessionalDevelopmentLeadership = () => {
   const careerPaths = [
     { title: 'Team Leader', salary: '$60,000 - $90,000', skills: ['Team Management', 'Communication', 'Project Planning', 'Conflict Resolution'] },
     { title: 'Department Manager', salary: '$80,000 - $120,000', skills: ['Strategic Planning', 'Budget Management', 'Team Leadership', 'Process Improvement'] },
-    { title: 'Executive Director', salary: '$120,000 - $200,000', skills: ['Strategic Leadership', 'Organizational Development', 'Stakeholder Management', 'Change Leadership'] },
+    { title: 'Executive Director', salary: '$120,000 - $200,000', skills: ['Strategic Leadership', 'Organisational Development', 'Stakeholder Management', 'Change Leadership'] },
     { title: 'Business Consultant', salary: '$70,000 - $150,000', skills: ['Problem Solving', 'Client Management', 'Strategic Analysis', 'Communication'] },
     { title: 'Project Manager', salary: '$65,000 - $100,000', skills: ['Project Planning', 'Risk Management', 'Team Coordination', 'Budget Control'] },
     { title: 'Leadership Coach', salary: '$50,000 - $120,000', skills: ['Coaching', 'Mentoring', 'Assessment', 'Development Planning'] }

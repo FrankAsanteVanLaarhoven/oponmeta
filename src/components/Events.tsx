@@ -368,7 +368,7 @@ const Events = () => {
                 <input type="email" className="w-full border border-gray-300 rounded-md px-3 py-2" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Organization</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Organisation</label>
                 <input type="text" className="w-full border border-gray-300 rounded-md px-3 py-2" />
               </div>
               <div>

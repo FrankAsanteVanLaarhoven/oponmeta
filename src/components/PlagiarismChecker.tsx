@@ -102,10 +102,10 @@ const PlagiarismChecker = () => {
     }
   };
 
-  const analyzeText = async () => {
+  const analyseText = async () => {
     if (!text.trim()) {
       toast({
-        title: "No text to analyze",
+        title: "No text to analyse",
         description: "Please enter or upload text to check for plagiarism",
         variant: "destructive"
       });
@@ -319,7 +319,7 @@ const PlagiarismChecker = () => {
                   {text.split(' ').length} words
                 </div>
                 <Button 
-                  onClick={analyzeText} 
+                  onClick={analyseText} 
                   disabled={isAnalyzing || !text.trim() || !subscriptionStatus.hasPlagiarismChecker}
                   className="flex items-center gap-2"
                 >

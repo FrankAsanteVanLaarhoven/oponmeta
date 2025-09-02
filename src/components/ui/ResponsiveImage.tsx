@@ -60,7 +60,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
     'scale-down': 'object-scale-down'
   };
 
-  // Generate optimized image URL
+      // Generate optimised image URL
   const generateImageUrl = (imageSrc: string, imageFormat?: string, imageQuality?: number) => {
     // If using a CDN or image optimization service, you can modify this function
     // For now, we'll return the original src

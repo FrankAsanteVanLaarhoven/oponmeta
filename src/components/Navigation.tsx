@@ -94,6 +94,7 @@ const RESOURCES_TOOLS = [
   { icon: <CheckCircle className="w-5 h-5 text-green-400" />, name: 'Grammar Checker', slug: 'grammar-checker', description: 'Free AI grammar and style checker' },
   { icon: <Crown className="w-5 h-5 text-yellow-500" />, name: 'Get Premium', slug: 'get-premium', description: 'Remove ads' },
   { icon: <CreditCard className="w-5 h-5 text-blue-500" />, name: 'Subscription', slug: 'subscription', description: 'Manage your subscription plans' },
+  { icon: <CreditCard className="w-5 h-5 text-green-500" />, name: 'Purchase Flow Demo', slug: 'purchase-flow-demo', description: 'Experience our enhanced Stripe-powered payment system', isNew: true },
   { icon: <Users className="w-5 h-5 text-[#2a3a7b]" />, name: 'Graduate Profiles', slug: 'graduate-profiles', description: 'Read graduate success stories' },
   { icon: <Award className="w-5 h-5 text-yellow-400" />, name: 'Certification', slug: 'certification', description: 'View and verify course certificates', isNew: true },
   { icon: <Brain className="w-5 h-5 text-[#2a3a7b]" />, name: 'How to Build a Growth Mindset', slug: 'growth-mindset', description: 'Practical strategies for lifelong learning and personal development' },

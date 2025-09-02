@@ -120,7 +120,7 @@ const GetPremium: React.FC = () => {
     {
       icon: Zap,
       title: 'Accelerated Learning',
-      description: 'Learn 3x faster with AI-powered personalized learning paths'
+                      description: 'Learn 3x faster with AI-powered personalised learning paths'
     },
     {
       icon: Shield,
@@ -161,7 +161,7 @@ const GetPremium: React.FC = () => {
       name: 'Michael Chen',
       role: 'Software Developer',
       company: 'InnovateTech',
-      content: 'The live sessions with industry experts and personalized learning paths made all the difference in my skill development.',
+                      content: 'The live sessions with industry experts and personalised learning paths made all the difference in my skill development.',
       rating: 5
     },
     {

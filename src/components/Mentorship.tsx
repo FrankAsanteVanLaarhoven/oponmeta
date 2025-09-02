@@ -140,7 +140,7 @@ const Mentorship = () => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <motion.div className="bg-white rounded-lg shadow p-6" variants={cardVariants}>
-              <h3 className="text-xl font-semibold text-[#0a174e] mb-2">Personalized Guidance</h3>
+                              <h3 className="text-xl font-semibold text-[#0a174e] mb-2">Personalised Guidance</h3>
               <p className="text-gray-600">1:1 and group mentorship sessions tailored to your goals and interests.</p>
             </motion.div>
             <motion.div className="bg-white rounded-lg shadow p-6" variants={cardVariants}>

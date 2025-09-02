@@ -372,7 +372,7 @@ const AICourseCreator = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">AI Course Creator</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Create engaging, personalized courses with AI assistance. Choose from templates or start from scratch.
+                            Create engaging, personalised courses with AI assistance. Choose from templates or start from scratch.
           </p>
         </div>
 
@@ -433,7 +433,7 @@ const AICourseCreator = () => {
             <CardHeader>
               <CardTitle className="text-white text-2xl flex items-center">
                 <Bot className="w-6 h-6 mr-2 text-blue-300" />
-                Customize Your Course
+                Customise Your Course
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">

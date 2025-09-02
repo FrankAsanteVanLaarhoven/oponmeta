@@ -61,7 +61,7 @@ const Mission = () => {
               <Heart className="w-12 h-12 text-red-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Student-Centered</h3>
               <p className="text-blue-100">
-                Putting learners at the heart of everything we do, with personalized 
+                Putting learners at the heart of everything we do, with personalised 
                 experiences that adapt to individual needs and goals.
               </p>
             </CardContent>
@@ -73,7 +73,7 @@ const Mission = () => {
               <h3 className="text-xl font-bold text-white mb-3">Excellence</h3>
               <p className="text-blue-100">
                 Maintaining the highest standards of educational quality, content, 
-                and delivery across all our programs and platforms.
+                and delivery across all our programmes and platforms.
               </p>
             </CardContent>
           </Card>

@@ -89,7 +89,7 @@ const MobileFirstDemo: React.FC = () => {
     },
     {
       id: 2,
-      title: 'Touch Optimized',
+                      title: 'Touch Optimised',
       description: '44px minimum touch targets with advanced gesture support',
       icon: <MousePointer className="w-8 h-8 text-oponm-600" />,
       image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop'
@@ -97,7 +97,7 @@ const MobileFirstDemo: React.FC = () => {
     {
       id: 3,
       title: 'Performance Focused',
-      description: 'Lazy loading, code splitting, and optimized images',
+                      description: 'Lazy loading, code splitting, and optimised images',
       icon: <Zap className="w-8 h-8 text-oponm-600" />,
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop'
     },
@@ -227,7 +227,7 @@ const MobileFirstDemo: React.FC = () => {
                 </h2>
                 <p className="text-lg mb-6 opacity-90">
                   Built with performance, accessibility, and user experience in mind. 
-                  Every component is optimized for touch interactions and responsive design.
+                  Every component is optimised for touch interactions and responsive design.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <TouchButtonLarge variant="mobile-secondary">
@@ -278,7 +278,7 @@ const MobileFirstDemo: React.FC = () => {
 
       {activeTab === 'components' && (
         <div className="space-y-8">
-          <h2 className="text-3xl font-bold text-black mb-6">Touch-Optimized Components</h2>
+                          <h2 className="text-3xl font-bold text-black mb-6">Touch-Optimised Components</h2>
           
           {/* Button Showcase */}
           <div className="bg-white rounded-lg shadow-mobile p-6">
@@ -301,7 +301,7 @@ const MobileFirstDemo: React.FC = () => {
             </div>
             <div className="bg-white rounded-lg shadow-mobile p-6">
               <MobileContainer>
-                <p className="text-black font-medium">Mobile Container - Optimized for small screens</p>
+                <p className="text-black font-medium">Mobile Container - Optimised for small screens</p>
               </MobileContainer>
             </div>
           </div>
@@ -414,7 +414,7 @@ const MobileFirstDemo: React.FC = () => {
                 <div className="p-6">
                   <h4 className="text-lg font-bold text-black mb-4">Bottom Sheet Content</h4>
                   <p className="text-black font-medium mb-4">
-                    This is a mobile-optimized bottom sheet with touch interactions.
+                    This is a mobile-optimised bottom sheet with touch interactions.
                   </p>
                   <TouchButton variant="mobile" size="mobile" fullWidth>
                     Action Button

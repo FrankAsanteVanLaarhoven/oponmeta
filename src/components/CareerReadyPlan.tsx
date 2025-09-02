@@ -81,7 +81,7 @@ const CAREER_PATHS: CareerPath[] = [
   {
     id: '2',
     title: 'Data Scientist',
-    description: 'Analyze data to drive business decisions',
+                    description: 'Analyse data to drive business decisions',
     requirements: ['Statistics', 'Python/R', 'Machine Learning'],
     salary: '$90,000 - $160,000',
     growth: 'Very high demand, 31% growth',
@@ -615,7 +615,7 @@ const CareerReadyPlan = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Career Ready Plan</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Create a personalized career roadmap to achieve your professional goals. Get a step-by-step plan tailored to your skills, interests, and aspirations.
+                            Create a personalised career roadmap to achieve your professional goals. Get a step-by-step plan tailored to your skills, interests, and aspirations.
           </p>
         </div>
 

@@ -458,7 +458,7 @@ const AIVideoCalling = () => {
             AI Video Calling
           </h1>
           <p className="text-xl text-yellow-400 max-w-2xl mx-auto">
-            Connect with AI tutors and experts for personalized learning experiences. 
+                            Connect with AI tutors and experts for personalised learning experiences. 
             Get real-time help, ask questions, and receive instant feedback.
           </p>
         </div>
@@ -629,14 +629,14 @@ const AIVideoCalling = () => {
                                         <Star className="w-8 h-8 text-yellow-400" />
               </div>
                                               <h3 className="text-xl font-semibold mb-2 text-yellow-400">Expert Knowledge</h3>
-                <p className="text-yellow-400">Access to specialized knowledge across all subjects and skill levels.</p>
+                <p className="text-yellow-400">Access to specialised knowledge across all subjects and skill levels.</p>
             </div>
             
             <div className="text-center">
                               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <MessageSquare className="w-8 h-8 text-yellow-400" />
               </div>
-                                              <h3 className="text-xl font-semibold mb-2 text-yellow-400">Personalized Learning</h3>
+                                              <h3 className="text-xl font-semibold mb-2 text-yellow-400">Personalised Learning</h3>
                 <p className="text-yellow-400">Tailored explanations and adaptive learning based on your needs.</p>
             </div>
           </div>

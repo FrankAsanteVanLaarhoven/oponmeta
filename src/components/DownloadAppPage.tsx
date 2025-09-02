@@ -113,7 +113,7 @@ const DownloadAppPage: React.FC = () => {
     {
       icon: Zap,
       title: 'AI-Powered Learning',
-      description: 'Personalized recommendations and adaptive content'
+                      description: 'Personalised recommendations and adaptive content'
     },
     {
       icon: Shield,
@@ -123,7 +123,7 @@ const DownloadAppPage: React.FC = () => {
   ];
 
   const benefits = [
-    'Learn on the go with mobile-optimized content',
+                    'Learn on the go with mobile-optimised content',
     'Sync progress across all your devices',
     'Access to exclusive mobile-only features',
     'Push notifications for course updates',

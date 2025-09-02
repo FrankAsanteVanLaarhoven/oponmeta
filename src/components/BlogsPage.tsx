@@ -58,7 +58,7 @@ const BlogsPage: React.FC = () => {
     {
       id: '1',
       title: 'The Future of AI in Education: Transforming Learning Experiences',
-      excerpt: 'Discover how artificial intelligence is revolutionizing education and creating personalized learning experiences for students worldwide.',
+                      excerpt: 'Discover how artificial intelligence is revolutionising education and creating personalised learning experiences for students worldwide.',
       content: 'Artificial intelligence is transforming the way we learn and teach...',
       author: {
         name: 'Dr. Sarah Johnson',
@@ -117,7 +117,7 @@ const BlogsPage: React.FC = () => {
     },
     {
       id: '4',
-      title: 'The Psychology of Learning: How to Optimize Your Study Habits',
+                      title: 'The Psychology of Learning: How to Optimise Your Study Habits',
       excerpt: 'Explore the science behind effective learning and discover proven techniques to improve your study efficiency.',
       content: 'Understanding how our brains process and retain information is crucial...',
       author: {

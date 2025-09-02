@@ -98,12 +98,12 @@ As a healthcare professional, you'll be part of a team dedicated to improving pe
 Nursing Roles:
 • Registered Nurse (RN): Provides direct patient care, administers medications, and coordinates care plans
 • Licensed Practical Nurse (LPN): Assists RNs and provides basic patient care under supervision
-• Nurse Practitioner (NP): Advanced practice nurse with prescribing authority and specialized training
+                • Nurse Practitioner (NP): Advanced practice nurse with prescribing authority and specialised training
 
 Healthcare Assistant Roles:
 • Certified Nursing Assistant (CNA): Provides basic patient care and support
 • Medical Assistant: Assists physicians with clinical and administrative tasks
-• Patient Care Technician: Specialized in specific areas like dialysis or phlebotomy
+                • Patient Care Technician: Specialised in specific areas like dialysis or phlebotomy
 
 Other Healthcare Roles:
 • Physician: Diagnoses and treats patients

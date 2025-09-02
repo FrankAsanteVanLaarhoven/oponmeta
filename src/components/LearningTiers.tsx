@@ -60,7 +60,7 @@ const LearningTiers = () => {
       features: [
         'All Professional Tier features',
         'Exclusive expert courses',
-        'Personalized learning path',
+                        'Personalised learning path',
         'Executive coaching',
         'Industry certification',
         'Job placement assistance',

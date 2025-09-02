@@ -581,7 +581,7 @@ const InformationTechnology = () => {
                     },
                     {
                       title: 'Data Scientist',
-                      description: 'Analyze data and develop machine learning models',
+                      description: 'Analyse data and develop machine learning models',
                       salary: '$90,000 - $200,000',
                       requirements: ['Statistics degree', 'Python/R skills', 'Machine learning', 'Data analysis']
                     },

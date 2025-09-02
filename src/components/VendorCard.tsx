@@ -98,7 +98,7 @@ const VendorCard = ({ vendor }: VendorCardProps) => {
           {/* Actions */}
           <div className="flex space-x-2 pt-2">
             <Button className="flex-1 bg-white text-purple-900 hover:bg-gray-100">
-              View Organization
+                              View Organisation
             </Button>
             <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10">
               See All Courses

@@ -69,6 +69,8 @@ const WeatherForecast = lazy(() => import('./components/WeatherForecast'));
 const CourseLibrary = lazy(() => import('./components/CourseLibrary'));
 const Whiteboard = lazy(() => import('./components/Whiteboard'));
 const CourseAuthoringTool = lazy(() => import('./components/CourseAuthoringTool'));
+const CoursePurchaseFlow = lazy(() => import('./components/CoursePurchaseFlow'));
+const PurchaseFlowDemo = lazy(() => import('./components/PurchaseFlowDemo'));
 const AIVideoCalling = lazy(() => import('./components/AIVideoCalling'));
 const CompanionsLibrary = lazy(() => import('./components/CompanionsLibrary'));
 const CompanionPage = lazy(() => import('./components/CompanionPage'));
@@ -221,6 +223,7 @@ function App() {
           <Route path="/course-purchase/:courseId" element={<CoursePurchase />} />
           <Route path="/course-library" element={<CourseLibrary />} />
           <Route path="/course-authoring" element={<CourseAuthoringTool />} />
+          <Route path="/purchase-flow-demo" element={<PurchaseFlowDemo />} />
           <Route path="/course-certifications" element={<CourseCertifications />} />
           
           {/* Dashboard Routes */}

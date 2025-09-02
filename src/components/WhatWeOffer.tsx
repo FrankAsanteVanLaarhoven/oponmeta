@@ -74,7 +74,7 @@ const WhatWeOffer = () => (
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-[#0a174e] mb-2">1:1 Mentorship</h3>
-          <p className="text-gray-600">Get personalized guidance from experienced mentors to accelerate your career growth.</p>
+                          <p className="text-gray-600">Get personalised guidance from experienced mentors to accelerate your career growth.</p>
         </motion.div>
 
         <motion.div

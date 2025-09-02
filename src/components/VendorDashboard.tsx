@@ -15,7 +15,7 @@ const sampleCourses = [
   {
     id: 2,
     title: 'AI for Business Leaders',
-    description: 'Harness AI to drive innovation and growth in your organization.',
+                    description: 'Harness AI to drive innovation and growth in your organisation.',
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80',
     published: true,
     enrollments: 180,

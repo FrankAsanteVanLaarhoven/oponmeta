@@ -317,7 +317,7 @@ const Collaboration = () => {
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h4 className="font-medium">How to optimize learning efficiency?</h4>
+                        <h4 className="font-medium">How to optimise learning efficiency?</h4>
                         <p className="text-sm text-gray-500">Posted by Sarah Chen • 2 hours ago</p>
                       </div>
                       <Badge variant="outline">Discussion</Badge>

@@ -545,7 +545,7 @@ const CreatorsPortal: React.FC = () => {
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-semibold text-black">My Courses</h3>
-                <p className="text-black">Manage and optimize your course offerings</p>
+                <p className="text-black">Manage and optimise your course offerings</p>
               </div>
               <div className="flex space-x-2">
                 <Button variant="outline" size="sm" className="text-black border-black hover:bg-black hover:text-white">

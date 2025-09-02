@@ -287,7 +287,7 @@ const MentorshipCareerReadiness = () => {
                         </li>
                         <li className="flex items-center gap-2">
                           <Heart className="w-4 h-4 text-red-600" />
-                          Personalized career roadmaps
+                          Personalised career roadmaps
                         </li>
                         <li className="flex items-center gap-2">
                           <Heart className="w-4 h-4 text-red-600" />
@@ -527,7 +527,7 @@ const MentorshipCareerReadiness = () => {
                       title: 'HR Professional',
                       description: 'Manage human resources and support employee development',
                       salary: '$60,000 - $150,000',
-                      requirements: ['HR degree/certification', 'People skills', 'Organizational knowledge']
+                      requirements: ['HR degree/certification', 'People skills', 'Organisational knowledge']
                     },
                     {
                       title: 'Executive Coach',

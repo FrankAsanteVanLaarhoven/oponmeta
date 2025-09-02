@@ -448,7 +448,7 @@ const InstructorPortal: React.FC = () => {
       {
         id: '2',
         title: 'AI for Business Leaders',
-        description: 'Harness the power of artificial intelligence to drive innovation and growth in your organization.',
+                        description: 'Harness the power of artificial intelligence to drive innovation and growth in your organisation.',
         category: 'Business',
         level: 'beginner',
         price: 149.99,
@@ -499,7 +499,7 @@ const InstructorPortal: React.FC = () => {
         completions: 0,
         tags: ['Marketing', 'SEO', 'Social Media', 'Analytics'],
         requirements: ['Basic computer skills', 'Social media accounts'],
-        learningOutcomes: ['Create marketing campaigns', 'Analyze performance data', 'Grow online presence'],
+        learningOutcomes: ['Create marketing campaigns', 'Analyse performance data', 'Grow online presence'],
         instructor: {
           name: 'Dr. John Vendor',
           avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80',
@@ -1284,7 +1284,7 @@ const InstructorPortal: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold text-black">Revenue Management</h2>
-                  <p className="text-black">Track earnings, manage payouts, and analyze revenue trends</p>
+                  <p className="text-black">Track earnings, manage payouts, and analyse revenue trends</p>
                 </div>
                 <Button onClick={() => setShowRevenueModal(true)} className="bg-green-600 hover:bg-green-700">
                   <DollarSign className="h-4 w-4 mr-2" />
@@ -1444,7 +1444,7 @@ const InstructorPortal: React.FC = () => {
                       <p className="text-black mb-4">Clean, professional design with modern typography</p>
                       <Button variant="outline" className="w-full">
                         <Edit className="h-4 w-4 mr-2" />
-                        Customize
+                        Customise
                       </Button>
                     </div>
                   </CardContent>
@@ -1460,7 +1460,7 @@ const InstructorPortal: React.FC = () => {
                       <p className="text-black mb-4">Traditional certificate design with elegant borders</p>
                       <Button variant="outline" className="w-full">
                         <Edit className="h-4 w-4 mr-2" />
-                        Customize
+                        Customise
                       </Button>
                     </div>
                   </CardContent>
@@ -1476,7 +1476,7 @@ const InstructorPortal: React.FC = () => {
                       <p className="text-black mb-4">Simple, clean design focusing on content</p>
                       <Button variant="outline" className="w-full">
                         <Edit className="h-4 w-4 mr-2" />
-                        Customize
+                        Customise
                       </Button>
                     </div>
                   </CardContent>
@@ -1717,7 +1717,7 @@ const InstructorPortal: React.FC = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-black">Enterprise</CardTitle>
-                    <CardDescription className="text-black">For large organizations</CardDescription>
+                    <CardDescription className="text-black">For large organisations</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-black mb-4">$199<span className="text-lg">/month</span></div>

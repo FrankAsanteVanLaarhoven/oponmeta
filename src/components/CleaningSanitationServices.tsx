@@ -136,7 +136,7 @@ const CleaningSanitationServices = () => {
     { name: 'Healthcare Cleaning', icon: <Target className="w-6 h-6" />, description: 'Hospitals, clinics, and medical facilities' },
     { name: 'Food Service Sanitation', icon: <Droplets className="w-6 h-6" />, description: 'Restaurants, food processing, and catering' },
     { name: 'Environmental Services', icon: <Globe className="w-6 h-6" />, description: 'Waste management and environmental protection' },
-    { name: 'Specialized Cleaning', icon: <Sparkles className="w-6 h-6" />, description: 'Carpet, upholstery, and specialized surfaces' }
+            { name: 'Specialised Cleaning', icon: <Sparkles className="w-6 h-6" />, description: 'Carpet, upholstery, and specialised surfaces' }
   ];
 
   const careerPaths = [

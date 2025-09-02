@@ -22,7 +22,7 @@ const touchButtonVariants = cva(
         default: 'h-10 px-4 py-2',
         sm: 'h-8 px-3 text-sm',
         lg: 'h-12 px-8 text-lg',
-        // Touch-optimized sizes
+        // Touch-optimised sizes
         touch: 'min-h-[44px] min-w-[44px] px-4 py-2 text-base',
         'touch-lg': 'min-h-[48px] min-w-[48px] px-6 py-3 text-lg',
         'touch-xl': 'min-h-[56px] min-w-[56px] px-8 py-4 text-xl',

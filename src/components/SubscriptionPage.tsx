@@ -147,7 +147,7 @@ const SubscriptionPage: React.FC = () => {
     {
       icon: <Sparkles className="w-6 h-6" />,
       title: 'AI-Powered Learning',
-      description: 'Personalized recommendations and adaptive learning'
+                      description: 'Personalised recommendations and adaptive learning'
     },
     {
       icon: <Shield className="w-6 h-6" />,
@@ -178,7 +178,7 @@ const SubscriptionPage: React.FC = () => {
       role: 'UX Designer',
       company: 'DesignStudio',
       rating: 5,
-      text: 'I love the personalized learning paths and offline access. It fits perfectly with my busy schedule.',
+                      text: 'I love the personalised learning paths and offline access. It fits perfectly with my busy schedule.',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
     }
   ];

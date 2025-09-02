@@ -44,7 +44,7 @@ const SocialCareCommunitySupport = () => {
       rating: 4.7,
       students: 2156,
       price: 299,
-      description: 'Specialized training in child welfare, family support, and protective services.',
+                      description: 'Specialised training in child welfare, family support, and protective services.',
       topics: ['Child Welfare', 'Family Support', 'Protective Services', 'Child Development'],
       skills: ['Child Welfare', 'Family Support', 'Protective Services', 'Child Development'],
       status: 'active',

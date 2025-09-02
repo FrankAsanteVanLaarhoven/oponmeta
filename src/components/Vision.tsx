@@ -25,7 +25,7 @@ const Vision = () => {
           <CardContent className="p-8">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">Vision Statement</h2>
             <p className="text-lg text-blue-100 leading-relaxed text-center max-w-4xl mx-auto">
-              We envision a world where quality education is universally accessible, personalized, and transformative. 
+              We envision a world where quality education is universally accessible, personalised, and transformative. 
               Through innovative technology and global collaboration, we're building the future of learning—one that 
               empowers every individual to reach their full potential and contribute to a better world.
             </p>

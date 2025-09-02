@@ -153,7 +153,7 @@ const Privacy = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-yellow-500 mr-2">•</span>
-                Personalize your learning experience and content recommendations
+                Personalise your learning experience and content recommendations
               </li>
               <li className="flex items-start">
                 <span className="text-yellow-500 mr-2">•</span>

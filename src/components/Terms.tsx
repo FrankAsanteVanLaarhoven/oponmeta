@@ -39,7 +39,7 @@ const Terms = () => {
 
   const prohibitedActivities = [
     'Sharing account credentials with others',
-    'Attempting to gain unauthorized access to the platform',
+            'Attempting to gain unauthorised access to the platform',
     'Uploading malicious content or software',
     'Harassing or bullying other users',
     'Violating intellectual property rights',

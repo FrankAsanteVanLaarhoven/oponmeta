@@ -134,7 +134,7 @@ const CourseBrowsingPage = () => {
                 <Zap className="w-8 h-8 text-purple-400" />
               </div>
               <h4 className="font-semibold mb-2">AI-Powered Learning</h4>
-              <p className="text-gray-300 text-sm">Personalized learning experiences with AI companions</p>
+                              <p className="text-gray-300 text-sm">Personalised learning experiences with AI companions</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">

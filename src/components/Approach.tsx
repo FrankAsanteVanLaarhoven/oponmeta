@@ -15,7 +15,7 @@ const Approach = () => {
             <h1 className="text-5xl font-bold text-white">Our Approach</h1>
           </div>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            We combine innovative technology, expert instruction, and personalized learning 
+            We combine innovative technology, expert instruction, and personalised learning 
             to create transformative educational experiences that empower learners worldwide.
           </p>
         </div>
@@ -51,7 +51,7 @@ const Approach = () => {
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Human-Centered</h3>
               <p className="text-blue-100">
-                Putting learners at the center of every decision, with personalized 
+                Putting learners at the centre of every decision, with personalised 
                 experiences that adapt to individual needs and learning styles.
               </p>
             </CardContent>

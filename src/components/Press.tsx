@@ -33,8 +33,8 @@ const Press = () => {
       id: 1,
       title: 'OponMeta Launches Revolutionary AI-Powered Learning Platform',
       date: '2024-12-15',
-      summary: 'OponMeta announces the launch of its cutting-edge AI-powered learning platform, designed to revolutionize online education through personalized learning experiences.',
-      content: 'OponMeta, a leading educational technology company, today announced the launch of its revolutionary AI-powered learning platform. This innovative platform combines advanced artificial intelligence with expert-led instruction to deliver personalized learning experiences that adapt to each student\'s unique needs and learning style.',
+      summary: 'OponMeta announces the launch of its cutting-edge AI-powered learning platform, designed to revolutionise online education through personalised learning experiences.',
+      content: 'OponMeta, a leading educational technology company, today announced the launch of its revolutionary AI-powered learning platform. This innovative platform combines advanced artificial intelligence with expert-led instruction to deliver personalised learning experiences that adapt to each student\'s unique needs and learning style.',
       category: 'Product Launch',
       featured: true
     },
@@ -65,7 +65,7 @@ const Press = () => {
       title: 'OponMeta: The Future of Online Education',
       date: '2024-12-10',
       url: '#',
-      excerpt: 'OponMeta is redefining what\'s possible in online education with its innovative approach to personalized learning.'
+      excerpt: 'OponMeta is redefining what\'s possible in online education with its innovative approach to personalised learning.'
     },
     {
       id: 2,

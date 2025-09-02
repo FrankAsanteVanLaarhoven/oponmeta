@@ -576,7 +576,7 @@ const MentalHealthAssessment = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-gray-600">
-                This wellness assessment is designed to help you understand your current mental health status. It covers mood, stress, sleep, social connection, and overall life satisfaction. Your responses are confidential and will help provide personalized recommendations.
+                This wellness assessment is designed to help you understand your current mental health status. It covers mood, stress, sleep, social connection, and overall life satisfaction. Your responses are confidential and will help provide personalised recommendations.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -630,8 +630,8 @@ const MentalHealthAssessment = () => {
             <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lightbulb className="w-8 h-8 text-purple-600" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">Personalized Tips</h3>
-            <p className="text-gray-600">Receive customized recommendations based on your assessment results</p>
+                            <h3 className="text-lg font-semibold mb-2">Personalised Tips</h3>
+                            <p className="text-gray-600">Receive customised recommendations based on your assessment results</p>
           </div>
           
           <div className="text-center">

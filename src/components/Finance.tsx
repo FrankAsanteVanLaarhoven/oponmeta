@@ -581,7 +581,7 @@ const Finance = () => {
                     },
                     {
                       title: 'Financial Analyst',
-                      description: 'Analyze financial data and provide investment recommendations',
+                      description: 'Analyse financial data and provide investment recommendations',
                       salary: '$70,000 - $120,000',
                       requirements: ['Finance degree', 'Analytical skills', 'Financial modeling', 'Market knowledge']
                     },

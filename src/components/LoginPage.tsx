@@ -119,7 +119,7 @@ const LoginPage: React.FC = () => {
     {
       icon: <Sparkles className="w-6 h-6" />,
       title: 'AI-Powered Learning',
-      description: 'Personalized recommendations and adaptive learning'
+                      description: 'Personalised recommendations and adaptive learning'
     }
   ];
 

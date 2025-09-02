@@ -27,9 +27,9 @@ const BusinessManagement = () => {
       rating: 4.8,
       students: 2345,
       price: 799,
-      description: 'Comprehensive strategic management training covering business strategy, leadership, and organizational development.',
-      topics: ['Strategic Planning', 'Business Strategy', 'Leadership Development', 'Organizational Management'],
-      skills: ['Strategic Management', 'Business Leadership', 'Organizational Development', 'Strategic Planning'],
+                      description: 'Comprehensive strategic management training covering business strategy, leadership, and organisational development.',
+              topics: ['Strategic Planning', 'Business Strategy', 'Leadership Development', 'Organisational Management'],
+        skills: ['Strategic Management', 'Business Leadership', 'Organisational Development', 'Strategic Planning'],
       status: 'active',
       category: 'Strategic Management',
       certificate: true,
@@ -61,9 +61,9 @@ const BusinessManagement = () => {
       rating: 4.6,
       students: 1678,
       price: 549,
-      description: 'HR management, talent acquisition, employee development, and organizational culture building.',
-      topics: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organizational Culture'],
-      skills: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organizational Culture'],
+                      description: 'HR management, talent acquisition, employee development, and organisational culture building.',
+              topics: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organisational Culture'],
+        skills: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organisational Culture'],
       status: 'active',
       category: 'Human Resources',
       certificate: true,
@@ -491,10 +491,10 @@ const BusinessManagement = () => {
                     {
                       name: 'Strategic Management',
                       icon: TargetIcon,
-                      description: 'Business strategy, planning, and organizational leadership',
+                      description: 'Business strategy, planning, and organisational leadership',
                       courses: 12,
                       avgSalary: '$90,000 - $180,000',
-                      skills: ['Strategic Planning', 'Business Strategy', 'Leadership', 'Organizational Development']
+                      skills: ['Strategic Planning', 'Business Strategy', 'Leadership', 'Organisational Development']
                     },
                     {
                       name: 'Operations Management',
@@ -507,10 +507,10 @@ const BusinessManagement = () => {
                     {
                       name: 'Human Resources',
                       icon: Users2,
-                      description: 'Talent management, employee development, and organizational culture',
+                      description: 'Talent management, employee development, and organisational culture',
                       courses: 8,
                       avgSalary: '$65,000 - $130,000',
-                      skills: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organizational Culture']
+                      skills: ['HR Management', 'Talent Acquisition', 'Employee Development', 'Organisational Culture']
                     },
                     {
                       name: 'Project Management',
@@ -575,13 +575,13 @@ const BusinessManagement = () => {
                   {[
                     {
                       title: 'Business Manager',
-                      description: 'Oversee business operations and lead organizational development',
+                      description: 'Oversee business operations and lead organisational development',
                       salary: '$80,000 - $160,000',
                       requirements: ['Business degree', 'Management experience', 'Leadership skills', 'Strategic thinking']
                     },
                     {
                       title: 'Operations Manager',
-                      description: 'Manage day-to-day operations and optimize business processes',
+                      description: 'Manage day-to-day operations and optimise business processes',
                       salary: '$70,000 - $140,000',
                       requirements: ['Operations experience', 'Process optimization', 'Team management', 'Problem-solving']
                     },
@@ -589,7 +589,7 @@ const BusinessManagement = () => {
                       title: 'HR Manager',
                       description: 'Manage human resources, talent acquisition, and employee development',
                       salary: '$65,000 - $130,000',
-                      requirements: ['HR experience', 'Talent management', 'Employee relations', 'Organizational skills']
+                      requirements: ['HR experience', 'Talent management', 'Employee relations', 'Organisational skills']
                     },
                     {
                       title: 'Project Manager',
