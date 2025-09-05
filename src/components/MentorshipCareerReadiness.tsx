@@ -184,7 +184,7 @@ const MentorshipCareerReadiness = () => {
           className="text-center mb-8"
         >
           <h1 className="text-4xl font-bold text-[#0a174e] mb-4">
-            Mentorship & Career Readiness
+            Mentorship and Career Readiness
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Accelerate your career growth with expert mentorship, career planning, and professional development. 
@@ -251,7 +251,7 @@ const MentorshipCareerReadiness = () => {
 
                 {/* About Mentorship & Career Readiness */}
                 <div className="bg-white rounded-lg shadow p-6">
-                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">About Mentorship & Career Readiness</h3>
+                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">About Mentorship and Career Readiness</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="text-lg font-semibold text-[#0a174e] mb-3">What You'll Learn</h4>

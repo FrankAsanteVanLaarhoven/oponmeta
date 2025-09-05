@@ -156,7 +156,7 @@ const DataAnalytics = () => {
           <div className="flex items-center space-x-4 mb-6">
             <BarChart3 className="w-12 h-12 text-cyan-200" />
             <div>
-              <h1 className="text-4xl font-bold">Data & Analytics</h1>
+              <h1 className="text-4xl font-bold">Data and Analytics</h1>
               <p className="text-cyan-200 text-lg">Transform data into insights and drive business decisions</p>
             </div>
           </div>
@@ -229,7 +229,7 @@ const DataAnalytics = () => {
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Data & Analytics</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Data and Analytics</h2>
                 <p className="text-gray-600 mb-4">
                   Data is the new currency of the digital age. Our comprehensive analytics program equips you with 
                   the skills to collect, analyse, and interpret data to drive strategic business decisions.

@@ -220,7 +220,7 @@ const BusinessManagement = () => {
           className="text-center mb-8"
         >
           <h1 className="text-4xl font-bold text-[#0a174e] mb-4">
-            Business Management & Administration (57 Courses)
+            Business Management and Administration (57 Courses)
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Master business management and administration with comprehensive training in strategic management, 
@@ -287,7 +287,7 @@ const BusinessManagement = () => {
 
                 {/* About Business Management */}
                 <div className="bg-white rounded-lg shadow p-6">
-                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">About Business Management & Administration</h3>
+                  <h3 className="text-2xl font-bold text-[#0a174e] mb-4">About Business Management and Administration</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="text-lg font-semibold text-[#0a174e] mb-3">What You'll Learn</h4>

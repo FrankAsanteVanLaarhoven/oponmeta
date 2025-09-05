@@ -78,7 +78,7 @@ const FeaturedCourses = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.7 }}
         >
-          Featured Courses & Workshops
+          Featured Courses and Workshops
         </motion.h2>
         <motion.div className="w-16 h-1 bg-indigo-400 mx-auto mb-8 rounded" variants={headingVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.7 }} />
         <motion.div

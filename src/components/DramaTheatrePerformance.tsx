@@ -159,7 +159,7 @@ const DramaTheatrePerformance = () => {
           <div className="flex items-center space-x-4 mb-6">
             <Theater className="w-12 h-12 text-indigo-200" />
             <div>
-              <h1 className="text-4xl font-bold">Drama, Theatre & Performance</h1>
+              <h1 className="text-4xl font-bold">Drama, Theatre and Performance</h1>
               <p className="text-indigo-200 text-lg">Master the art of performance and theatrical production</p>
             </div>
           </div>
@@ -232,7 +232,7 @@ const DramaTheatrePerformance = () => {
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Drama, Theatre & Performance</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Drama, Theatre and Performance</h2>
                 <p className="text-gray-600 mb-4">
                   Our drama, theatre, and performance program provides comprehensive training in acting, 
                   production, and theatrical arts. Develop your creative voice and performance skills.

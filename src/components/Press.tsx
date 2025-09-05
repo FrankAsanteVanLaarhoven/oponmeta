@@ -104,7 +104,7 @@ const Press = () => {
           viewport={{ once: true, amount: 0.7 }}
         >
           <motion.h1 className="text-4xl font-bold text-[#0a174e] mb-4" variants={headingVariants}>
-            Press & Media
+            Press and Media
           </motion.h1>
           <motion.p className="text-lg text-gray-700 max-w-3xl mx-auto" variants={headingVariants}>
             Stay updated with the latest news, press releases, and media coverage about OponMeta's mission to revolutionize education.

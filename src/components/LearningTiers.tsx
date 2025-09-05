@@ -88,7 +88,7 @@ const LearningTiers = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#0a174e] mb-4">Learning Tiers & Progression</h1>
+          <h1 className="text-4xl font-bold text-[#0a174e] mb-4">Learning Tiers and Progression</h1>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
             Choose your learning path and progress through our structured tiers designed to take you from beginner to expert.
           </p>

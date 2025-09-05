@@ -54,15 +54,15 @@ const SignUpPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const availableInterests = [
-    'Technology & Digital Skills',
-    'Data & Analytics',
-    'Health & Healthcare Innovation',
-    'Business & Strategy',
-    'Engineering & Construction',
-    'Education & Training',
-    'Creative Arts & Media',
-    'Sports & Wellness',
-    'Agriculture & Food Systems',
+    'Technology and Digital Skills',
+    'Data and Analytics',
+    'Health and Healthcare Innovation',
+    'Business and Strategy',
+    'Engineering and Construction',
+    'Education and Training',
+    'Creative Arts and Media',
+    'Sports and Wellness',
+    'Agriculture and Food Systems',
     'Environmental Sustainability'
   ];
 
@@ -72,7 +72,7 @@ const SignUpPage: React.FC = () => {
     'Instructor',
     'Corporate Trainer',
     'HR Manager',
-    'Learning & Development',
+    'Learning and Development',
     'Entrepreneur',
     'Other'
   ];

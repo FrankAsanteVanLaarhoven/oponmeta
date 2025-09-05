@@ -158,7 +158,7 @@ const ProfessionalDevelopmentLeadership = () => {
           <div className="flex items-center space-x-4 mb-6">
             <Target className="w-12 h-12 text-orange-200" />
             <div>
-              <h1 className="text-4xl font-bold">Professional Development & Leadership</h1>
+              <h1 className="text-4xl font-bold">Professional Development and Leadership</h1>
               <p className="text-orange-200 text-lg">Develop leadership skills and advance your career</p>
             </div>
           </div>
@@ -231,7 +231,7 @@ const ProfessionalDevelopmentLeadership = () => {
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Professional Development & Leadership</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Professional Development and Leadership</h2>
                 <p className="text-gray-600 mb-4">
                   Our professional development and leadership program empowers you to become an effective leader 
                   and advance your career. Learn essential skills for modern workplace success.

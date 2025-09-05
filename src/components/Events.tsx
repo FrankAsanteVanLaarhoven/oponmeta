@@ -144,7 +144,7 @@ const Events = () => {
           viewport={{ once: true, amount: 0.7 }}
         >
           <motion.h1 className="text-4xl font-bold text-[#0a174e] mb-4" variants={headingVariants}>
-            Events & Conferences
+            Events and Conferences
           </motion.h1>
           <motion.p className="text-lg text-gray-700 max-w-3xl mx-auto" variants={headingVariants}>
             Join us for inspiring events, workshops, and conferences designed to connect, educate, and empower our community.

@@ -159,7 +159,7 @@ const HealthHealthcareInnovation = () => {
           <div className="flex items-center space-x-4 mb-6">
             <Heart className="w-12 h-12 text-green-200" />
             <div>
-              <h1 className="text-4xl font-bold">Health & Healthcare Innovation</h1>
+              <h1 className="text-4xl font-bold">Health and Healthcare Innovation</h1>
               <p className="text-green-200 text-lg">Advancing healthcare through technology and innovation</p>
             </div>
           </div>
@@ -232,7 +232,7 @@ const HealthHealthcareInnovation = () => {
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Health & Healthcare Innovation</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">About Health and Healthcare Innovation</h2>
                 <p className="text-gray-600 mb-4">
                   The healthcare industry is undergoing a digital transformation, creating unprecedented opportunities 
                   for innovation and improved patient care. Our program prepares you to lead this revolution.

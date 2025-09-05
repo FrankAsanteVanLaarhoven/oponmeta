@@ -330,7 +330,7 @@ function App() {
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/community-forums" element={<Placeholder title="Community Forums" />} />
         <Route path="/alumni-network" element={<Placeholder title="Alumni Network" />} />
-        <Route path="/events" element={<Placeholder title="Events & Networking" />} />
+        <Route path="/events" element={<Placeholder title="Events and Networking" />} />
         <Route path="/support" element={<Contact />} />
         <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
         <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
