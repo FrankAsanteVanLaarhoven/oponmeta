@@ -113,6 +113,7 @@ const DataProtectionModule = lazy(() => import('./components/DataProtectionModul
 const SLAManagement = lazy(() => import('./components/SLAManagement'));
 const StripeConnectIntegration = lazy(() => import('./components/StripeConnectIntegration'));
 const MobileFirstDemo = lazy(() => import('./components/MobileFirstDemo'));
+const MobileCourseMarketplace = lazy(() => import('./components/MobileCourseMarketplace'));
 const WorkplacePersonalityAssessment = lazy(() => import('./components/WorkplacePersonalityAssessment'));
 const MentalHealthAssessment = lazy(() => import('./components/MentalHealthAssessment'));
 const LearningManagementSystem = lazy(() => import('./components/LearningManagementSystem'));
@@ -288,6 +289,7 @@ function App() {
             <Route path="/sla-management" element={<SLAManagement />} />
             <Route path="/stripe-connect" element={<StripeConnectIntegration />} />
             <Route path="/mobile-demo" element={<MobileFirstDemo />} />
+            <Route path="/mobile-courses" element={<MobileCourseMarketplace />} />
           <Route path="/localization-demo" element={<LocalizationDemo />} />
           <Route path="/ai-course-creator" element={<AICourseCreator />} />
         <Route path="/payment-demo" element={<PaymentDemo />} />

@@ -20,7 +20,8 @@ import {
   Heart,
   ShoppingCart,
   CreditCard,
-  X
+  X,
+  Smartphone
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { createStripeCheckoutSession } from '../api/stripe';
@@ -738,6 +739,37 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'];
                       </div>
                     );
                   })}
+                </div>
+              </div>
+              
+              {/* Mobile Course Marketplace Link */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Mobile Course Marketplace</h3>
+                    <p className="text-sm text-gray-600 mb-4">Browse and purchase courses with our mobile-optimized marketplace</p>
+                    <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <span className="flex items-center">
+                        <Smartphone className="w-4 h-4 mr-1" />
+                        Mobile Optimized
+                      </span>
+                      <span className="flex items-center">
+                        <CreditCard className="w-4 h-4 mr-1" />
+                        Secure Checkout
+                      </span>
+                      <span className="flex items-center">
+                        <ShoppingCart className="w-4 h-4 mr-1" />
+                        Cart System
+                      </span>
+                    </div>
+                  </div>
+                  <a
+                    href="/mobile-courses"
+                    className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center"
+                  >
+                    <Smartphone className="w-5 h-5 mr-2" />
+                    Open Marketplace
+                  </a>
                 </div>
               </div>
             </div>
