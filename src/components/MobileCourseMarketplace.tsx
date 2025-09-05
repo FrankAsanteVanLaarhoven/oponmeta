@@ -54,6 +54,7 @@ import {
 import { coursesData, Course } from '../data/coursesData';
 import { toast } from 'sonner';
 import { coursePurchaseService, PurchaseRequest } from '../services/coursePurchaseService';
+import { createStripeCheckoutSession, SUPPORTED_PAYMENT_METHODS, getAvailablePaymentMethods, formatCurrency } from '../api/stripe';
 
 interface CartItem extends Course {
   quantity: number;
@@ -94,6 +95,10 @@ const MobileCourseMarketplace: React.FC = () => {
   const [couponCode, setCouponCode] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
   const [showCouponInput, setShowCouponInput] = useState(false);
+  const [useStripeCheckout, setUseStripeCheckout] = useState(false);
+  const [availablePaymentMethods, setAvailablePaymentMethods] = useState<any[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState('GB');
+  const [selectedCurrency, setSelectedCurrency] = useState('GBP');
 
   const categories = [
     'all',
@@ -109,6 +114,12 @@ const MobileCourseMarketplace: React.FC = () => {
   ];
 
   const levels = ['all', 'Beginner', 'Intermediate', 'Advanced'];
+
+  // Initialize available payment methods
+  useEffect(() => {
+    const methods = getAvailablePaymentMethods(selectedCountry, selectedCurrency);
+    setAvailablePaymentMethods(methods);
+  }, [selectedCountry, selectedCurrency]);
 
   const filteredCourses = coursesData.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -187,8 +198,55 @@ const MobileCourseMarketplace: React.FC = () => {
     }
   };
 
+  const processStripeCheckout = async () => {
+    if (cart.length === 0) return;
+    
+    toast.loading('Redirecting to secure checkout...');
+    
+    try {
+      const checkoutData = {
+        courses: cart.map(item => ({
+          courseId: item.id.toString(),
+          courseTitle: item.title,
+          amount: Math.round(item.price * 100), // Convert to cents
+          instructor: item.instructor
+        })),
+        totalAmount: Math.round(getTotalPrice().total * 100),
+        currency: selectedCurrency,
+        successUrl: `${window.location.origin}/mobile-courses?success=true`,
+        cancelUrl: `${window.location.origin}/mobile-courses?canceled=true`,
+        metadata: {
+          customerEmail: customerInfo.email,
+          customerName: `${customerInfo.firstName} ${customerInfo.lastName}`,
+          couponCode: appliedCoupon ? couponCode : '',
+          source: 'mobile_marketplace'
+        },
+        locale: 'en',
+        paymentMethodTypes: availablePaymentMethods.map(method => method.type),
+        customerEmail: customerInfo.email,
+        billingAddressCollection: 'required' as const,
+        allowPromotionCodes: true,
+        taxIdCollection: false,
+        phoneNumberCollection: true
+      };
+
+      const result = await createStripeCheckoutSession(checkoutData);
+      
+      // Redirect to Stripe checkout
+      window.location.href = result.url;
+      
+    } catch (error) {
+      toast.error('Failed to initiate checkout. Please try again.');
+    }
+  };
+
   const processPayment = async () => {
     if (cart.length === 0) return;
+    
+    if (useStripeCheckout) {
+      await processStripeCheckout();
+      return;
+    }
     
     toast.loading('Processing payment...');
     
@@ -418,13 +476,13 @@ const MobileCourseMarketplace: React.FC = () => {
           
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
             <input
               type="text"
               placeholder="Search courses..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
             />
           </div>
           
@@ -454,7 +512,7 @@ const MobileCourseMarketplace: React.FC = () => {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full p-2 border border-gray-200 rounded-lg"
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                   >
                     {categories.map(category => (
                       <option key={category} value={category}>
@@ -468,7 +526,7 @@ const MobileCourseMarketplace: React.FC = () => {
                   <select
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
-                    className="w-full p-2 border border-gray-200 rounded-lg"
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                   >
                     {levels.map(level => (
                       <option key={level} value={level}>
@@ -556,14 +614,14 @@ const MobileCourseMarketplace: React.FC = () => {
                         <div className="flex space-x-2">
                           <input
                             type="text"
-                            placeholder="Coupon code"
+                            placeholder="Enter coupon code"
                             value={couponCode}
                             onChange={(e) => setCouponCode(e.target.value)}
-                            className="flex-1 p-2 border border-gray-200 rounded-lg text-sm"
+                            className="flex-1 p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                           />
                           <button
                             onClick={applyCoupon}
-                            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors"
+                            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
                           >
                             Apply
                           </button>
@@ -638,14 +696,14 @@ const MobileCourseMarketplace: React.FC = () => {
                         placeholder="First Name"
                         value={customerInfo.firstName}
                         onChange={(e) => setCustomerInfo({...customerInfo, firstName: e.target.value})}
-                        className="p-3 border border-gray-200 rounded-lg"
+                        className="p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                       />
                       <input
                         type="text"
                         placeholder="Last Name"
                         value={customerInfo.lastName}
                         onChange={(e) => setCustomerInfo({...customerInfo, lastName: e.target.value})}
-                        className="p-3 border border-gray-200 rounded-lg"
+                        className="p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                       />
                     </div>
                     <input
@@ -653,14 +711,14 @@ const MobileCourseMarketplace: React.FC = () => {
                       placeholder="Email Address"
                       value={customerInfo.email}
                       onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
-                      className="w-full p-3 border border-gray-200 rounded-lg"
+                      className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     />
                     <input
                       type="tel"
                       placeholder="Phone Number"
                       value={customerInfo.phone}
                       onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
-                      className="w-full p-3 border border-gray-200 rounded-lg"
+                      className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     />
                     
                     <div className="pt-4">
@@ -678,66 +736,132 @@ const MobileCourseMarketplace: React.FC = () => {
                   <div className="p-4 space-y-4">
                     <h3 className="font-semibold text-gray-900">Payment Method</h3>
                     
-                    <div className="space-y-3">
-                      <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer">
+                    {/* Stripe Checkout Option */}
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-4">
+                      <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
-                          name="payment"
-                          value="card"
-                          checked={paymentMethod === 'card'}
-                          onChange={(e) => setPaymentMethod(e.target.value)}
-                          className="mr-3"
+                          name="checkout"
+                          checked={useStripeCheckout}
+                          onChange={() => setUseStripeCheckout(true)}
+                          className="mr-3 w-5 h-5 text-blue-600"
                         />
-                        <CreditCard className="w-5 h-5 mr-2" />
-                        <span>Credit/Debit Card</span>
-                      </label>
-                      
-                      <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer">
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="paypal"
-                          checked={paymentMethod === 'paypal'}
-                          onChange={(e) => setPaymentMethod(e.target.value)}
-                          className="mr-3"
-                        />
-                        <Globe className="w-5 h-5 mr-2" />
-                        <span>PayPal</span>
+                        <div className="flex-1">
+                          <div className="flex items-center">
+                            <Shield className="w-6 h-6 text-blue-600 mr-2" />
+                            <span className="font-semibold text-gray-900">Secure Stripe Checkout</span>
+                          </div>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Pay securely with Stripe. Supports cards, Apple Pay, Google Pay, and more.
+                          </p>
+                          <div className="flex items-center mt-2 space-x-4 text-xs text-gray-500">
+                            <span className="flex items-center">
+                              <Lock className="w-3 h-3 mr-1" />
+                              SSL Encrypted
+                            </span>
+                            <span className="flex items-center">
+                              <CheckCircle className="w-3 h-3 mr-1" />
+                              PCI Compliant
+                            </span>
+                            <span className="flex items-center">
+                              <Globe className="w-3 h-3 mr-1" />
+                              Global Support
+                            </span>
+                          </div>
+                        </div>
                       </label>
                     </div>
                     
-                    {paymentMethod === 'card' && (
-                      <div className="space-y-3">
+                    <div className="text-center text-gray-500 text-sm">OR</div>
+                    
+                    <div className="space-y-3">
+                      <label className="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors">
                         <input
-                          type="text"
-                          placeholder="Card Number"
-                          value={cardInfo.number}
-                          onChange={(e) => setCardInfo({...cardInfo, number: e.target.value})}
-                          className="w-full p-3 border border-gray-200 rounded-lg"
+                          type="radio"
+                          name="checkout"
+                          checked={!useStripeCheckout}
+                          onChange={() => setUseStripeCheckout(false)}
+                          className="mr-3 w-5 h-5 text-blue-600"
                         />
-                        <div className="grid grid-cols-2 gap-3">
+                        <CreditCard className="w-5 h-5 mr-2 text-gray-600" />
+                        <span className="font-medium text-gray-900">Direct Payment</span>
+                      </label>
+                    </div>
+                    
+                    {!useStripeCheckout && (
+                      <div className="space-y-3 mt-4">
+                        <label className="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors">
                           <input
-                            type="text"
-                            placeholder="MM/YY"
-                            value={cardInfo.expiry}
-                            onChange={(e) => setCardInfo({...cardInfo, expiry: e.target.value})}
-                            className="p-3 border border-gray-200 rounded-lg"
+                            type="radio"
+                            name="payment"
+                            value="card"
+                            checked={paymentMethod === 'card'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            className="mr-3 w-5 h-5 text-blue-600"
                           />
+                          <CreditCard className="w-5 h-5 mr-2 text-gray-600" />
+                          <span className="font-medium text-gray-900">Credit/Debit Card</span>
+                        </label>
+                        
+                        <label className="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors">
+                          <input
+                            type="radio"
+                            name="payment"
+                            value="paypal"
+                            checked={paymentMethod === 'paypal'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            className="mr-3 w-5 h-5 text-blue-600"
+                          />
+                          <Globe className="w-5 h-5 mr-2 text-gray-600" />
+                          <span className="font-medium text-gray-900">PayPal</span>
+                        </label>
+                      </div>
+                    )}
+                    
+                    {paymentMethod === 'card' && !useStripeCheckout && (
+                      <div className="space-y-3 mt-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
                           <input
                             type="text"
-                            placeholder="CVV"
-                            value={cardInfo.cvv}
-                            onChange={(e) => setCardInfo({...cardInfo, cvv: e.target.value})}
-                            className="p-3 border border-gray-200 rounded-lg"
+                            placeholder="1234 5678 9012 3456"
+                            value={cardInfo.number}
+                            onChange={(e) => setCardInfo({...cardInfo, number: e.target.value})}
+                            className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                           />
                         </div>
-                        <input
-                          type="text"
-                          placeholder="Cardholder Name"
-                          value={cardInfo.name}
-                          onChange={(e) => setCardInfo({...cardInfo, name: e.target.value})}
-                          className="w-full p-3 border border-gray-200 rounded-lg"
-                        />
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
+                            <input
+                              type="text"
+                              placeholder="MM/YY"
+                              value={cardInfo.expiry}
+                              onChange={(e) => setCardInfo({...cardInfo, expiry: e.target.value})}
+                              className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                            <input
+                              type="text"
+                              placeholder="123"
+                              value={cardInfo.cvv}
+                              onChange={(e) => setCardInfo({...cardInfo, cvv: e.target.value})}
+                              className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Cardholder Name</label>
+                          <input
+                            type="text"
+                            placeholder="John Doe"
+                            value={cardInfo.name}
+                            onChange={(e) => setCardInfo({...cardInfo, name: e.target.value})}
+                            className="w-full p-3 border-2 border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                          />
+                        </div>
                       </div>
                     )}
                     
@@ -793,10 +917,23 @@ const MobileCourseMarketplace: React.FC = () => {
                     <div className="pt-4">
                       <button
                         onClick={processPayment}
-                        className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
+                        className={`w-full py-3 rounded-lg font-semibold transition-colors flex items-center justify-center ${
+                          useStripeCheckout 
+                            ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                            : 'bg-green-600 text-white hover:bg-green-700'
+                        }`}
                       >
-                        <Lock className="w-5 h-5 mr-2" />
-                        Complete Purchase
+                        {useStripeCheckout ? (
+                          <>
+                            <Shield className="w-5 h-5 mr-2" />
+                            Pay Securely with Stripe
+                          </>
+                        ) : (
+                          <>
+                            <Lock className="w-5 h-5 mr-2" />
+                            Complete Purchase
+                          </>
+                        )}
                       </button>
                     </div>
                   </div>
