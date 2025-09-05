@@ -162,7 +162,8 @@ const Navigation = () => {
   const deepBlueHover = 'hover:bg-gradient-to-r hover:from-[#11235a] hover:via-[#2a3a7b] hover:to-[#11235a]';
 
   return (
-    <header className={`shadow-md border-b border-gray-200 sticky top-0 z-50 ${deepBlue} pt-3 pb-1`}>
+    <>
+      <header className={`shadow-md border-b border-gray-200 sticky top-0 z-50 ${deepBlue} pt-3 pb-1`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex justify-between items-center">
           {/* Logo and Brand */}
@@ -944,6 +945,7 @@ const Navigation = () => {
         )}
       </div>
     </header>
+    </>
   );
 };
 
