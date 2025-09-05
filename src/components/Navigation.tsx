@@ -13,7 +13,7 @@ import {
 import { ThemeToggle } from './ThemeToggle';
 import { CompactLanguageSelector, SearchableLanguageSelector } from './LanguageSelector';
 
-const NavigationClean: React.FC = () => {
+const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -97,6 +97,28 @@ const NavigationClean: React.FC = () => {
                     </div>
                     <span className="text-xs text-gray-500">(0 Courses)</span>
                   </Link>
+                  <Link
+                    to="/programmes"
+                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className="flex items-center">
+                      <BarChart3 className="w-5 h-5 text-cyan-500" />
+                      <span className="ml-3">Data and Analytics</span>
+                    </div>
+                    <span className="text-xs text-gray-500">(0 Courses)</span>
+                  </Link>
+                  <Link
+                    to="/programmes"
+                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className="flex items-center">
+                      <Heart className="w-5 h-5 text-green-500" />
+                      <span className="ml-3">Health and Healthcare Innovation</span>
+                    </div>
+                    <span className="text-xs text-gray-500">(0 Courses)</span>
+                  </Link>
                 </div>
               )}
             </div>
@@ -125,6 +147,45 @@ const NavigationClean: React.FC = () => {
                       <div className="text-xs text-gray-500 mt-1">Browse our extensive course collection</div>
                     </div>
                   </Link>
+                  <Link
+                    to="/ai-course-creator"
+                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className="flex-shrink-0 mt-0.5">
+                      <Sparkles className="w-5 h-5 text-[#0a174e]" />
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-gray-900">AI Course Creator</div>
+                      <div className="text-xs text-gray-500 mt-1">Create courses with AI assistance</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/student-portal"
+                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className="flex-shrink-0 mt-0.5">
+                      <User className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-gray-900">Student Portal</div>
+                      <div className="text-xs text-gray-500 mt-1">Access your learning dashboard and courses</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/instructor-portal"
+                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className="flex-shrink-0 mt-0.5">
+                      <UserCog className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-gray-900">Instructor Portal</div>
+                      <div className="text-xs text-gray-500 mt-1">Manage your courses and instructor tools</div>
+                    </div>
+                  </Link>
                 </div>
               )}
             </div>
@@ -147,6 +208,22 @@ const NavigationClean: React.FC = () => {
                   >
                     <FileText className="w-5 h-5 text-orange-600" />
                     <span className="ml-3">Blogs</span>
+                  </Link>
+                  <Link
+                    to="/download-app"
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <Download className="w-5 h-5 text-[#0a174e]" />
+                    <span className="ml-3">Download the App</span>
+                  </Link>
+                  <Link
+                    to="/stripe-connect"
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <CreditCard className="w-5 h-5 text-green-600" />
+                    <span className="ml-3">Stripe Connect</span>
                   </Link>
                 </div>
               )}
@@ -246,4 +323,4 @@ const NavigationClean: React.FC = () => {
   );
 };
 
-export default NavigationClean;
+export default Navigation;
