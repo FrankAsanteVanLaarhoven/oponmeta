@@ -132,7 +132,7 @@ export const coursesData: Course[] = [
   },
   {
     id: 3,
-    title: "Business Strategy & Leadership",
+    title: "Business Strategy and Leadership",
     instructor: "Dr. Amara Okafor",
     price: 399,
     rating: 4.7,
@@ -142,7 +142,7 @@ export const coursesData: Course[] = [
     duration: "11-20 hours",
     level: "Advanced",
     lessonsCount: 32,
-    description: "Advanced strategies for business leadership and organizational development",
+    description: "Advanced strategies for business leadership and organisational development",
     lastUpdated: "2024-02-28",
     language: "English",
     hasSubtitles: true
@@ -238,7 +238,7 @@ export const coursesData: Course[] = [
   },
   {
     id: 9,
-    title: "AI & Machine Learning Course",
+    title: "AI and Machine Learning Course",
     instructor: "Dr. Elena Rodriguez",
     price: 599,
     originalPrice: 799,
@@ -278,7 +278,7 @@ export const coursesData: Course[] = [
   },
   {
     id: 11,
-    title: "Music Production & Sound Design",
+    title: "Music Production and Sound Design",
     instructor: "Sophie Williams",
     price: 399,
     originalPrice: 549,
@@ -298,7 +298,7 @@ export const coursesData: Course[] = [
   },
   {
     id: 12,
-    title: "Screenwriting for Film & Television",
+    title: "Screenwriting for Film and Television",
     instructor: "David Mitchell",
     price: 349,
     originalPrice: 449,

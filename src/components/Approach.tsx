@@ -26,7 +26,7 @@ const Approach = () => {
             <h2 className="text-3xl font-bold text-white mb-6 text-center">How We Work</h2>
             <p className="text-lg text-blue-100 leading-relaxed text-center max-w-4xl mx-auto">
               Our approach is built on three core pillars: technology-driven innovation, 
-              human-centered design, and global collaboration. We believe that the best 
+              human-centred design, and global collaboration. We believe that the best 
               learning experiences come from combining cutting-edge tools with proven 
               educational methodologies and real-world applications.
             </p>
@@ -49,7 +49,7 @@ const Approach = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300">
             <CardContent className="p-6 text-center">
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-3">Human-Centered</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Human-Centred</h3>
               <p className="text-blue-100">
                 Putting learners at the centre of every decision, with personalised 
                 experiences that adapt to individual needs and learning styles.
@@ -62,7 +62,7 @@ const Approach = () => {
               <Globe className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Global Collaboration</h3>
               <p className="text-blue-100">
-                Building partnerships with experts, institutions, and organizations 
+                Building partnerships with experts, institutions, and organisations 
                 worldwide to deliver the best possible learning content.
               </p>
             </CardContent>

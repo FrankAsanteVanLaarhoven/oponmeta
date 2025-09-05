@@ -100,9 +100,9 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* About & Values */}
+          {/* About and Values */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-yellow-400">About & Values</h3>
+            <h3 className="text-lg font-semibold mb-4 text-yellow-400">About and Values</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/mission" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
@@ -127,9 +127,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Learning & Platform */}
+          {/* Learning and Platform */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-yellow-400">Learning & Platform</h3>
+            <h3 className="text-lg font-semibold mb-4 text-yellow-400">Learning and Platform</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/courses" className="flex items-center text-gray-300 hover:text-yellow-400 transition-colors text-sm">
@@ -164,9 +164,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Community & Support */}
+          {/* Community and Support */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-yellow-400">Community & Support</h3>
+            <h3 className="text-lg font-semibold mb-4 text-yellow-400">Community and Support</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/community-forums" className="flex items-center text-gray-300 hover:text-yellow-400 transition-colors text-sm">
@@ -183,7 +183,7 @@ const Footer = () => {
               <li>
                 <Link to="/events" className="flex items-center text-gray-300 hover:text-yellow-400 transition-colors text-sm">
                   <Calendar className="w-4 h-4 mr-2" />
-                  Events & Networking
+                  Events and Networking
                 </Link>
               </li>
               <li>

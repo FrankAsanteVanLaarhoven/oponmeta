@@ -104,7 +104,7 @@ const SubscriptionPage: React.FC = () => {
       period: billingPeriod,
       icon: <Zap className="w-8 h-8" />,
       color: 'from-purple-500 to-purple-700',
-      description: 'For teams and organizations',
+      description: 'For teams and organisations',
       savings: billingPeriod === 'yearly' ? 'Save 38%' : undefined,
       features: [
         'Everything in Pro',

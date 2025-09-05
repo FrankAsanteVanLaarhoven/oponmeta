@@ -29,7 +29,7 @@ const stats = [
 
 const team = [
   {
-    name: 'Founder & CEO',
+    name: 'Founder and CEO',
     title: 'Former World Bank education specialist with 15+ years in African development',
     img: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
@@ -97,12 +97,12 @@ const About = () => (
       </p>
     </div>
 
-    {/* Vision & Mission Cards */}
+    {/* Vision and Mission Cards */}
     <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
       <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
         <Target className="h-10 w-10 text-yellow-400 mb-2" />
         <h3 className="text-xl font-bold text-white mb-2">Mission</h3>
-        <p className="text-yellow-400 text-center">To democratize access to high-quality global education through multilingual platforms, AI-powered learning, Web3 integration, industry partnerships, and inclusive programs that empower learners, educators, and organizations worldwide with future-ready skills.</p>
+        <p className="text-yellow-400 text-center">To democratize access to high-quality global education through multilingual platforms, AI-powered learning, Web3 integration, industry partnerships, and inclusive programmes that empower learners, educators, and organisations worldwide with future-ready skills.</p>
       </div>
       <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
         <Eye className="h-10 w-10 text-yellow-400 mb-2" />
