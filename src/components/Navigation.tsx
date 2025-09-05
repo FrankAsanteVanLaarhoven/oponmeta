@@ -10,7 +10,7 @@ import {
   Truck, Music, Video, Handshake, Compass, Monitor, FileText,
   ChevronRight, Download, CheckCircle, Crown, Brain
 } from "lucide-react";
-import { EnhancedThemeSwitcher } from './EnhancedThemeSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 import { CompactLanguageSelector, SearchableLanguageSelector } from './LanguageSelector';
 
 // Course categories data (Non-career focused categories)
@@ -552,9 +552,9 @@ const Navigation = () => {
             />
 
             {/* Theme Switcher */}
-            <EnhancedThemeSwitcher 
-              variant="toggle" 
-              size="sm" 
+            <ThemeToggle 
+              variant="button"
+              size="sm"
               showLabels={false}
               className="text-white hover:text-yellow-400 transition-colors"
             />
@@ -899,7 +899,7 @@ const Navigation = () => {
 
               {/* Mobile Theme Switcher */}
               <div className="w-full px-3 py-2">
-                <EnhancedThemeSwitcher 
+                <ThemeToggle 
                   variant="buttons" 
                   size="sm" 
                   showLabels={true}
@@ -939,7 +939,6 @@ const Navigation = () => {
                   Get Started
                 </span>
               </Link>
-              </div>
             </div>
           </div>
         )}
