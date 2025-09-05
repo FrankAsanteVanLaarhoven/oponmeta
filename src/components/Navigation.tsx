@@ -589,8 +589,20 @@ const Navigation = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+          <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)}>
+            <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="px-4 pt-4 pb-6 space-y-2">
+              {/* Mobile Menu Header */}
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
               {/* Mobile Search */}
               <div className="mb-4">
                 <div className="relative">
@@ -645,7 +657,7 @@ const Navigation = () => {
               
               {/* Programmes */}
               <button
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-between transition-colors"
                 onClick={() => toggleDropdown('mobile-programmes')}
               >
                 <span className="flex items-center">
@@ -655,8 +667,8 @@ const Navigation = () => {
                 <ChevronRight className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'mobile-programmes' ? 'rotate-90' : ''}`} />
               </button>
               {activeDropdown === 'mobile-programmes' && (
-                <div className="pl-4 bg-white rounded shadow mt-1">
-                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-100">CATEGORIES</div>
+                <div className="pl-4 bg-gray-50 rounded shadow mt-1 max-h-64 overflow-y-auto">
+                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-200 bg-white sticky top-0">CATEGORIES</div>
                   {COURSE_CATEGORIES.map((category) => {
                     // Map course category slugs to actual routes
                     const routeMap: { [key: string]: string } = {
@@ -732,7 +744,7 @@ const Navigation = () => {
 
               {/* Discover Career Mobile */}
               <button
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-between transition-colors"
                 onClick={() => toggleDropdown('mobile-career')}
               >
                 <span className="flex items-center">
@@ -742,8 +754,8 @@ const Navigation = () => {
                 <ChevronRight className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'mobile-career' ? 'rotate-90' : ''}`} />
               </button>
               {activeDropdown === 'mobile-career' && (
-                <div className="pl-4 bg-white rounded shadow mt-1">
-                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-100">EXPLORE CAREER CATEGORIES</div>
+                <div className="pl-4 bg-gray-50 rounded shadow mt-1 max-h-64 overflow-y-auto">
+                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-200 bg-white sticky top-0">EXPLORE CAREER CATEGORIES</div>
                   {CAREER_CATEGORIES.map((category) => {
                     // Map career category slugs to actual routes
                     const routeMap: { [key: string]: string } = {
@@ -793,7 +805,7 @@ const Navigation = () => {
 
               {/* Platform Mobile */}
               <button
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-between transition-colors"
                 onClick={() => toggleDropdown('mobile-platform')}
               >
                 <span className="flex items-center">
@@ -803,8 +815,8 @@ const Navigation = () => {
                 <ChevronRight className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'mobile-platform' ? 'rotate-90' : ''}`} />
               </button>
               {activeDropdown === 'mobile-platform' && (
-                <div className="pl-4 bg-white rounded shadow mt-1">
-                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-100">PLATFORM FEATURES</div>
+                <div className="pl-4 bg-gray-50 rounded shadow mt-1 max-h-64 overflow-y-auto">
+                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-200 bg-white sticky top-0">PLATFORM FEATURES</div>
                   {PLATFORM_FEATURES.map((feature) => {
                     // Map platform feature slugs to actual routes
                     const routeMap: { [key: string]: string } = {
@@ -843,7 +855,7 @@ const Navigation = () => {
 
               {/* Resources Mobile */}
               <button
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-between transition-colors"
                 onClick={() => toggleDropdown('mobile-resources')}
               >
                 <span className="flex items-center">
@@ -853,8 +865,8 @@ const Navigation = () => {
                 <ChevronRight className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'mobile-resources' ? 'rotate-90' : ''}`} />
               </button>
               {activeDropdown === 'mobile-resources' && (
-                <div className="pl-4 bg-white rounded shadow mt-1 max-h-96 overflow-y-auto">
-                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-100">RESOURCES & TOOLS</div>
+                <div className="pl-4 bg-gray-50 rounded shadow mt-1 max-h-64 overflow-y-auto">
+                  <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider font-semibold border-b border-gray-200 bg-white sticky top-0">RESOURCES & TOOLS</div>
                   {RESOURCES_TOOLS.map((resource) => (
                     <Link
                       key={resource.slug}
@@ -908,7 +920,7 @@ const Navigation = () => {
 
               <Link
                 to="/login"
-                className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#0a174e] rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-between transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="flex items-center">
@@ -919,7 +931,7 @@ const Navigation = () => {
 
               <Link
                 to="/signup"
-                className="w-full text-left px-3 py-2 text-base font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded flex items-center justify-between"
+                className="w-full text-left px-4 py-3 text-base font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-lg flex items-center justify-between hover:from-yellow-500 hover:to-yellow-700 transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="flex items-center">
@@ -927,6 +939,7 @@ const Navigation = () => {
                   Get Started
                 </span>
               </Link>
+              </div>
             </div>
           </div>
         )}
