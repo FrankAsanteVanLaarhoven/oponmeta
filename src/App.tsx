@@ -332,7 +332,6 @@ function App() {
         <Route path="/alumni-network" element={<Placeholder title="Alumni Network" />} />
         <Route path="/events" element={<Placeholder title="Events and Networking" />} />
         <Route path="/press" element={<Placeholder title="Press and Media" />} />
-        <Route path="/help" element={<Placeholder title="Help Centre" />} />
         <Route path="/features" element={<Placeholder title="Platform Features" />} />
         <Route path="/programmes" element={<Programme />} />
         <Route path="/programmes/technology" element={<Placeholder title="Technology and Digital Skills" />} />
@@ -414,7 +413,6 @@ function App() {
           <Route path="/international-payment" element={<InternationalPaymentForm />} />
           <Route path="/theme-demo" element={<ThemeDemo />} />
           <Route path="/test-yellow-buttons" element={<TestYellowButtons />} />
-          <Route path="/world-class-lms-features" element={<WorldClassLMSFeatures />} />
           
           {/* Placeholder Routes for Missing Components */}
           <Route path="/growth-mindset" element={<GrowthMindset />} />
