@@ -8,8 +8,8 @@ import {
   Search, Play, Target, TrendingUp, Award, Heart, Star, Zap, 
   BarChart3, Shield, Home, Wrench, CreditCard, Gift, Calendar, 
   Truck, Music, Video, Handshake, Compass, Monitor, FileText,
-  ChevronRight, Download, CheckCircle, Crown, Brain
-} from "lucide-react";
+  UserPlus as UserPlusIcon, LogIn as LogInIcon, CreditCard as CreditCardIcon
+} from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CompactLanguageSelector, SearchableLanguageSelector } from './LanguageSelector';
 
@@ -74,29 +74,13 @@ const Navigation: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex justify-between items-center">
             {/* Logo and Brand */}
-            <div className="flex items-center">
-              <Link to="/" className="flex items-center group">
-                <div className="relative">
-                  <img
-                    src="/logo.png"
-                    alt="OponMeta Logo"
-                    className="h-12 w-12 mr-3 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-12"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-sm"></div>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors duration-300">
-                    OponMeta
-                  </span>
-                  <span className="text-xs text-yellow-300 font-medium tracking-wider">
-                    LEARNING PLATFORM
-                  </span>
-                </div>
-              </Link>
-            </div>
+            <Link to="/" className="flex items-center">
+              <img src="/logo.png" alt="OponMeta" className="h-10 w-10 mr-3" />
+              <span className="text-2xl font-bold text-white">OponMeta</span>
+            </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8">
               {/* Programmes Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -134,7 +118,21 @@ const Navigation: React.FC = () => {
                         <Sparkles className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Creative Arts</div>
-                          <div className="text-sm text-gray-500">Design and media</div>
+                          <div className="text-sm text-gray-500">Media and design</div>
+                        </div>
+                      </Link>
+                      <Link to="/programmes/health" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Heart className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Health</div>
+                          <div className="text-sm text-gray-500">Healthcare skills</div>
+                        </div>
+                      </Link>
+                      <Link to="/programmes/agriculture" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Truck className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Agriculture</div>
+                          <div className="text-sm text-gray-500">Food systems</div>
                         </div>
                       </Link>
                     </div>
@@ -155,31 +153,45 @@ const Navigation: React.FC = () => {
                   <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                     <div className="grid grid-cols-2 gap-1">
                       <Link to="/features" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
-                        <Zap className="w-5 h-5 mr-3 text-blue-500" />
+                        <Layers className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
-                          <div className="font-medium">Features</div>
-                          <div className="text-sm text-gray-500">Platform capabilities</div>
+                          <div className="font-medium">Platform Features</div>
+                          <div className="text-sm text-gray-500">Core functionality</div>
                         </div>
                       </Link>
                       <Link to="/mobile-courses" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                         <Monitor className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
-                          <div className="font-medium">Mobile Courses</div>
-                          <div className="text-sm text-gray-500">Mobile marketplace</div>
+                          <div className="font-medium">Mobile Marketplace</div>
+                          <div className="text-sm text-gray-500">Course marketplace</div>
                         </div>
                       </Link>
                       <Link to="/instructor-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                         <UserCog className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Instructor Portal</div>
-                          <div className="text-sm text-gray-500">Teach with us</div>
+                          <div className="text-sm text-gray-500">Teaching tools</div>
                         </div>
                       </Link>
                       <Link to="/student-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                         <User className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Student Portal</div>
-                          <div className="text-sm text-gray-500">Your dashboard</div>
+                          <div className="text-sm text-gray-500">Learning dashboard</div>
+                        </div>
+                      </Link>
+                      <Link to="/world-class-lms-features" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <BarChart3 className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">LMS Features</div>
+                          <div className="text-sm text-gray-500">Learning management</div>
+                        </div>
+                      </Link>
+                      <Link to="/ai-video-calling" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Video className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">AI Video Calling</div>
+                          <div className="text-sm text-gray-500">Virtual meetings</div>
                         </div>
                       </Link>
                     </div>
@@ -200,7 +212,7 @@ const Navigation: React.FC = () => {
                   <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                     <div className="grid grid-cols-2 gap-1">
                       <Link to="/about" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
-                        <Heart className="w-5 h-5 mr-3 text-blue-500" />
+                        <Users className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">About Us</div>
                           <div className="text-sm text-gray-500">Our mission</div>
@@ -390,6 +402,21 @@ const Navigation: React.FC = () => {
                         <button onClick={() => handleMobileNavigation('/world-class-lms-features')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           LMS Features
                         </button>
+                        <button onClick={() => handleMobileNavigation('/ai-video-calling')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          AI Video Calling
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/companions-library')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          AI Companions Library
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/course-authoring')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Course Authoring Tool
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/whiteboard')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Interactive Whiteboard
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/course-certifications')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Course Certifications
+                        </button>
                       </div>
                     )}
                   </div>
@@ -423,23 +450,29 @@ const Navigation: React.FC = () => {
                         <button onClick={() => handleMobileNavigation('/help')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Help Centre
                         </button>
+                        <button onClick={() => handleMobileNavigation('/blogs')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Blogs
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/download-app')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Download App
+                        </button>
                       </div>
                     )}
                   </div>
 
                   {/* Direct Links */}
                   <button onClick={() => handleMobileNavigation('/pricing')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                    <CreditCard className="w-5 h-5 mr-3 text-blue-500" />
+                    <CreditCardIcon className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Pricing</span>
                   </button>
 
                   <button onClick={() => handleMobileNavigation('/signup')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                    <UserPlus className="w-5 h-5 mr-3 text-blue-500" />
+                    <UserPlusIcon className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Sign Up</span>
                   </button>
 
                   <button onClick={() => handleMobileNavigation('/login')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                    <LogIn className="w-5 h-5 mr-3 text-blue-500" />
+                    <LogInIcon className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Login</span>
                   </button>
                 </nav>
