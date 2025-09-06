@@ -333,6 +333,16 @@ function App() {
         <Route path="/community-forums" element={<Placeholder title="Community Forums" />} />
         <Route path="/alumni-network" element={<Placeholder title="Alumni Network" />} />
         <Route path="/events" element={<Placeholder title="Events and Networking" />} />
+        <Route path="/press" element={<Placeholder title="Press and Media" />} />
+        <Route path="/help" element={<Placeholder title="Help Centre" />} />
+        <Route path="/features" element={<Placeholder title="Platform Features" />} />
+        <Route path="/programmes" element={<Programme />} />
+        <Route path="/programmes/technology" element={<Placeholder title="Technology and Digital Skills" />} />
+        <Route path="/programmes/business" element={<Placeholder title="Business and Management" />} />
+        <Route path="/programmes/creative" element={<Placeholder title="Creative Arts and Media" />} />
+        <Route path="/programmes/health" element={<Placeholder title="Health and Healthcare" />} />
+        <Route path="/programmes/agriculture" element={<Placeholder title="Agriculture and Food Systems" />} />
+        <Route path="/world-class-lms-features" element={<Placeholder title="LMS Features" />} />
         <Route path="/support" element={<Contact />} />
         <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
         <Route path="/terms" element={<Placeholder title="Terms of Service" />} />

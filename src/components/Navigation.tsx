@@ -51,6 +51,13 @@ const Navigation: React.FC = () => {
     setActiveDropdown(null);
   };
 
+  const handleMobileNavigation = (path: string) => {
+    // Small delay to ensure navigation happens before menu closes
+    setTimeout(() => {
+      closeMobileMenu();
+    }, 100);
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // Implement search functionality
@@ -328,22 +335,22 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-programmes' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/programmes" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes" onClick={() => handleMobileNavigation('/programmes')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           All Programmes
                         </Link>
-                        <Link to="/programmes/technology" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes/technology" onClick={() => handleMobileNavigation('/programmes/technology')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Technology and Digital Skills
                         </Link>
-                        <Link to="/programmes/business" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes/business" onClick={() => handleMobileNavigation('/programmes/business')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Business and Management
                         </Link>
-                        <Link to="/programmes/creative" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes/creative" onClick={() => handleMobileNavigation('/programmes/creative')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Creative Arts and Media
                         </Link>
-                        <Link to="/programmes/health" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes/health" onClick={() => handleMobileNavigation('/programmes/health')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Health and Healthcare
                         </Link>
-                        <Link to="/programmes/agriculture" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/programmes/agriculture" onClick={() => handleMobileNavigation('/programmes/agriculture')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Agriculture and Food Systems
                         </Link>
                       </div>
@@ -364,19 +371,19 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-platform' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/features" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/features" onClick={() => handleMobileNavigation('/features')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Platform Features
                         </Link>
-                        <Link to="/mobile-courses" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/mobile-courses" onClick={() => handleMobileNavigation('/mobile-courses')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Mobile Course Marketplace
                         </Link>
-                        <Link to="/instructor-portal" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/instructor-portal" onClick={() => handleMobileNavigation('/instructor-portal')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Instructor Portal
                         </Link>
-                        <Link to="/student-portal" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/student-portal" onClick={() => handleMobileNavigation('/student-portal')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Student Portal
                         </Link>
-                        <Link to="/world-class-lms-features" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/world-class-lms-features" onClick={() => handleMobileNavigation('/world-class-lms-features')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           LMS Features
                         </Link>
                       </div>
@@ -397,19 +404,19 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-resources' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/about" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/about" onClick={() => handleMobileNavigation('/about')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           About Us
                         </Link>
-                        <Link to="/events" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/events" onClick={() => handleMobileNavigation('/events')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Events and Conferences
                         </Link>
-                        <Link to="/press" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/press" onClick={() => handleMobileNavigation('/press')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Press and Media
                         </Link>
-                        <Link to="/contact" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/contact" onClick={() => handleMobileNavigation('/contact')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Contact Us
                         </Link>
-                        <Link to="/help" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <Link to="/help" onClick={() => handleMobileNavigation('/help')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Help Centre
                         </Link>
                       </div>
@@ -417,17 +424,17 @@ const Navigation: React.FC = () => {
                   </div>
 
                   {/* Direct Links */}
-                  <Link to="/pricing" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <Link to="/pricing" onClick={() => handleMobileNavigation('/pricing')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <CreditCard className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Pricing</span>
                   </Link>
 
-                  <Link to="/signup" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <Link to="/signup" onClick={() => handleMobileNavigation('/signup')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <UserPlus className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Sign Up</span>
                   </Link>
 
-                  <Link to="/login" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <Link to="/login" onClick={() => handleMobileNavigation('/login')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <LogIn className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Login</span>
                   </Link>
