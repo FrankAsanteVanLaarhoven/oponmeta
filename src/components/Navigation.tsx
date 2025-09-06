@@ -56,15 +56,12 @@ const Navigation: React.FC = () => {
 
   const handleMobileNavigation = (path: string) => {
     console.log('Navigating to:', path);
-    // Navigate to the path immediately
     navigate(path);
-    // Close menu after navigation
     closeMobileMenu();
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Implement search functionality
     console.log('Searching for:', searchQuery);
   };
 
