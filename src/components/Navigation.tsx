@@ -36,290 +36,425 @@ const Navigation: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  }, [location]);
+
+  const toggleDropdown = (dropdown: string) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Implement search functionality
+    console.log('Searching for:', searchQuery);
+  };
+
   return (
-    <header className={`shadow-md border-b border-gray-200 sticky top-0 z-50 ${deepBlue} pt-3 pb-1`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex justify-between items-center">
-          {/* Logo and Brand */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center group">
-              <div className="relative">
-                <img
-                  src="/logo.png"
-                  alt="OponMeta Logo"
-                  className="h-12 w-12 mr-3 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-12"
-                  style={{ 
-                    minWidth: '3rem',
-                    filter: 'drop-shadow(0 4px 8px rgba(255, 199, 44, 0.2))'
-                  }}
-                />
-              </div>
-              <div className="relative group/text">
-                <span
-                  className="text-3xl font-extrabold transition-all duration-700 ease-out group-hover:text:scale-105 group-hover:text:translate-x-1"
-                  style={{
-                    color: '#FFC72C',
-                    letterSpacing: '0.03em',
-                    fontFamily: 'inherit',
-                    textShadow: '0 0 10px rgba(255, 199, 44, 0.3)'
-                  }}
+    <>
+      <header className={`shadow-md border-b border-gray-200 sticky top-0 z-50 ${deepBlue} pt-3 pb-1`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="flex justify-between items-center">
+            {/* Logo and Brand */}
+            <div className="flex items-center">
+              <Link to="/" className="flex items-center group">
+                <div className="relative">
+                  <img
+                    src="/logo.png"
+                    alt="OponMeta Logo"
+                    className="h-12 w-12 mr-3 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-12"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-sm"></div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors duration-300">
+                    OponMeta
+                  </span>
+                  <span className="text-xs text-yellow-300 font-medium tracking-wider">
+                    LEARNING PLATFORM
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              {/* Programmes Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => toggleDropdown('programmes')}
+                  className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
                 >
-                  OponMeta
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-1" ref={dropdownRef}>
-            {/* Programmes Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setActiveDropdown(activeDropdown === 'programmes' ? null : 'programmes')}
-                className="flex items-center px-4 py-2 text-white hover:text-yellow-400 transition-colors font-medium"
-              >
-                PROGRAMMES
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'programmes' ? 'rotate-180' : ''}`} />
-              </button>
-              {activeDropdown === 'programmes' && (
-                <div className="absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-200">
-                  <div className="px-4 py-2 text-sm font-medium text-gray-900 border-b border-gray-100">
-                    Course Categories
+                  Programmes
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${activeDropdown === 'programmes' ? 'rotate-180' : ''}`} />
+                </button>
+                {activeDropdown === 'programmes' && (
+                  <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                    <div className="grid grid-cols-2 gap-1">
+                      <Link to="/programmes" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <BookOpen className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">All Programmes</div>
+                          <div className="text-sm text-gray-500">Browse all courses</div>
+                        </div>
+                      </Link>
+                      <Link to="/programmes/technology" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Monitor className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Technology</div>
+                          <div className="text-sm text-gray-500">Digital skills</div>
+                        </div>
+                      </Link>
+                      <Link to="/programmes/business" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Briefcase className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Business</div>
+                          <div className="text-sm text-gray-500">Management skills</div>
+                        </div>
+                      </Link>
+                      <Link to="/programmes/creative" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Sparkles className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Creative Arts</div>
+                          <div className="text-sm text-gray-500">Design and media</div>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                  <Link
-                    to="/programmes"
-                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex items-center">
-                      <Laptop className="w-5 h-5 text-[#0a174e]" />
-                      <span className="ml-3">Technology and Digital Skills</span>
-                    </div>
-                    <span className="text-xs text-gray-500">(0 Courses)</span>
-                  </Link>
-                  <Link
-                    to="/programmes"
-                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex items-center">
-                      <BarChart3 className="w-5 h-5 text-cyan-500" />
-                      <span className="ml-3">Data and Analytics</span>
-                    </div>
-                    <span className="text-xs text-gray-500">(0 Courses)</span>
-                  </Link>
-                  <Link
-                    to="/programmes"
-                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex items-center">
-                      <Heart className="w-5 h-5 text-green-500" />
-                      <span className="ml-3">Health and Healthcare Innovation</span>
-                    </div>
-                    <span className="text-xs text-gray-500">(0 Courses)</span>
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Platform Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setActiveDropdown(activeDropdown === 'platform' ? null : 'platform')}
-                className="flex items-center px-4 py-2 text-white hover:text-yellow-400 transition-colors font-medium"
-              >
-                PLATFORM
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'platform' ? 'rotate-180' : ''}`} />
-              </button>
-              {activeDropdown === 'platform' && (
-                <div className="absolute left-0 mt-2 w-80 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-200">
-                  <Link
-                    to="/course-library"
-                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex-shrink-0 mt-0.5">
-                      <BookOpen className="w-5 h-5 text-[#0a174e]" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="font-medium text-gray-900">Course Library</div>
-                      <div className="text-xs text-gray-500 mt-1">Browse our extensive course collection</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/ai-course-creator"
-                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex-shrink-0 mt-0.5">
-                      <Sparkles className="w-5 h-5 text-[#0a174e]" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="font-medium text-gray-900">AI Course Creator</div>
-                      <div className="text-xs text-gray-500 mt-1">Create courses with AI assistance</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/student-portal"
-                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex-shrink-0 mt-0.5">
-                      <User className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="font-medium text-gray-900">Student Portal</div>
-                      <div className="text-xs text-gray-500 mt-1">Access your learning dashboard and courses</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/instructor-portal"
-                    className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <div className="flex-shrink-0 mt-0.5">
-                      <UserCog className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="font-medium text-gray-900">Instructor Portal</div>
-                      <div className="text-xs text-gray-500 mt-1">Manage your courses and instructor tools</div>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Resources Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')}
-                className="flex items-center px-4 py-2 text-white hover:text-yellow-400 transition-colors font-medium"
-              >
-                RESOURCES
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
-              </button>
-              {activeDropdown === 'resources' && (
-                <div className="absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-200">
-                  <Link
-                    to="/blogs"
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <FileText className="w-5 h-5 text-orange-600" />
-                    <span className="ml-3">Blogs</span>
-                  </Link>
-                  <Link
-                    to="/download-app"
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <Download className="w-5 h-5 text-[#0a174e]" />
-                    <span className="ml-3">Download the App</span>
-                  </Link>
-                  <Link
-                    to="/stripe-connect"
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setActiveDropdown(null)}
-                  >
-                    <CreditCard className="w-5 h-5 text-green-600" />
-                    <span className="ml-3">Stripe Connect</span>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </nav>
-
-          {/* Search Bar */}
-          <div className="hidden md:flex items-center">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
-                <Search className={`h-5 w-5 transition-colors duration-200 ${isSearchExpanded ? 'text-gray-500' : 'text-gray-300'}`} />
+                )}
               </div>
-              <input
-                type="text"
-                placeholder="Search courses, topics..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
+
+              {/* Platform Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => toggleDropdown('platform')}
+                  className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
+                >
+                  Platform
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${activeDropdown === 'platform' ? 'rotate-180' : ''}`} />
+                </button>
+                {activeDropdown === 'platform' && (
+                  <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                    <div className="grid grid-cols-2 gap-1">
+                      <Link to="/features" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Zap className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Features</div>
+                          <div className="text-sm text-gray-500">Platform capabilities</div>
+                        </div>
+                      </Link>
+                      <Link to="/mobile-courses" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Monitor className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Mobile Courses</div>
+                          <div className="text-sm text-gray-500">Mobile marketplace</div>
+                        </div>
+                      </Link>
+                      <Link to="/instructor-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <UserCog className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Instructor Portal</div>
+                          <div className="text-sm text-gray-500">Teach with us</div>
+                        </div>
+                      </Link>
+                      <Link to="/student-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <User className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Student Portal</div>
+                          <div className="text-sm text-gray-500">Your dashboard</div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Resources Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => toggleDropdown('resources')}
+                  className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
+                >
+                  Resources
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
+                </button>
+                {activeDropdown === 'resources' && (
+                  <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                    <div className="grid grid-cols-2 gap-1">
+                      <Link to="/about" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Heart className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">About Us</div>
+                          <div className="text-sm text-gray-500">Our mission</div>
+                        </div>
+                      </Link>
+                      <Link to="/events" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Calendar className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Events</div>
+                          <div className="text-sm text-gray-500">Upcoming events</div>
+                        </div>
+                      </Link>
+                      <Link to="/press" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Megaphone className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Press</div>
+                          <div className="text-sm text-gray-500">News and media</div>
+                        </div>
+                      </Link>
+                      <Link to="/contact" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <Handshake className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Contact</div>
+                          <div className="text-sm text-gray-500">Get in touch</div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Direct Links */}
+              <Link to="/pricing" className="text-white hover:text-yellow-400 transition-colors duration-300 font-medium">
+                Pricing
+              </Link>
+              <Link to="/signup" className="text-white hover:text-yellow-400 transition-colors duration-300 font-medium">
+                Sign Up
+              </Link>
+            </nav>
+
+            {/* Right Side Controls */}
+            <div className="flex items-center space-x-4">
+              {/* Search */}
+              <div className="hidden md:block">
+                <form onSubmit={handleSearch} className="relative">
+                  <div className="flex items-center">
+                    <Search className="absolute left-3 h-4 w-4 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search courses..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10 pr-4 py-2 w-64 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    />
+                  </div>
+                </form>
+              </div>
+
+              {/* Theme Toggle */}
+              <ThemeToggle
+                variant="button"
+                size="sm"
+                showLabels={false}
+                className="text-white hover:text-yellow-400 transition-colors"
               />
+
+              {/* Language Selector */}
+              <CompactLanguageSelector />
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden text-white hover:text-yellow-400 transition-colors duration-300"
+              >
+                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
-          </div>
-
-          {/* Right side actions */}
-          <div className="flex items-center space-x-4">
-            {/* Language Selector */}
-            <CompactLanguageSelector
-              className="text-white hover:text-yellow-400 transition-colors"
-              size="sm"
-            />
-
-            {/* Theme Switcher */}
-            <ThemeToggle 
-              variant="button"
-              size="sm"
-              showLabels={false}
-              className="text-white hover:text-yellow-400 transition-colors"
-            />
-
-            {/* Sign In Button */}
-            <Link
-              to="/login"
-              className="px-3 py-2 text-white font-medium rounded-lg hover:bg-white/10 transition-all duration-200 flex items-center"
-            >
-              <LogIn className="h-4 w-4 mr-1" />
-              Sign In
-            </Link>
-
-            {/* Get Started Button */}
-            <Link
-              to="/signup"
-              className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200 flex items-center"
-            >
-              <UserPlus className="h-4 w-4 mr-1" />
-              Get Started
-            </Link>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-white hover:text-yellow-400 transition-colors"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-2">
-              <Link
-                to="/programmes"
-                className="px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Programmes
-              </Link>
-              <Link
-                to="/platform"
-                className="px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Platform
-              </Link>
-              <Link
-                to="/resources"
-                className="px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Resources
-              </Link>
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50"
+            onClick={closeMobileMenu}
+          />
+          
+          {/* Mobile Menu Panel */}
+          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
+              {/* Mobile Menu Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                <div className="flex items-center">
+                  <img src="/logo.png" alt="OponMeta" className="h-8 w-8 mr-2" />
+                  <span className="text-lg font-bold text-gray-900">OponMeta</span>
+                </div>
+                <button
+                  onClick={closeMobileMenu}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              {/* Mobile Search */}
+              <div className="p-4 border-b border-gray-200">
+                <form onSubmit={handleSearch} className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search courses..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </form>
+              </div>
+
+              {/* Mobile Menu Content */}
+              <div className="flex-1 overflow-y-auto">
+                <nav className="p-4 space-y-2">
+                  {/* Programmes Section */}
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown('mobile-programmes')}
+                      className="flex items-center justify-between w-full p-3 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <div className="flex items-center">
+                        <BookOpen className="w-5 h-5 mr-3 text-blue-500" />
+                        <span className="font-medium">Programmes</span>
+                      </div>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === 'mobile-programmes' ? 'rotate-180' : ''}`} />
+                    </button>
+                    {activeDropdown === 'mobile-programmes' && (
+                      <div className="ml-8 mt-2 space-y-1">
+                        <Link to="/programmes" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          All Programmes
+                        </Link>
+                        <Link to="/programmes/technology" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Technology and Digital Skills
+                        </Link>
+                        <Link to="/programmes/business" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Business and Management
+                        </Link>
+                        <Link to="/programmes/creative" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Creative Arts and Media
+                        </Link>
+                        <Link to="/programmes/health" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Health and Healthcare
+                        </Link>
+                        <Link to="/programmes/agriculture" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Agriculture and Food Systems
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Platform Section */}
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown('mobile-platform')}
+                      className="flex items-center justify-between w-full p-3 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <div className="flex items-center">
+                        <Monitor className="w-5 h-5 mr-3 text-blue-500" />
+                        <span className="font-medium">Platform</span>
+                      </div>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === 'mobile-platform' ? 'rotate-180' : ''}`} />
+                    </button>
+                    {activeDropdown === 'mobile-platform' && (
+                      <div className="ml-8 mt-2 space-y-1">
+                        <Link to="/features" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Platform Features
+                        </Link>
+                        <Link to="/mobile-courses" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Mobile Course Marketplace
+                        </Link>
+                        <Link to="/instructor-portal" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Instructor Portal
+                        </Link>
+                        <Link to="/student-portal" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Student Portal
+                        </Link>
+                        <Link to="/world-class-lms-features" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          LMS Features
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Resources Section */}
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown('mobile-resources')}
+                      className="flex items-center justify-between w-full p-3 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <div className="flex items-center">
+                        <FileText className="w-5 h-5 mr-3 text-blue-500" />
+                        <span className="font-medium">Resources</span>
+                      </div>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === 'mobile-resources' ? 'rotate-180' : ''}`} />
+                    </button>
+                    {activeDropdown === 'mobile-resources' && (
+                      <div className="ml-8 mt-2 space-y-1">
+                        <Link to="/about" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          About Us
+                        </Link>
+                        <Link to="/events" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Events and Conferences
+                        </Link>
+                        <Link to="/press" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Press and Media
+                        </Link>
+                        <Link to="/contact" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Contact Us
+                        </Link>
+                        <Link to="/help" onClick={closeMobileMenu} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Help Centre
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Direct Links */}
+                  <Link to="/pricing" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                    <CreditCard className="w-5 h-5 mr-3 text-blue-500" />
+                    <span className="font-medium">Pricing</span>
+                  </Link>
+
+                  <Link to="/signup" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                    <UserPlus className="w-5 h-5 mr-3 text-blue-500" />
+                    <span className="font-medium">Sign Up</span>
+                  </Link>
+
+                  <Link to="/login" onClick={closeMobileMenu} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                    <LogIn className="w-5 h-5 mr-3 text-blue-500" />
+                    <span className="font-medium">Login</span>
+                  </Link>
+                </nav>
+              </div>
+
+              {/* Mobile Menu Footer */}
+              <div className="p-4 border-t border-gray-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Theme</span>
+                  <ThemeToggle
+                    variant="buttons"
+                    size="sm"
+                    showLabels={true}
+                    className="w-full justify-center"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Language</span>
+                  <SearchableLanguageSelector />
+                </div>
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+      )}
+    </>
   );
 };
 
