@@ -37,10 +37,12 @@ const Navigation: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu when route changes
+  // Close mobile menu when route changes (but not on initial load)
   useEffect(() => {
-    setIsMenuOpen(false);
-    setActiveDropdown(null);
+    if (location.pathname !== '/') {
+      setIsMenuOpen(false);
+      setActiveDropdown(null);
+    }
   }, [location]);
 
   const toggleDropdown = (dropdown: string) => {
@@ -53,6 +55,7 @@ const Navigation: React.FC = () => {
   };
 
   const handleMobileNavigation = (path: string) => {
+    console.log('Navigating to:', path);
     // Navigate to the path immediately
     navigate(path);
     // Close menu after navigation

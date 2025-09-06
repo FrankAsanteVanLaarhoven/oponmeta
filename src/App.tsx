@@ -279,8 +279,6 @@ function App() {
                           <Route path="/companions/analytics" element={<CompanionsAnalytics />} />
                 <Route path="/companions/settings" element={<CompanionsSettings />} />
           <Route path="/companions/create" element={<CreateCompanion />} />
-          <Route path="/student-portal" element={<StudentPortal />} />
-          <Route path="/instructor-portal" element={<InstructorPortal />} />
           <Route path="/course-marketplace" element={<CourseMarketplace />} />
           <Route path="/checkout" element={<WorldClassCheckout />} />
           <Route path="/coupon-management" element={<CouponManagement />} />
