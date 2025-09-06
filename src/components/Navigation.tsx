@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Sun, Moon, Laptop, Globe, CloudSun, 
@@ -20,6 +20,7 @@ const Navigation: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const location = useLocation();
+  const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const deepBlue = 'bg-gradient-to-r from-[#0a174e] via-[#1a2a6b] to-[#0a174e]';
@@ -52,10 +53,10 @@ const Navigation: React.FC = () => {
   };
 
   const handleMobileNavigation = (path: string) => {
-    // Small delay to ensure navigation happens before menu closes
-    setTimeout(() => {
-      closeMobileMenu();
-    }, 100);
+    // Navigate to the path immediately
+    navigate(path);
+    // Close menu after navigation
+    closeMobileMenu();
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -335,24 +336,24 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-programmes' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/programmes" onClick={() => handleMobileNavigation('/programmes')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <button onClick={() => handleMobileNavigation('/programmes')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           All Programmes
-                        </Link>
-                        <Link to="/programmes/technology" onClick={() => handleMobileNavigation('/programmes/technology')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/programmes/technology')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Technology and Digital Skills
-                        </Link>
-                        <Link to="/programmes/business" onClick={() => handleMobileNavigation('/programmes/business')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/programmes/business')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Business and Management
-                        </Link>
-                        <Link to="/programmes/creative" onClick={() => handleMobileNavigation('/programmes/creative')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/programmes/creative')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Creative Arts and Media
-                        </Link>
-                        <Link to="/programmes/health" onClick={() => handleMobileNavigation('/programmes/health')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/programmes/health')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Health and Healthcare
-                        </Link>
-                        <Link to="/programmes/agriculture" onClick={() => handleMobileNavigation('/programmes/agriculture')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/programmes/agriculture')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Agriculture and Food Systems
-                        </Link>
+                        </button>
                       </div>
                     )}
                   </div>
@@ -371,21 +372,21 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-platform' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/features" onClick={() => handleMobileNavigation('/features')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <button onClick={() => handleMobileNavigation('/features')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Platform Features
-                        </Link>
-                        <Link to="/mobile-courses" onClick={() => handleMobileNavigation('/mobile-courses')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/mobile-courses')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Mobile Course Marketplace
-                        </Link>
-                        <Link to="/instructor-portal" onClick={() => handleMobileNavigation('/instructor-portal')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/instructor-portal')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Instructor Portal
-                        </Link>
-                        <Link to="/student-portal" onClick={() => handleMobileNavigation('/student-portal')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/student-portal')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Student Portal
-                        </Link>
-                        <Link to="/world-class-lms-features" onClick={() => handleMobileNavigation('/world-class-lms-features')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/world-class-lms-features')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           LMS Features
-                        </Link>
+                        </button>
                       </div>
                     )}
                   </div>
@@ -404,40 +405,40 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-resources' && (
                       <div className="ml-8 mt-2 space-y-1">
-                        <Link to="/about" onClick={() => handleMobileNavigation('/about')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        <button onClick={() => handleMobileNavigation('/about')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           About Us
-                        </Link>
-                        <Link to="/events" onClick={() => handleMobileNavigation('/events')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/events')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Events and Conferences
-                        </Link>
-                        <Link to="/press" onClick={() => handleMobileNavigation('/press')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/press')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Press and Media
-                        </Link>
-                        <Link to="/contact" onClick={() => handleMobileNavigation('/contact')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/contact')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Contact Us
-                        </Link>
-                        <Link to="/help" onClick={() => handleMobileNavigation('/help')} className="block p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                        </button>
+                        <button onClick={() => handleMobileNavigation('/help')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Help Centre
-                        </Link>
+                        </button>
                       </div>
                     )}
                   </div>
 
                   {/* Direct Links */}
-                  <Link to="/pricing" onClick={() => handleMobileNavigation('/pricing')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <button onClick={() => handleMobileNavigation('/pricing')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <CreditCard className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Pricing</span>
-                  </Link>
+                  </button>
 
-                  <Link to="/signup" onClick={() => handleMobileNavigation('/signup')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <button onClick={() => handleMobileNavigation('/signup')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <UserPlus className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Sign Up</span>
-                  </Link>
+                  </button>
 
-                  <Link to="/login" onClick={() => handleMobileNavigation('/login')} className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                  <button onClick={() => handleMobileNavigation('/login')} className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                     <LogIn className="w-5 h-5 mr-3 text-blue-500" />
                     <span className="font-medium">Login</span>
-                  </Link>
+                  </button>
                 </nav>
               </div>
 
