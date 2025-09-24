@@ -267,7 +267,7 @@ const DashboardSettings = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <Label>Live Streaming</Label>
-                    <p className="text-sm text-gray-500">Host live classes and Q&A sessions</p>
+                    <p className="text-sm text-gray-500">Host live classes and Q and A sessions</p>
                     <Badge variant="outline" className="mt-1">Available</Badge>
                   </div>
                   <Switch

@@ -6,6 +6,7 @@ import { NotificationProvider } from './context/NotificationContext';
 import { MobileProvider } from './context/MobileContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { PWAInitializer } from './components/PWAInitializer';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -20,9 +21,8 @@ const FeaturedCourses = lazy(() => import('./components/FeaturedCourses'));
 const About = lazy(() => import('./components/About'));
 const Programme = lazy(() => import('./components/Programme'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
-const Pricing = lazy(() => import('./components/Pricing'));
+const UnifiedPricing = lazy(() => import('./components/UnifiedPricing'));
 const CourseDetail = lazy(() => import('./components/CourseDetail'));
-const PricingPage = lazy(() => import('./components/PricingPage'));
 const Resources = lazy(() => import('./components/Resources'));
 const Community = lazy(() => import('./components/Community'));
 const StudentDashboard = lazy(() => import('./components/StudentDashboard'));
@@ -39,7 +39,7 @@ const StudentPortalWidgets = lazy(() => import('./components/StudentPortalWidget
 const StudentPortal = lazy(() => import('./components/StudentPortal'));
 const SocialFeed = lazy(() => import('./components/SocialFeed'));
 const CourseWorkspace = lazy(() => import('./components/CourseWorkspace'));
-const CoursePurchase = lazy(() => import('./components/CoursePurchase'));
+const UnifiedCoursePurchase = lazy(() => import('./components/UnifiedCoursePurchase'));
 const InternationalPaymentForm = lazy(() => import('./components/InternationalPaymentForm'));
 const PlagiarismChecker = lazy(() => import('./components/PlagiarismChecker'));
 const GrammarChecker = lazy(() => import('./components/GrammarChecker'));
@@ -69,7 +69,6 @@ const WeatherForecast = lazy(() => import('./components/WeatherForecast'));
 const CourseLibrary = lazy(() => import('./components/CourseLibrary'));
 const Whiteboard = lazy(() => import('./components/Whiteboard'));
 const CourseAuthoringTool = lazy(() => import('./components/CourseAuthoringTool'));
-const CoursePurchaseFlow = lazy(() => import('./components/CoursePurchaseFlow'));
 const PurchaseFlowDemo = lazy(() => import('./components/PurchaseFlowDemo'));
 const AIVideoCalling = lazy(() => import('./components/AIVideoCalling'));
 const CompanionsLibrary = lazy(() => import('./components/CompanionsLibrary'));
@@ -85,11 +84,12 @@ const Blogs = lazy(() => import('./components/Blogs'));
 const DownloadApp = lazy(() => import('./components/DownloadApp'));
 const ThemeDemo = lazy(() => import('./components/ThemeDemo'));
 const TestYellowButtons = lazy(() => import('./components/TestYellowButtons'));
-const CreatorsPortal = lazy(() => import('./components/CreatorsPortal'));
+const UnifiedCreatorsPortal = lazy(() => import('./components/UnifiedCreatorsPortal'));
 const BecomeInstructor = lazy(() => import('./components/BecomeInstructor'));
 const ResumeBuilder = lazy(() => import('./components/ResumeBuilder'));
 const LeadershipManagement = lazy(() => import('./components/LeadershipManagement'));
 const MentorshipCareerReadiness = lazy(() => import('./components/MentorshipCareerReadiness'));
+const Mentorship = lazy(() => import('./components/Mentorship'));
 const SpecialisedIndustryTracks = lazy(() => import('./components/SpecialisedIndustryTracks'));
 const RealEstateManagement = lazy(() => import('./components/RealEstateManagement'));
 const PublicSafetyEmergencyServices = lazy(() => import('./components/PublicSafetyEmergencyServices'));
@@ -185,9 +185,10 @@ function App() {
             v7_relativeSplatPath: true
           }}
         >
-                  <div className="App min-h-screen transition-colors duration-300">
-                    <Navigation />
-                    <Suspense fallback={<LoadingSpinner />}>
+                  <PWAInitializer>
+                    <div className="App min-h-screen transition-colors duration-300">
+                      <Navigation />
+                      <Suspense fallback={<LoadingSpinner />}>
                       <Routes>
           {/* Main Routes */}
           <Route path="/" element={
@@ -197,7 +198,7 @@ function App() {
     <FeaturedCourses />
     <Testimonials />
               <TrustedByCarousel />
-    <Pricing />
+    <UnifiedPricing />
             </>
           } />
           
@@ -209,11 +210,10 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           
           {/* Courses Page */}
-          <Route path="/courses" element={<Programme />} />
+          <Route path="/courses" element={<CourseCatalog />} />
           <Route path="/programme" element={<Programme />} />
           
           {/* Course Routes */}
-          <Route path="/courses" element={<CourseCatalog />} />
           <Route path="/course-browsing" element={<CourseBrowsingPage />} />
           <Route path="/course/:id" element={<CourseDetail />} />
           <Route path="/course-grid" element={<CourseGrid />} />
@@ -221,7 +221,7 @@ function App() {
           <Route path="/course-card" element={<Placeholder title="Course Card Demo" />} />
           <Route path="/bauhaus-course-card" element={<BauhausCourseCard />} />
           <Route path="/course-workspace" element={<CourseWorkspace />} />
-          <Route path="/course-purchase/:courseId" element={<CoursePurchase />} />
+          <Route path="/course-purchase/:courseId" element={<UnifiedCoursePurchase />} />
           <Route path="/course-library" element={<CourseLibrary />} />
           <Route path="/course-authoring" element={<CourseAuthoringTool />} />
           <Route path="/purchase-flow-demo" element={<PurchaseFlowDemo />} />
@@ -311,6 +311,7 @@ function App() {
         <Route path="/resources/blogs" element={<BlogsPage />} />
         <Route path="/resources/download-app" element={<DownloadAppPage />} />
                   <Route path="/workshops" element={<Workshop />} />
+          <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/technology-and-digital-skills" element={<TechnologyDigitalSkills />} />
           <Route path="/data-and-analytics" element={<DataAnalytics />} />
@@ -327,19 +328,19 @@ function App() {
           <Route path="/sports-fitness-and-wellness" element={<SportsFitnessWellness />} />
           <Route path="/vocational-and-technical-training" element={<VocationalTechnicalTraining />} />
           <Route path="/childhood-studies-and-early-year-education" element={<ChildhoodStudiesEarlyYearEducation />} />
-        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/pricing" element={<UnifiedPricing />} />
         <Route path="/community-forums" element={<Placeholder title="Community Forums" />} />
         <Route path="/alumni-network" element={<Placeholder title="Alumni Network" />} />
         <Route path="/events" element={<Placeholder title="Events and Networking" />} />
         <Route path="/press" element={<Placeholder title="Press and Media" />} />
-        <Route path="/features" element={<Placeholder title="Platform Features" />} />
+        <Route path="/features" element={<FeatureGrid />} />
         <Route path="/programmes" element={<Programme />} />
         <Route path="/programmes/technology" element={<Placeholder title="Technology and Digital Skills" />} />
         <Route path="/programmes/business" element={<Placeholder title="Business and Management" />} />
         <Route path="/programmes/creative" element={<Placeholder title="Creative Arts and Media" />} />
         <Route path="/programmes/health" element={<Placeholder title="Health and Healthcare" />} />
         <Route path="/programmes/agriculture" element={<Placeholder title="Agriculture and Food Systems" />} />
-        <Route path="/world-class-lms-features" element={<Placeholder title="LMS Features" />} />
+        <Route path="/world-class-lms-features" element={<WorldClassLMSFeatures />} />
         <Route path="/support" element={<Contact />} />
         <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
         <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
@@ -351,7 +352,7 @@ function App() {
         <Route path="/instructors/:id" element={<Placeholder title="Instructor Profile" />} />
         <Route path="/messages/instructor/:id" element={<Placeholder title="Instructor Messages" />} />
         <Route path="/course/:id/preview" element={<Placeholder title="Course Preview" />} />
-          <Route path="/pricing-page" element={<PricingPage />} />
+          <Route path="/pricing-page" element={<UnifiedPricing />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/community" element={<Community />} />
           <Route path="/blogs" element={<Blogs />} />
@@ -363,7 +364,7 @@ function App() {
           <Route path="/share-knowledge" element={<ShareKnowledgeGlobally />} />
           
           {/* Resource Routes */}
-          <Route path="/resources/creators-portal" element={<CreatorsPortal />} />
+          <Route path="/resources/creators-portal" element={<UnifiedCreatorsPortal />} />
           <Route path="/resources/meet-ai-video-calling" element={<AIVideoCalling />} />
           <Route path="/resources/share-knowledge-globally" element={<ShareKnowledgeGlobally />} />
           <Route path="/resources/become-instructor" element={<BecomeInstructor />} />
@@ -468,10 +469,11 @@ function App() {
           <Route path="/vendor-card-page" element={<Placeholder title="Vendor Card Page" />} />
           <Route path="/weather-forecast-page" element={<Placeholder title="Weather Forecast Page" />} />
                       </Routes>
-                    </Suspense>
-                    <Footer />
-                  {/* <Toaster /> */} {/* Removed Toaster as per new_code */}
-                  </div>
+                      </Suspense>
+                      <Footer />
+                    {/* <Toaster /> */} {/* Removed Toaster as per new_code */}
+                    </div>
+                  </PWAInitializer>
                 </BrowserRouter>
               </LanguageProvider>
             </MobileProvider>

@@ -155,11 +155,11 @@ const EnhancedPaymentModal: React.FC<EnhancedPaymentModalProps> = ({
             </div>
           </div>
 
-          {/* Localization Settings */}
+          {/* Localisation Settings */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
               <Globe className="w-5 h-5 text-blue-600" />
-              Localization & Payment Options
+              Localisation and Payment Option
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

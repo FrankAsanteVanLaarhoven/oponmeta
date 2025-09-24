@@ -95,7 +95,7 @@ const AIQuizGenerator = () => {
       <div className="border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center bg-purple-50">
         <Upload className="w-12 h-12 text-purple-400 mb-2" />
         <input type="file" multiple className="hidden" id="file-upload" onChange={e => setForm(f => ({ ...f, files: [...f.files, ...Array.from(e.target.files || [])] }))} />
-        <label htmlFor="file-upload" className="text-purple-600 cursor-pointer">Drag & Drop to upload<br />or <span className="underline">Browse to upload</span></label>
+        <label htmlFor="file-upload" className="text-purple-600 cursor-pointer">Drag and Drop to upload<br />or <span className="underline">Browse to upload</span></label>
         <div className="text-xs text-gray-500 mt-2">Supported File Types: .pdf, .txt, .docx, .csv</div>
         {form.files.length > 0 && <div className="mt-4 w-full"><b>Files:</b> {form.files.map((f: any) => f.name).join(', ')}</div>}
       </div>

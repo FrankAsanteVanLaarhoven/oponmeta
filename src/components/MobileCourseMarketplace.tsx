@@ -55,12 +55,14 @@ import { coursesData, Course } from '../data/coursesData';
 import { toast } from 'sonner';
 import { coursePurchaseService, PurchaseRequest } from '../services/coursePurchaseService';
 import { createStripeCheckoutSession, SUPPORTED_PAYMENT_METHODS, getAvailablePaymentMethods, formatCurrency } from '../api/stripe';
+import { useNavigate } from 'react-router-dom';
 
 interface CartItem extends Course {
   quantity: number;
 }
 
 const MobileCourseMarketplace: React.FC = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('browse');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -72,6 +74,7 @@ const MobileCourseMarketplace: React.FC = () => {
   const [favorites, setFavorites] = useState<number[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [showCourseDetail, setShowCourseDetail] = useState(false);
+  const [enrolledCourses, setEnrolledCourses] = useState<number[]>([]);
   
   // Checkout state
   const [checkoutStep, setCheckoutStep] = useState(1);
@@ -120,6 +123,21 @@ const MobileCourseMarketplace: React.FC = () => {
     const methods = getAvailablePaymentMethods(selectedCountry, selectedCurrency);
     setAvailablePaymentMethods(methods);
   }, [selectedCountry, selectedCurrency]);
+
+  // Load enrolled courses on component mount
+  useEffect(() => {
+    const loadEnrolledCourses = () => {
+      try {
+        const enrollments = JSON.parse(localStorage.getItem('courseEnrollments') || '[]');
+        const enrolledIds = enrollments.map((enrollment: any) => enrollment.courseId);
+        setEnrolledCourses(enrolledIds);
+      } catch (error) {
+        console.error('Failed to load enrolled courses:', error);
+      }
+    };
+
+    loadEnrolledCourses();
+  }, []);
 
   const filteredCourses = coursesData.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -285,11 +303,22 @@ const MobileCourseMarketplace: React.FC = () => {
         });
       }
 
-      toast.success('Payment successful! Check your email for course access.');
+      toast.success('Payment successful! Your courses are now available in your student portal.', {
+        duration: 5000,
+        action: {
+          label: 'View Courses',
+          onClick: () => navigate('/student-portal')
+        }
+      });
       setCart([]);
       setShowCheckout(false);
       setCheckoutStep(1);
       setActiveTab('browse');
+      
+      // Refresh enrolled courses
+      const enrollments = JSON.parse(localStorage.getItem('courseEnrollments') || '[]');
+      const enrolledIds = enrollments.map((enrollment: any) => enrollment.courseId);
+      setEnrolledCourses(enrolledIds);
       
       // Reset form
       setCustomerInfo({
@@ -397,13 +426,23 @@ const MobileCourseMarketplace: React.FC = () => {
             >
               View
             </button>
-            <button
-              onClick={() => addToCart(course)}
-              className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
-            >
-              <ShoppingCart className="w-4 h-4 mr-1" />
-              Add
-            </button>
+            {enrolledCourses.includes(course.id) ? (
+              <button
+                onClick={() => navigate('/student-portal')}
+                className="px-3 py-1.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center"
+              >
+                <CheckCircle className="w-4 h-4 mr-1" />
+                Access
+              </button>
+            ) : (
+              <button
+                onClick={() => addToCart(course)}
+                className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+              >
+                <ShoppingCart className="w-4 h-4 mr-1" />
+                Add
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -1012,16 +1051,29 @@ const MobileCourseMarketplace: React.FC = () => {
                         </span>
                       </div>
                       
-                      <button
-                        onClick={() => {
-                          addToCart(selectedCourse);
-                          setShowCourseDetail(false);
-                        }}
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center"
-                      >
-                        <ShoppingCart className="w-5 h-5 mr-2" />
-                        Add to Cart
-                      </button>
+                      {enrolledCourses.includes(selectedCourse.id) ? (
+                        <button
+                          onClick={() => {
+                            setShowCourseDetail(false);
+                            navigate('/student-portal');
+                          }}
+                          className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center"
+                        >
+                          <CheckCircle className="w-5 h-5 mr-2" />
+                          Access Course
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            addToCart(selectedCourse);
+                            setShowCourseDetail(false);
+                          }}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center"
+                        >
+                          <ShoppingCart className="w-5 h-5 mr-2" />
+                          Add to Cart
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

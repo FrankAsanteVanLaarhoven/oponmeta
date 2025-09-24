@@ -21,14 +21,21 @@ const Navigation: React.FC = () => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const programmesDropdownRef = useRef<HTMLDivElement>(null);
+  const platformDropdownRef = useRef<HTMLDivElement>(null);
+  const resourcesDropdownRef = useRef<HTMLDivElement>(null);
 
   const deepBlue = 'bg-gradient-to-r from-[#0a174e] via-[#1a2a6b] to-[#0a174e]';
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const isOutsideProgrammes = programmesDropdownRef.current && !programmesDropdownRef.current.contains(target);
+      const isOutsidePlatform = platformDropdownRef.current && !platformDropdownRef.current.contains(target);
+      const isOutsideResources = resourcesDropdownRef.current && !resourcesDropdownRef.current.contains(target);
+      
+      if (isOutsideProgrammes && isOutsidePlatform && isOutsideResources) {
         setActiveDropdown(null);
       }
     };
@@ -37,7 +44,7 @@ const Navigation: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu when route changes (but not on initial load)
+  // Close mobile menu when route changes
   useEffect(() => {
     if (location.pathname !== '/') {
       setIsMenuOpen(false);
@@ -46,6 +53,7 @@ const Navigation: React.FC = () => {
   }, [location]);
 
   const toggleDropdown = (dropdown: string) => {
+    console.log('Toggling dropdown:', dropdown, 'Current active:', activeDropdown);
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
@@ -65,6 +73,11 @@ const Navigation: React.FC = () => {
     console.log('Searching for:', searchQuery);
   };
 
+  const handleLinkClick = () => {
+    console.log('Link clicked, closing dropdown');
+    setActiveDropdown(null);
+  };
+
   return (
     <>
       <header className={`shadow-md border-b border-gray-200 sticky top-0 z-50 ${deepBlue} pt-3 pb-1`}>
@@ -79,7 +92,7 @@ const Navigation: React.FC = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               {/* Programmes Dropdown */}
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative" ref={programmesDropdownRef}>
                 <button
                   onClick={() => toggleDropdown('programmes')}
                   className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
@@ -90,42 +103,77 @@ const Navigation: React.FC = () => {
                 {activeDropdown === 'programmes' && (
                   <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                     <div className="grid grid-cols-2 gap-1">
-                      <Link to="/programmes" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/courses" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <BookOpen className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
-                          <div className="font-medium">All Programmes</div>
+                          <div className="font-medium">Courses</div>
                           <div className="text-sm text-gray-500">Browse all courses</div>
                         </div>
                       </Link>
-                      <Link to="/programmes/technology" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/programmes" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
+                        <BookOpen className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">All Programmes</div>
+                          <div className="text-sm text-gray-500">Browse all programmes</div>
+                        </div>
+                      </Link>
+                      <Link 
+                        to="/programmes/technology" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Monitor className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Technology</div>
                           <div className="text-sm text-gray-500">Digital skills</div>
                         </div>
                       </Link>
-                      <Link to="/programmes/business" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/programmes/business" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Briefcase className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Business</div>
                           <div className="text-sm text-gray-500">Management skills</div>
                         </div>
                       </Link>
-                      <Link to="/programmes/creative" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/programmes/creative" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Sparkles className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Creative Arts</div>
                           <div className="text-sm text-gray-500">Media and design</div>
                         </div>
                       </Link>
-                      <Link to="/programmes/health" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/programmes/health" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Heart className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Health</div>
                           <div className="text-sm text-gray-500">Healthcare skills</div>
                         </div>
                       </Link>
-                      <Link to="/programmes/agriculture" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/programmes/agriculture" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Truck className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Agriculture</div>
@@ -138,7 +186,7 @@ const Navigation: React.FC = () => {
               </div>
 
               {/* Platform Dropdown */}
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative" ref={platformDropdownRef}>
                 <button
                   onClick={() => toggleDropdown('platform')}
                   className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
@@ -149,46 +197,81 @@ const Navigation: React.FC = () => {
                 {activeDropdown === 'platform' && (
                   <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                     <div className="grid grid-cols-2 gap-1">
-                      <Link to="/features" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/features" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Layers className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Platform Features</div>
                           <div className="text-sm text-gray-500">Core functionality</div>
                         </div>
                       </Link>
-                      <Link to="/mobile-courses" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/mobile-courses" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Monitor className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Mobile Marketplace</div>
                           <div className="text-sm text-gray-500">Course marketplace</div>
                         </div>
                       </Link>
-                      <Link to="/instructor-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/instructor-portal" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <UserCog className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Instructor Portal</div>
                           <div className="text-sm text-gray-500">Teaching tools</div>
                         </div>
                       </Link>
-                      <Link to="/student-portal" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/student-portal" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <User className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Student Portal</div>
                           <div className="text-sm text-gray-500">Learning dashboard</div>
                         </div>
                       </Link>
-                      <Link to="/world-class-lms-features" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/world-class-lms-features" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <BarChart3 className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">LMS Features</div>
                           <div className="text-sm text-gray-500">Learning management</div>
                         </div>
                       </Link>
-                      <Link to="/ai-video-calling" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/ai-video-calling" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Video className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">AI Video Calling</div>
                           <div className="text-sm text-gray-500">Virtual meetings</div>
+                        </div>
+                      </Link>
+                      <Link 
+                        to="/workshops" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
+                        <Users className="w-5 h-5 mr-3 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Workshops</div>
+                          <div className="text-sm text-gray-500">Interactive sessions</div>
                         </div>
                       </Link>
                     </div>
@@ -197,7 +280,7 @@ const Navigation: React.FC = () => {
               </div>
 
               {/* Resources Dropdown */}
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative" ref={resourcesDropdownRef}>
                 <button
                   onClick={() => toggleDropdown('resources')}
                   className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-medium"
@@ -208,28 +291,44 @@ const Navigation: React.FC = () => {
                 {activeDropdown === 'resources' && (
                   <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                     <div className="grid grid-cols-2 gap-1">
-                      <Link to="/about" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/about" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Users className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">About Us</div>
                           <div className="text-sm text-gray-500">Our mission</div>
                         </div>
                       </Link>
-                      <Link to="/events" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/events" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Calendar className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Events</div>
                           <div className="text-sm text-gray-500">Upcoming events</div>
                         </div>
                       </Link>
-                      <Link to="/press" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/press" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Megaphone className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Press</div>
                           <div className="text-sm text-gray-500">News and media</div>
                         </div>
                       </Link>
-                      <Link to="/contact" className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/contact" 
+                        className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={handleLinkClick}
+                      >
                         <Handshake className="w-5 h-5 mr-3 text-blue-500" />
                         <div>
                           <div className="font-medium">Contact</div>
@@ -348,6 +447,9 @@ const Navigation: React.FC = () => {
                     </button>
                     {activeDropdown === 'mobile-programmes' && (
                       <div className="ml-8 mt-2 space-y-1">
+                        <button onClick={() => handleMobileNavigation('/courses')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Courses
+                        </button>
                         <button onClick={() => handleMobileNavigation('/programmes')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           All Programmes
                         </button>
@@ -402,17 +504,8 @@ const Navigation: React.FC = () => {
                         <button onClick={() => handleMobileNavigation('/ai-video-calling')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           AI Video Calling
                         </button>
-                        <button onClick={() => handleMobileNavigation('/companions-library')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          AI Companions Library
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/course-authoring')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Course Authoring Tool
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/whiteboard')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Interactive Whiteboard
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/course-certifications')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Course Certifications
+                        <button onClick={() => handleMobileNavigation('/workshops')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                          Workshops
                         </button>
                       </div>
                     )}
@@ -443,15 +536,6 @@ const Navigation: React.FC = () => {
                         </button>
                         <button onClick={() => handleMobileNavigation('/contact')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                           Contact Us
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/help')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Help Centre
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/blogs')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Blogs
-                        </button>
-                        <button onClick={() => handleMobileNavigation('/download-app')} className="block w-full text-left p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                          Download App
                         </button>
                       </div>
                     )}

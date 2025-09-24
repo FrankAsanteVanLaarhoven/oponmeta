@@ -4,22 +4,45 @@ import { Database } from './database.types';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Check if environment variables are properly set
+let supabaseClient: any;
+
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+  console.warn('Supabase environment variables are not set. Using mock client for development.');
+  // For development, we'll create a mock client that doesn't throw errors
+  supabaseClient = createClient<Database>(
+    'https://mock.supabase.co',
+    'mock-anon-key',
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 0
+        }
+      }
+    }
+  );
+} else {
+  // Create the real Supabase client
+  supabaseClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    },
+    realtime: {
+      params: {
+        eventsPerSecond: 10
+      }
+    }
+  });
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
-  },
-  realtime: {
-    params: {
-      eventsPerSecond: 10
-    }
-  }
-});
+export const supabase = supabaseClient;
 
 // Auth helpers
 export const auth = {

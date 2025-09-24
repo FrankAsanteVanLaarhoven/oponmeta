@@ -172,14 +172,14 @@ const Header = () => {
                         ))}
                         <div className="px-4 py-2 border-t border-gray-100 text-xs text-gray-500 uppercase tracking-wider font-semibold">Other</div>
                         {item.dropdown && item.dropdown.map((sub, idx) => (
-                          <a
+                          <Link
                             key={sub + idx}
-                            href="#"
+                            to={`/${sub.toLowerCase()}`}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                             onClick={() => setOpenDropdown(null)}
                           >
                             {sub}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -198,14 +198,14 @@ const Header = () => {
                     {openDropdown === item.label && item.dropdown && (
                       <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-200 backdrop-blur-sm bg-white/95">
                         {item.dropdown.map((sub, idx) => (
-                          <a
+                          <Link
                             key={sub + idx}
-                            href="#"
+                            to={`/${sub.toLowerCase()}`}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                             onClick={() => setOpenDropdown(null)}
                           >
                             {sub}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -242,10 +242,10 @@ const Header = () => {
               </button>
               {isLanguageOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">English</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Spanish</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">French</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">German</a>
+                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" onClick={() => setIsLanguageOpen(false)}>English</button>
+                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" onClick={() => setIsLanguageOpen(false)}>Spanish</button>
+                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" onClick={() => setIsLanguageOpen(false)}>French</button>
+                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" onClick={() => setIsLanguageOpen(false)}>German</button>
                 </div>
               )}
             </div>
@@ -331,13 +331,14 @@ const Header = () => {
                       {openDropdown === item.label && item.dropdown && (
                         <div className="pl-4 bg-white rounded shadow mt-1">
                           {item.dropdown.map((sub, idx) => (
-                            <a
+                            <Link
                               key={sub + idx}
-                              href="#"
+                              to={`/${sub.toLowerCase()}`}
                               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              onClick={() => setIsMobileMenuOpen(false)}
                             >
                               {sub}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       )}

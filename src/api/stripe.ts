@@ -1,4 +1,4 @@
-// Enhanced Stripe API endpoints for course purchases with full localization support
+// Enhanced Stripe API endpoints for course purchases with full localisation support
 // Including Sub-Saharan African mobile payments via Paystack and local systems
 // In production, this would be a real server endpoint
 
@@ -17,7 +17,7 @@ export interface StripeCheckoutSessionData {
     instructor: string;
   }>;
   totalAmount?: number;
-  // Enhanced localization options
+  // Enhanced localisation options
   locale?: string;
   paymentMethodTypes?: string[];
   customerEmail?: string;

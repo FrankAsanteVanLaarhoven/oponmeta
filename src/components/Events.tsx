@@ -73,7 +73,7 @@ const Events = () => {
         '2:00 PM - Introduction to AI',
         '2:30 PM - Machine Learning Basics',
         '3:00 PM - Hands-on Exercises',
-        '3:45 PM - Q&A Session'
+        '3:45 PM - Q and A Session'
       ]
     },
     {

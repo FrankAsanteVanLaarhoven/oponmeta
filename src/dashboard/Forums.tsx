@@ -86,7 +86,7 @@ const Forums = () => {
     { name: "Projects", count: 67, color: "bg-purple-100 text-purple-700" },
     { name: "Technical", count: 134, color: "bg-red-100 text-red-700" },
     { name: "Learning", count: 98, color: "bg-yellow-100 text-yellow-700" },
-    { name: "Q&A Support", count: 203, color: "bg-orange-100 text-orange-700" }
+    { name: "Q and A Support", count: 203, color: "bg-orange-100 text-orange-700" }
   ];
 
   const trendingTopics = [

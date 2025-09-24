@@ -61,6 +61,9 @@ class CoursePurchaseService {
       // Generate mock transaction ID
       const transactionId = `TXN_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
+      // Save enrollment to localStorage for student portal access
+      this.saveCourseEnrollment(purchaseRequest.courseId, purchaseRequest.customerInfo.email, transactionId);
+
       return {
         success: true,
         transactionId,
@@ -72,6 +75,72 @@ class CoursePurchaseService {
         success: false,
         error: 'An unexpected error occurred. Please try again.'
       };
+    }
+  }
+
+  // Save course enrollment to localStorage for student portal access
+  private saveCourseEnrollment(courseId: number, userEmail: string, transactionId: string): void {
+    try {
+      const enrollmentData = {
+        courseId,
+        userEmail,
+        transactionId,
+        enrolledAt: new Date().toISOString(),
+        progress: 0,
+        status: 'enrolled',
+        estimatedCompletion: this.calculateEstimatedCompletion()
+      };
+
+      // Get existing enrollments
+      const existingEnrollments = JSON.parse(localStorage.getItem('courseEnrollments') || '[]');
+      
+      // Check if already enrolled
+      const existingEnrollment = existingEnrollments.find(
+        (enrollment: any) => enrollment.courseId === courseId && enrollment.userEmail === userEmail
+      );
+
+      if (!existingEnrollment) {
+        // Add new enrollment
+        existingEnrollments.push(enrollmentData);
+        localStorage.setItem('courseEnrollments', JSON.stringify(existingEnrollments));
+        
+        // Also save to user-specific storage
+        const userKey = `userEnrollments_${userEmail}`;
+        const userEnrollments = JSON.parse(localStorage.getItem(userKey) || '[]');
+        userEnrollments.push(enrollmentData);
+        localStorage.setItem(userKey, JSON.stringify(userEnrollments));
+      }
+    } catch (error) {
+      console.error('Failed to save course enrollment:', error);
+    }
+  }
+
+  // Calculate estimated completion date (3 months from enrollment)
+  private calculateEstimatedCompletion(): string {
+    const date = new Date();
+    date.setMonth(date.getMonth() + 3);
+    return date.toISOString().split('T')[0];
+  }
+
+  // Get enrolled courses for a specific user
+  getEnrolledCourses(userEmail: string): any[] {
+    try {
+      const userKey = `userEnrollments_${userEmail}`;
+      return JSON.parse(localStorage.getItem(userKey) || '[]');
+    } catch (error) {
+      console.error('Failed to get enrolled courses:', error);
+      return [];
+    }
+  }
+
+  // Check if user is enrolled in a specific course
+  isEnrolledInCourse(courseId: number, userEmail: string): boolean {
+    try {
+      const enrollments = this.getEnrolledCourses(userEmail);
+      return enrollments.some(enrollment => enrollment.courseId === courseId);
+    } catch (error) {
+      console.error('Failed to check enrollment:', error);
+      return false;
     }
   }
 

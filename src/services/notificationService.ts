@@ -1,390 +1,275 @@
-export interface Notification {
-  id: string;
-  userId: string;
-  type: 'info' | 'success' | 'warning' | 'error' | 'course' | 'companion' | 'system';
-  title: string;
-  message: string;
-  data?: Record<string, any>;
-  read: boolean;
-  createdAt: Date;
-  readAt?: Date;
-  expiresAt?: Date;
-  priority: 'low' | 'medium' | 'high' | 'urgent';
-  category: 'course' | 'companion' | 'payment' | 'system' | 'achievement' | 'social';
-  actionUrl?: string;
-  actionText?: string;
+import { supabase } from '../lib/supabase'
+import { offlineService } from './offlineService'
+
+// Disable offline notifications to prevent IndexedDB errors
+const DISABLE_OFFLINE_NOTIFICATIONS = true
+
+export interface NotificationData {
+  title: string
+  body: string
+  icon?: string
+  badge?: string
+  image?: string
+  data?: any
+  actions?: NotificationAction[]
+  requireInteraction?: boolean
+  silent?: boolean
+  tag?: string
+  timestamp?: number
 }
 
-export interface NotificationPreferences {
-  userId: string;
-  email: boolean;
-  push: boolean;
-  inApp: boolean;
-  categories: {
-    course: boolean;
-    companion: boolean;
-    payment: boolean;
-    system: boolean;
-    achievement: boolean;
-    social: boolean;
-  };
-  frequency: 'immediate' | 'daily' | 'weekly';
-  quietHours: {
-    enabled: boolean;
-    start: string;
-    end: string;
-  };
+export interface NotificationAction {
+  action: string
+  title: string
+  icon?: string
 }
 
-export interface NotificationTemplate {
-  id: string;
-  name: string;
-  type: Notification['type'];
-  category: Notification['category'];
-  title: string;
-  message: string;
-  variables: string[];
-  priority: Notification['priority'];
-}
+export class NotificationService {
+  private static instance: NotificationService
+  private permission: NotificationPermission = 'default'
+  private subscription: PushSubscription | null = null
 
-class NotificationService {
-  private notifications: Notification[] = [];
-  private preferences: NotificationPreferences[] = [];
-  private templates: NotificationTemplate[] = [];
-
-  constructor() {
-    this.loadData();
-    this.initializeTemplates();
+  static getInstance(): NotificationService {
+    if (!NotificationService.instance) {
+      NotificationService.instance = new NotificationService()
+    }
+    return NotificationService.instance
   }
 
-  // Notification Management
-  async createNotification(notification: Omit<Notification, 'id' | 'createdAt' | 'read'>): Promise<Notification> {
-    const newNotification: Notification = {
-      ...notification,
-      id: `notification_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      createdAt: new Date(),
-      read: false,
-    };
-
-    this.notifications.push(newNotification);
-    this.saveNotifications();
-
-    // Check if user wants immediate notifications
-    const userPrefs = await this.getUserPreferences(notification.userId);
-    if (userPrefs?.inApp) {
-      this.showInAppNotification(newNotification);
+  async initialize(): Promise<void> {
+    if (!('Notification' in window)) {
+      console.warn('This browser does not support notifications')
+      return
     }
 
-    return newNotification;
-  }
-
-  async getNotifications(userId: string, options?: {
-    unreadOnly?: boolean;
-    category?: Notification['category'];
-    limit?: number;
-    offset?: number;
-  }): Promise<Notification[]> {
-    let filtered = this.notifications.filter(n => n.userId === userId);
-
-    if (options?.unreadOnly) {
-      filtered = filtered.filter(n => !n.read);
+    if (!('serviceWorker' in navigator)) {
+      console.warn('This browser does not support service workers')
+      return
     }
 
-    if (options?.category) {
-      filtered = filtered.filter(n => n.category === options.category);
+    this.permission = Notification.permission
+    this.setupNotificationClickHandler()
+    this.setupServiceWorkerMessageHandler()
+  }
+
+  async requestPermission(): Promise<NotificationPermission> {
+    if (!('Notification' in window)) {
+      throw new Error('This browser does not support notifications')
     }
 
-    // Sort by creation date (newest first)
-    filtered.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    try {
+      this.permission = await Notification.requestPermission()
+      return this.permission
+    } catch (error) {
+      console.error('Failed to request notification permission:', error)
+      throw error
+    }
+  }
 
-    if (options?.offset) {
-      filtered = filtered.slice(options.offset);
+  async subscribeToPush(userId: string): Promise<PushSubscription | null> {
+    if (this.permission !== 'granted') {
+      throw new Error('Notification permission not granted')
     }
 
-    if (options?.limit) {
-      filtered = filtered.slice(0, options.limit);
+    if (!('serviceWorker' in navigator)) {
+      throw new Error('Service worker not supported')
     }
 
-    return filtered;
+    try {
+      const registration = await navigator.serviceWorker.ready
+      
+      if (!registration.pushManager) {
+        throw new Error('Push messaging not supported')
+      }
+
+      const vapidPublicKey = import.meta.env.VITE_VAPID_PUBLIC_KEY
+      if (!vapidPublicKey) {
+        throw new Error('VAPID public key not configured')
+      }
+
+      this.subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: this.urlBase64ToUint8Array(vapidPublicKey)
+      })
+
+      await this.saveSubscriptionToDatabase(userId, this.subscription)
+      await this.storeSubscriptionLocally(userId, this.subscription)
+
+      return this.subscription
+    } catch (error) {
+      console.error('Failed to subscribe to push notifications:', error)
+      throw error
+    }
   }
 
-  async markAsRead(notificationId: string): Promise<Notification | null> {
-    const notification = this.notifications.find(n => n.id === notificationId);
-    if (!notification) return null;
+  async sendNotification(notification: NotificationData): Promise<void> {
+    if (this.permission !== 'granted') {
+      throw new Error('Notification permission not granted')
+    }
 
-    notification.read = true;
-    notification.readAt = new Date();
-    this.saveNotifications();
-    return notification;
+    try {
+      const notificationOptions: NotificationOptions = {
+        body: notification.body,
+        icon: notification.icon || '/icons/pwa-192x192.png',
+        badge: notification.badge || '/icons/badge-72x72.png',
+        image: notification.image,
+        data: notification.data,
+        actions: notification.actions,
+        requireInteraction: notification.requireInteraction || false,
+        silent: notification.silent || false,
+        tag: notification.tag,
+        timestamp: notification.timestamp || Date.now()
+      }
+
+      const notificationInstance = new Notification(notification.title, notificationOptions)
+      
+      if (!DISABLE_OFFLINE_NOTIFICATIONS) {
+        await offlineService.storeNotification(notification)
+      }
+      
+      this.trackNotificationEvent('displayed', notification.title)
+
+      notificationInstance.onclose = () => {
+        this.trackNotificationEvent('closed', notification.title)
+      }
+
+      notificationInstance.onclick = () => {
+        this.trackNotificationEvent('clicked', notification.title)
+        notificationInstance.close()
+      }
+
+    } catch (error) {
+      console.error('Failed to send notification:', error)
+      throw error
+    }
   }
 
-  async markAllAsRead(userId: string): Promise<void> {
-    const userNotifications = this.notifications.filter(n => n.userId === userId && !n.read);
-    userNotifications.forEach(n => {
-      n.read = true;
-      n.readAt = new Date();
-    });
-    this.saveNotifications();
+  private async saveSubscriptionToDatabase(userId: string, subscription: PushSubscription): Promise<void> {
+    try {
+      const { error } = await supabase
+        .from('push_subscriptions')
+        .upsert({
+          user_id: userId,
+          subscription: JSON.stringify(subscription),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        })
+
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      console.error('Failed to save subscription to database:', error)
+      throw error
+    }
   }
 
-  async deleteNotification(notificationId: string): Promise<boolean> {
-    const index = this.notifications.findIndex(n => n.id === notificationId);
-    if (index === -1) return false;
-
-    this.notifications.splice(index, 1);
-    this.saveNotifications();
-    return true;
-  }
-
-  async deleteAllNotifications(userId: string): Promise<void> {
-    this.notifications = this.notifications.filter(n => n.userId !== userId);
-    this.saveNotifications();
-  }
-
-  // Template-based Notifications
-  async sendTemplateNotification(
-    userId: string,
-    templateId: string,
-    variables: Record<string, any>
-  ): Promise<Notification | null> {
-    const template = this.templates.find(t => t.id === templateId);
-    if (!template) return null;
-
-    const title = this.replaceVariables(template.title, variables);
-    const message = this.replaceVariables(template.message, variables);
-
-    return await this.createNotification({
-      userId,
-      type: template.type,
-      category: template.category,
-      title,
-      message,
-      priority: template.priority,
-      data: variables,
-    });
-  }
-
-  // Predefined Notifications
-  async sendCourseEnrollmentNotification(userId: string, courseName: string): Promise<Notification> {
-    return await this.sendTemplateNotification(userId, 'course_enrollment', { courseName });
-  }
-
-  async sendCourseCompletionNotification(userId: string, courseName: string): Promise<Notification> {
-    return await this.sendTemplateNotification(userId, 'course_completion', { courseName });
-  }
-
-  async sendCompanionInteractionNotification(userId: string, companionName: string): Promise<Notification> {
-    return await this.sendTemplateNotification(userId, 'companion_interaction', { companionName });
-  }
-
-  async sendPaymentSuccessNotification(userId: string, amount: number, planName: string): Promise<Notification> {
-    return await this.sendTemplateNotification(userId, 'payment_success', { amount, planName });
-  }
-
-  async sendAchievementNotification(userId: string, achievementName: string): Promise<Notification> {
-    return await this.sendTemplateNotification(userId, 'achievement_unlocked', { achievementName });
-  }
-
-  // Preferences Management
-  async getUserPreferences(userId: string): Promise<NotificationPreferences | null> {
-    return this.preferences.find(p => p.userId === userId) || null;
-  }
-
-  async updatePreferences(userId: string, updates: Partial<NotificationPreferences>): Promise<NotificationPreferences> {
-    let prefs = this.preferences.find(p => p.userId === userId);
-    
-    if (!prefs) {
-      prefs = {
+  private async storeSubscriptionLocally(userId: string, subscription: PushSubscription): Promise<void> {
+    try {
+      const subscriptionData = {
         userId,
-        email: true,
-        push: true,
-        inApp: true,
-        categories: {
-          course: true,
-          companion: true,
-          payment: true,
-          system: true,
-          achievement: true,
-          social: true,
-        },
-        frequency: 'immediate',
-        quietHours: {
-          enabled: false,
-          start: '22:00',
-          end: '08:00',
-        },
-      };
-      this.preferences.push(prefs);
-    }
-
-    Object.assign(prefs, updates);
-    this.savePreferences();
-    return prefs;
-  }
-
-  // Analytics
-  async getNotificationStats(userId: string): Promise<{
-    total: number;
-    unread: number;
-    byCategory: Record<string, number>;
-    byType: Record<string, number>;
-  }> {
-    const userNotifications = this.notifications.filter(n => n.userId === userId);
-    const unread = userNotifications.filter(n => !n.read).length;
-
-    const byCategory = userNotifications.reduce((acc, n) => {
-      acc[n.category] = (acc[n.category] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-
-    const byType = userNotifications.reduce((acc, n) => {
-      acc[n.type] = (acc[n.type] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-
-    return {
-      total: userNotifications.length,
-      unread,
-      byCategory,
-      byType,
-    };
-  }
-
-  // Utility Methods
-  private replaceVariables(text: string, variables: Record<string, any>): string {
-    return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-      return variables[key] || match;
-    });
-  }
-
-  private showInAppNotification(notification: Notification): void {
-    // This would integrate with the notification context to show in-app notifications
-    if (typeof window !== 'undefined' && window.dispatchEvent) {
-      const event = new CustomEvent('showNotification', {
-        detail: notification,
-      });
-      window.dispatchEvent(event);
-    }
-  }
-
-  private initializeTemplates(): void {
-    this.templates = [
-      {
-        id: 'course_enrollment',
-        name: 'Course Enrollment',
-        type: 'success',
-        category: 'course',
-        title: 'Welcome to {{courseName}}!',
-        message: 'You have successfully enrolled in {{courseName}}. Start your learning journey now!',
-        variables: ['courseName'],
-        priority: 'medium',
-      },
-      {
-        id: 'course_completion',
-        name: 'Course Completion',
-        type: 'success',
-        category: 'course',
-        title: 'Congratulations! You completed {{courseName}}',
-        message: 'Great job! You have successfully completed {{courseName}}. Your certificate is ready for download.',
-        variables: ['courseName'],
-        priority: 'high',
-      },
-      {
-        id: 'companion_interaction',
-        name: 'Companion Interaction',
-        type: 'info',
-        category: 'companion',
-        title: 'New message from {{companionName}}',
-        message: '{{companionName}} has sent you a new message. Continue your conversation!',
-        variables: ['companionName'],
-        priority: 'medium',
-      },
-      {
-        id: 'payment_success',
-        name: 'Payment Success',
-        type: 'success',
-        category: 'payment',
-        title: 'Payment Successful',
-        message: 'Your payment of ${{amount}} for {{planName}} has been processed successfully.',
-        variables: ['amount', 'planName'],
-        priority: 'high',
-      },
-      {
-        id: 'achievement_unlocked',
-        name: 'Achievement Unlocked',
-        type: 'success',
-        category: 'achievement',
-        title: 'Achievement Unlocked: {{achievementName}}',
-        message: 'Congratulations! You have unlocked the {{achievementName}} achievement.',
-        variables: ['achievementName'],
-        priority: 'medium',
-      },
-      {
-        id: 'system_maintenance',
-        name: 'System Maintenance',
-        type: 'warning',
-        category: 'system',
-        title: 'Scheduled Maintenance',
-        message: 'We will be performing scheduled maintenance on {{date}} from {{startTime}} to {{endTime}}.',
-        variables: ['date', 'startTime', 'endTime'],
-        priority: 'medium',
-      },
-    ];
-  }
-
-  // Data Persistence
-  private loadData(): void {
-    try {
-      const storedNotifications = localStorage.getItem('oponmeta_notifications');
-      if (storedNotifications) {
-        this.notifications = JSON.parse(storedNotifications).map((n: any) => ({
-          ...n,
-          createdAt: new Date(n.createdAt),
-          readAt: n.readAt ? new Date(n.readAt) : undefined,
-          expiresAt: n.expiresAt ? new Date(n.expiresAt) : undefined,
-        }));
+        subscription: JSON.stringify(subscription),
+        timestamp: Date.now()
       }
+      localStorage.setItem('oponm-push-subscription', JSON.stringify(subscriptionData))
+    } catch (error) {
+      console.error('Failed to store subscription locally:', error)
+    }
+  }
 
-      const storedPreferences = localStorage.getItem('oponmeta_notification_preferences');
-      if (storedPreferences) {
-        this.preferences = JSON.parse(storedPreferences);
+  private setupNotificationClickHandler(): void {
+    if (DISABLE_OFFLINE_NOTIFICATIONS) {
+      return
+    }
+    
+    window.addEventListener('focus', () => {
+      this.handlePendingNotifications()
+    })
+  }
+
+  private setupServiceWorkerMessageHandler(): void {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'NOTIFICATION_CLICKED') {
+          this.handleNotificationClick(event.data.notification)
+        }
+      })
+    }
+  }
+
+  private async handlePendingNotifications(): Promise<void> {
+    if (DISABLE_OFFLINE_NOTIFICATIONS) {
+      return
+    }
+    
+    try {
+      const unreadNotifications = await offlineService.getUnreadNotifications()
+      
+      for (const notification of unreadNotifications) {
+        if (notification.data.type === 'course-reminder') {
+          window.location.href = `/course/${notification.data.courseId}`
+        } else if (notification.data.type === 'payment-success') {
+          window.location.href = '/payment/success'
+        }
+        
+        await offlineService.markNotificationAsRead(notification.id)
       }
     } catch (error) {
-      console.error('Failed to load notification data:', error);
+      console.error('Failed to handle pending notifications:', error)
     }
   }
 
-  private saveNotifications(): void {
-    try {
-      localStorage.setItem('oponmeta_notifications', JSON.stringify(this.notifications));
-    } catch (error) {
-      console.error('Failed to save notifications:', error);
-    }
-  }
-
-  private savePreferences(): void {
-    try {
-      localStorage.setItem('oponmeta_notification_preferences', JSON.stringify(this.preferences));
-    } catch (error) {
-      console.error('Failed to save preferences:', error);
-    }
-  }
-
-  // Cleanup expired notifications
-  async cleanupExpiredNotifications(): Promise<void> {
-    const now = new Date();
-    this.notifications = this.notifications.filter(n => {
-      if (n.expiresAt && n.expiresAt < now) {
-        return false;
+  private handleNotificationClick(notification: any): void {
+    if (notification.data) {
+      if (notification.data.courseId) {
+        window.location.href = `/course/${notification.data.courseId}`
+      } else if (notification.data.url) {
+        window.location.href = notification.data.url
       }
-      return true;
-    });
-    this.saveNotifications();
+    }
+  }
+
+  private trackNotificationEvent(event: string, title: string): void {
+    if (window.gtag) {
+      window.gtag('event', 'notification', {
+        event_type: event,
+        notification_title: title
+      })
+    }
+  }
+
+  private urlBase64ToUint8Array(base64String: string): Uint8Array {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4)
+    const base64 = (base64String + padding)
+      .replace(/-/g, '+')
+      .replace(/_/g, '/')
+
+    const rawData = window.atob(base64)
+    const outputArray = new Uint8Array(rawData.length)
+
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i)
+    }
+    return outputArray
+  }
+
+  getPermission(): NotificationPermission {
+    return this.permission
+  }
+
+  getSubscription(): PushSubscription | null {
+    return this.subscription
+  }
+
+  isSupported(): boolean {
+    return 'Notification' in window && 'serviceWorker' in navigator
   }
 }
 
-// Create singleton instance
-const notificationService = new NotificationService();
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void
+  }
+}
 
-export { notificationService };
-export default notificationService;
+export const notificationService = NotificationService.getInstance()

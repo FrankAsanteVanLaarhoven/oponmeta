@@ -33,7 +33,6 @@ import {
 } from "lucide-react";
 import { toast } from 'sonner';
 import { createStripeCheckoutSession } from '../api/stripe';
-import CoursePurchaseFlow from './CoursePurchaseFlow';
 
 const CourseLibrary = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -1000,17 +999,18 @@ const CourseLibrary = () => {
           </div>
         )}
 
-        {/* Enhanced Purchase Flow */}
-        <CoursePurchaseFlow
-          course={selectedCourse}
-          isOpen={showPurchaseModal}
-          onClose={() => setShowPurchaseModal(false)}
-          onSuccess={(courseId) => {
-            setShowPurchaseModal(false);
-            setSelectedCourse(null);
-            toast.success('Course purchased successfully!');
-          }}
-        />
+        {/* Enhanced Purchase Flow - Disabled */}
+        {showPurchaseModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+              <h3 className="text-lg font-semibold mb-4">Purchase Course</h3>
+              <p className="text-gray-600 mb-4">Purchase functionality is being updated.</p>
+              <Button onClick={() => setShowPurchaseModal(false)} className="w-full">
+                Close
+              </Button>
+            </div>
+          </div>
+        )}
 
         {/* Modals Placeholder */}
         {showAddCourseModal && (

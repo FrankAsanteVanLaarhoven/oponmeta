@@ -7,15 +7,23 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "build:prod": "vite build --mode production",
+    "build:prod": "npm run type-check && npm run build && npm run test:build",
+    "test:build": "npm run lighthouse && npm run bundle-analyzer",
+    "lighthouse": "lighthouse http://localhost:4173 --output json --output html --output-path ./lighthouse-results",
+    "bundle-analyzer": "npx vite-bundle-analyzer dist",
+    "preview:prod": "vite preview --port 4173",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "test": "echo \"No tests specified\" && exit 0",
     "clean": "rm -rf dist",
+    "deploy:staging": "npm run build:prod && vercel --target staging",
+    "deploy:prod": "npm run build:prod && vercel --prod",
     "deploy:vercel": "vercel --prod",
-    "deploy:netlify": "netlify deploy --prod"
+    "deploy:netlify": "netlify deploy --prod",
+    "pwa:generate-icons": "pwa-asset-generator public/logo.png public/icons --manifest public/manifest.json",
+    "pwa:validate": "pwa-validate public/manifest.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -62,6 +70,7 @@
     "i18next": "^25.4.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-http-backend": "^3.0.2",
+    "idb": "^8.0.3",
     "input-otp": "^1.2.4",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
@@ -85,6 +94,9 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.3",
+    "vite-plugin-pwa": "^1.0.3",
+    "web-vitals": "^5.1.0",
+    "workbox-window": "^7.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
